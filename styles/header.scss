@@ -1,0 +1,168 @@
+.nav_main {
+  overflow: hidden;
+  // background: ?;
+  // shadow
+
+  .checkbox {
+    display: none;
+  }
+
+  .nav_toggle {
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+    margin: 0rem 1rem;
+
+    .checkbox {
+      display: none;
+    }
+
+    .close {
+      display: none;
+    }
+
+    .close,
+    .menu {
+      margin-top: 1.5rem;
+    }
+  }
+
+  .nav_menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .switch-theme {
+      margin: 0 25px;
+    }
+
+    li {
+      cursor: pointer;
+      list-style: none;
+      display: none;
+      border-bottom: 1px solid #9087872f;
+      width: 100%;
+
+      &:first-child {
+        margin-right: auto;
+        display: block;
+        text-align: left;
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 16px;
+        // color: ?
+        font-weight: 400;
+      }
+
+      .text {
+        font-size: 18px;
+      }
+    }
+
+    .switch-theme {
+      margin-right: 10px;
+    }
+  }
+
+  .github-link {
+    text-align: center;
+    width: 80px;
+    // padding: 0 20px;
+  }
+
+  .on-hover {
+    padding: 10px 5px;
+
+    &:hover {
+      // background: ?;
+      // I guess it has to be done on the jsx
+      // using the useColorMode Hook
+    }
+  }
+
+  .buttons {
+    margin: 10px 0 10px 5px;
+
+    li:nth-child(1) {
+      margin-bottom: 15px;
+    }
+  }
+  // Toggle the hamburger menu in mobile view
+  #checkbox_id {
+    padding: 200px;
+  }
+
+  #checkbox_id:checked ~ ul.nav_menu li {
+    display: block;
+  }
+
+  //Change from menu to close icon on tap
+  #checkbox_id:checked ~ label.nav_toggle .close {
+    display: block;
+  }
+
+  #checkbox_id:checked ~ label.nav_toggle .menu {
+    display: none;
+  }
+
+  //Desktop view
+  @media only screen and (min-width: 768px) {
+    // Where is this coming from???
+    .separator {
+      display: none;
+    }
+
+    & {
+      .nav_toggle {
+        display: none;
+      }
+
+      .nav_menu {
+        flex-direction: row;
+        --tw-shadow: 0;
+        box-shadow: 0;
+
+        .logo {
+          margin-left: 10px;
+        }
+
+        li {
+          display: block;
+          width: inherit;
+          border-bottom: 0;
+        }
+      }
+
+      .on_hover {
+        padding: 30px 20px;
+      }
+
+      .buttons {
+        margin: 0 12px 0 15px;
+        display: flex;
+
+        .button {
+          font-size: 17px;
+          font-weight: 400;
+          width: 160px;
+          height: 55px;
+          border-radius: 4px;
+          border: 2px solid #fff;
+          // color ????
+          // background???
+        }
+
+        li:nth-child(1) {
+          margin-bottom: 0;
+        }
+        li:nth-child(2) {
+          margin-left: 16px;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
