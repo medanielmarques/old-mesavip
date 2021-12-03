@@ -1,6 +1,6 @@
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { dark } from 'styles/themes/dark';
-import { light } from 'styles/themes/light';
+import { dark } from 'src/styles/themes/dark';
+import { light } from 'src/styles/themes/light';
 
 type Props = {
   width: string;

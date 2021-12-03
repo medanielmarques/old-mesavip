@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaGithub, FaBars, FaTimes } from 'react-icons/fa';
-import { isAuthenticated, removeToken } from 'services/auth';
+import { isAuthenticated, removeToken } from 'src/services/auth';
 import { ListItemButton } from './ListItemButton';
 import { SwitchTheme } from './SwitchTheme';
 import { useColorModeValue } from '@chakra-ui/react';

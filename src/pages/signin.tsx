@@ -2,17 +2,17 @@ import Link from 'next/link';
 import { Button, useColorModeValue } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 
-import { authResponse } from 'interfaces/authResponse';
-import { User } from 'interfaces/user';
+import { authResponse } from 'src/interfaces/authResponse';
+import { User } from 'src/interfaces/user';
 
-import { api } from 'services/api';
-import { setToken } from 'services/auth';
+import { api } from 'src/services/api';
+import { setToken } from 'src/services/auth';
 
-import { Input } from 'components/Input';
-import { Separator } from 'components/Separator';
+import { Input } from 'src/components/Input';
+import { Separator } from 'src/components/Separator';
 
-import { dark } from 'styles/themes/dark';
-import { light } from 'styles/themes/light';
+import { dark } from 'src/styles/themes/dark';
+import { light } from 'src/styles/themes/light';
 
 export default function Signin() {
   const theme = useColorModeValue(light, dark);
