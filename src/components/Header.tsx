@@ -63,7 +63,7 @@ export function Header() {
           </>
         ) : (
           <>
-            <ListItemButton label='Sign in' href='/signin' />
+            <ListItemButton label='Sign in' href='/' />
             <ListItemButton label='Sign up' href='/signup' />
           </>
         )}

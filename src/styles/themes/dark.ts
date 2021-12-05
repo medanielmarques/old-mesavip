@@ -1,3 +1,5 @@
+// Site de comida com dark mode kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk é mole
+
 export const dark = {
   separator: '#3b3f42',
   logo: 'https://bit.ly/2UjKlSb',
