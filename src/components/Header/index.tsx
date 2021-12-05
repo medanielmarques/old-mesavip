@@ -3,18 +3,11 @@ import Image from 'next/image';
 import { FaGithub, FaBars, FaTimes } from 'react-icons/fa';
 import { isAuthenticated, removeToken } from 'src/services/auth';
 import { ListItemButton } from './ListItemButton';
-import { SwitchTheme } from './SwitchTheme';
-import { useColorModeValue } from '@chakra-ui/react';
 
 export function Header() {
   const signout = () => {
     removeToken();
   };
-
-  const logo = useColorModeValue(
-    'https://bit.ly/2YFsIhw',
-    'https://bit.ly/30mxrpz'
-  );
 
   return (
     <nav className='nav_main'>
@@ -28,17 +21,18 @@ export function Header() {
         <li className='logo'>
           <Link href='/'>
             <a>
-              <Image width='165' height='80' src={logo} alt='Mesavip logo' />
+              <Image
+                width='165'
+                height='80'
+                src='https://bit.ly/2YFsIhw'
+                alt='Mesavip logo'
+              />
             </a>
           </Link>
         </li>
 
-        <li className='switch-theme'>
-          <SwitchTheme />
-        </li>
-
         <li className='on_hover'>
-          <Link href='/'>
+          <Link href='https://github.com/Mesavip/mesavip-web-tsc-next'>
             <a target='_blank' rel='noreferrer' className='github-link'>
               <FaGithub size='25' />
             </a>
@@ -63,7 +57,7 @@ export function Header() {
           </>
         ) : (
           <>
-            <ListItemButton label='Sign in' href='/' />
+            <ListItemButton label='Sign in' href='/signin' />
             <ListItemButton label='Sign up' href='/signup' />
           </>
         )}

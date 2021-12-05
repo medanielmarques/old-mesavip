@@ -11,22 +11,20 @@ import {
   Link,
 } from '@chakra-ui/react';
 
-import { User } from 'src/interfaces/user';
-import { signUpUser } from 'src/http/user';
+// Ver como usar
+import { signInFormSchema } from 'src/schemas/yup';
 
-export default function SignUp() {
+import { User } from 'src/interfaces/user';
+import { signInUser } from 'src/http/user';
+
+export default function SignIn() {
   const router = useRouter();
 
-  const [user, userSet] = useState<User>({
-    name: '',
-    cpf: '',
-    email: '',
-    password: '',
-  });
+  const [user, userSet] = useState<User>({ email: '', password: '' });
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    signUpUser(user);
+    signInUser(user);
     router.push('/sandbox');
   };
 
@@ -48,27 +46,11 @@ export default function SignUp() {
 
         <Stack spacing={5} align='center'>
           <Input
-            name='name'
-            type='text'
-            placeholder='Name'
-            value={user.name}
-            onChange={(e) => userSet({ ...user, name: e.target.value })}
-          />
-
-          <Input
             name='email'
             type='email'
             placeholder='E-mail'
             value={user.email}
             onChange={(e) => userSet({ ...user, email: e.target.value })}
-          />
-
-          <Input
-            name='cpf'
-            type='number'
-            placeholder='CPF'
-            value={user.cpf}
-            onChange={(e) => userSet({ ...user, cpf: e.target.value })}
           />
 
           <Input
@@ -80,19 +62,19 @@ export default function SignUp() {
           />
 
           <Button type='submit' bg='red.400' _hover={{ bg: 'red.500' }}>
-            Sign up
+            Sign in
           </Button>
-
-          <Link as={NextLink} href='/sandbox'>
-            <a style={{ textDecoration: 'underline' }}>Forgot your password?</a>
-          </Link>
 
           <Divider />
 
-          <Link as={NextLink} href='/sandbox'>
+          <Link as={NextLink} href='/signup'>
             <Button bg='red.800' _hover={{ bg: 'red.900' }}>
-              Already have an account? Sign in
+              Create a new account
             </Button>
+          </Link>
+
+          <Link as={NextLink} href='/sandbox'>
+            <a style={{ textDecoration: 'underline' }}>Forgot your password?</a>
           </Link>
         </Stack>
       </Flex>
