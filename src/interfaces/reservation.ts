@@ -8,3 +8,8 @@ export interface Reservation {
   city?: string;
   address?: string;
 }
+
+export interface ReservationType {
+  pastReservation: Reservation[];
+  followingReservation: Reservation[];
+}
