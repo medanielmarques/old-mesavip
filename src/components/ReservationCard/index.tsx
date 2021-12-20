@@ -37,7 +37,6 @@ export default function ReservationCard(props: CardProps) {
           {!!past ? 'Rate' : 'Cancel'} reservation
         </Button>
       </Flex>
-      {/* <Button variant='outline'>Rate reservation</Button> */}
     </Box>
   );
 }

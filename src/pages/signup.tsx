@@ -42,8 +42,10 @@ export default function SignUp() {
         onSubmit={handleSubmit}
       >
         <Text fontSize={22} mb={50} align='center'>
-          <Text as='b'> MESAVIP </Text> helps you to make reservations in your
-          favorite restaurants.
+          <Text as='b' color='red.400'>
+            MESAVIP{' '}
+          </Text>
+          helps you to make reservations in your favorite restaurants.
         </Text>
 
         <Stack spacing={5} align='center'>
@@ -83,16 +85,16 @@ export default function SignUp() {
             Sign up
           </Button>
 
-          <Link as={NextLink} href='/sandbox'>
-            <a style={{ textDecoration: 'underline' }}>Forgot your password?</a>
-          </Link>
-
           <Divider />
 
-          <Link as={NextLink} href='/sandbox'>
+          <Link as={NextLink} href='/signin'>
             <Button bg='red.800' _hover={{ bg: 'red.900' }}>
               Already have an account? Sign in
             </Button>
+          </Link>
+
+          <Link as={NextLink} href='/sandbox'>
+            <a style={{ textDecoration: 'underline' }}>Forgot your password?</a>
           </Link>
         </Stack>
       </Flex>
