@@ -13,7 +13,7 @@ export default function ReservationCard(props: CardProps) {
   const { past, onClick } = props;
 
   return (
-    <Box w='96' h='52' p='4' borderRadius='md' shadow='base'>
+    <Box w='92' h='52' p='4' borderRadius='md' shadow='base'>
       <Flex w='68' h='32' ml='5px' m='0 auto' gridGap='3'>
         <ScheduledDate />
 

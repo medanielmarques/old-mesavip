@@ -12,7 +12,7 @@ export function MenuButton({ children, href, onClick }: MenuButtonProps) {
   const buttonVariant = useBreakpointValue({ base: 'unstyled', md: 'outline' });
 
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <Button variant={buttonVariant} onClick={onClick}>
         {children}
       </Button>

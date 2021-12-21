@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Stack } from '@chakra-ui/react';
+import { Box, Grid, Text } from '@chakra-ui/react';
 
 import ReservationCard from 'src/components/ReservationCard';
 import { Reservation, ReservationType } from 'src/interfaces/reservation';
@@ -13,17 +13,40 @@ export default function Reservations() {
 
   useEffect(() => {
     api.get<ReservationType>('reservations/list').then((response) => {
-      pastReservationsSet(response.data.pastReservation);
-      followingReservationsSet(response.data.followingReservation);
+      pastReservationsSet(response.data.pastReservations);
+      followingReservationsSet(response.data.followingReservations);
     });
   }, []);
 
   return (
-    <Stack spacing='5'>
-      <ReservationCard />
-      <ReservationCard />
-      <ReservationCard />
-      <ReservationCard />
-    </Stack>
+    <Box
+      m='0 auto'
+      w={{
+        base: '384px',
+        md: '792px',
+        lg: '792px',
+        xl: '792px',
+        '2xl': '1300px',
+      }}
+      display='table'
+    >
+      <Text fontSize='20px' m='30px 0' align='center'>
+        Following Reservations
+      </Text>
+      <Grid templateColumns='repeat(auto-fill, minmax(384px, 1fr))' gap={6}>
+        {followingReservations.map((reservation) => (
+          <ReservationCard />
+        ))}
+      </Grid>
+
+      <Text fontSize='20px' m='30px 0' align='center'>
+        Past Reservations
+      </Text>
+      <Grid templateColumns='repeat(auto-fill, minmax(384px, 1fr))' gap={6}>
+        {pastReservations.map((reservation) => (
+          <ReservationCard />
+        ))}
+      </Grid>
+    </Box>
   );
 }

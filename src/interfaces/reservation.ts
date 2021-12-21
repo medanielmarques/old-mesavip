@@ -10,6 +10,6 @@ export interface Reservation {
 }
 
 export interface ReservationType {
-  pastReservation: Reservation[];
-  followingReservation: Reservation[];
+  pastReservations: Reservation[];
+  followingReservations: Reservation[];
 }
