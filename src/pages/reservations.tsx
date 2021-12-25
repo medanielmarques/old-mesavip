@@ -1,22 +1,18 @@
-import { useEffect, useState } from 'react';
-import { Box, Grid, Text } from '@chakra-ui/react';
+import { createContext, useEffect, useState } from 'react';
+import { Box, Button, Grid, Text } from '@chakra-ui/react';
 
-import ReservationCard from 'src/components/ReservationCard';
-import { Reservation, ReservationType } from 'src/interfaces/reservation';
+import { ReservationCard } from 'src/components/ReservationCard';
+import { Reservation, ReservationsType } from 'src/interfaces/reservation';
 import { api } from 'src/services/api';
+import { useReservationTests } from 'src/hooks/useReservationsTest';
+
+interface IReservationContext {
+  toggleRefetchPastReservations(): void;
+  toggleRefetchFollowingReservations(): void;
+}
 
 export default function Reservations() {
-  const [pastReservations, pastReservationsSet] = useState([] as Reservation[]);
-  const [followingReservations, followingReservationsSet] = useState(
-    [] as Reservation[]
-  );
-
-  useEffect(() => {
-    api.get<ReservationType>('reservations/list').then((response) => {
-      pastReservationsSet(response.data.pastReservations);
-      followingReservationsSet(response.data.followingReservations);
-    });
-  }, []);
+  const { pastReservations, followingReservations } = useReservationTests();
 
   return (
     <Box
@@ -34,18 +30,24 @@ export default function Reservations() {
         Following Reservations
       </Text>
       <Grid templateColumns='repeat(auto-fill, minmax(384px, 1fr))' gap={6}>
-        {followingReservations.map((reservation) => (
-          <ReservationCard />
-        ))}
+        {followingReservations &&
+          followingReservations.map((reservation) => (
+            <ReservationCard key={reservation.id} reservation={reservation} />
+          ))}
       </Grid>
 
       <Text fontSize='20px' m='30px 0' align='center'>
         Past Reservations
       </Text>
       <Grid templateColumns='repeat(auto-fill, minmax(384px, 1fr))' gap={6}>
-        {pastReservations.map((reservation) => (
-          <ReservationCard />
-        ))}
+        {pastReservations &&
+          pastReservations.map((reservation) => (
+            <ReservationCard
+              key={reservation.id}
+              reservation={reservation}
+              past
+            />
+          ))}
       </Grid>
     </Box>
   );

@@ -1,6 +1,12 @@
+import { useContext } from 'react';
 import { Flex, Text } from '@chakra-ui/react';
+import { ReservationCardContext } from './contexts/ReservationCardContext';
 
 export function ScheduledDate() {
+  const {
+    reservation: { day, month },
+  } = useContext(ReservationCardContext);
+
   return (
     <Flex
       w='40'
@@ -12,10 +18,10 @@ export function ScheduledDate() {
       justifyContent='center'
     >
       <Text fontSize='4xl' fontWeight='700'>
-        22
+        {day}
       </Text>
 
-      <Text fontWeight='500'>December</Text>
+      <Text fontWeight='500'>{month}</Text>
     </Flex>
   );
 }

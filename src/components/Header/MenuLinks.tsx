@@ -32,8 +32,8 @@ export function MenuItens({ isOpen }: MenuItensProps) {
         <MenuItem href='/'>
           <Text fontSize='18px'>Restaurants</Text>
         </MenuItem>
+
         <MenuButton href='/signin'>Sign in</MenuButton>
-        <MenuButton href='/signup'>Sign up</MenuButton>
       </Stack>
     </Box>
   );

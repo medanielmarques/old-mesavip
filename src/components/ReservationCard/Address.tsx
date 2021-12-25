@@ -1,10 +1,16 @@
+import { useContext } from 'react';
 import { Flex, Text } from '@chakra-ui/react';
+import { ReservationCardContext } from './contexts/ReservationCardContext';
 
 export function Address() {
+  const {
+    reservation: { city, address },
+  } = useContext(ReservationCardContext);
+
   return (
     <Flex fontSize='14px' direction='column'>
-      <Text>Teresina - PI</Text>
-      <Text>Rua Governador Tibério Nunes, 56</Text>
+      <Text>{city}</Text>
+      <Text>{address}</Text>
     </Flex>
   );
 }
