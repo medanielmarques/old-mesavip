@@ -3,11 +3,13 @@ import { Flex, Button } from '@chakra-ui/react';
 import { ReservationCardContext } from './contexts/ReservationCardContext';
 
 export function PastReservationButton() {
-  const { onToggle, reservation } = useContext(ReservationCardContext);
+  const { onToggle, onToggleSeeRatingModal, reservation } = useContext(
+    ReservationCardContext
+  );
 
   function handleClick() {
     if (!!reservation.rated) {
-      console.log('Seeing my rate');
+      onToggleSeeRatingModal();
     } else {
       onToggle();
     }

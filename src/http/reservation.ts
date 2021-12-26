@@ -1,3 +1,4 @@
+import { Rating } from 'src/interfaces/rating';
 import { api } from 'src/services/api';
 
 interface rateReservation {
@@ -13,4 +14,10 @@ export async function CancelReservation(reservation_id: string) {
 
 export async function RateReservation(rating: rateReservation) {
   await api.post('ratings/create', { rating });
+}
+
+export async function ListRatingById(reservation_id: string) {
+  return await api
+    .get(`ratings/list-by-id/${reservation_id}`)
+    .then((response) => response.data);
 }
