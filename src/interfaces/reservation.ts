@@ -11,8 +11,3 @@ export interface Reservation {
   city: string;
   address: string;
 }
-
-export interface ReservationsType {
-  pastReservations: Reservation[];
-  followingReservations: Reservation[];
-}

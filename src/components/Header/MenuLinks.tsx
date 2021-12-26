@@ -1,5 +1,6 @@
-import { Box, Stack, Text } from '@chakra-ui/react';
+import { Box, HStack, Stack, Text } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
+import { isAuthenticated, signOut } from 'src/services/auth';
 import { MenuButton } from './MenuButton';
 import { MenuItem } from './MenuItem';
 
@@ -9,6 +10,10 @@ interface MenuItensProps {
 
 export function MenuItens({ isOpen }: MenuItensProps) {
   const github_link = 'https://github.com/Mesavip/mesavip-web-tsc-next';
+
+  function handleSignOut() {
+    signOut();
+  }
 
   return (
     <Box
@@ -33,7 +38,19 @@ export function MenuItens({ isOpen }: MenuItensProps) {
           <Text fontSize='18px'>Restaurants</Text>
         </MenuItem>
 
-        <MenuButton href='/signin'>Sign in</MenuButton>
+        {isAuthenticated() ? (
+          <HStack>
+            <MenuButton href='/reservations'>Reservations</MenuButton>
+            <MenuButton href='/' onClick={handleSignOut}>
+              Sign out
+            </MenuButton>
+          </HStack>
+        ) : (
+          <HStack>
+            <MenuButton href='/signin'>Sign in</MenuButton>
+            <MenuButton href='/signup'>Sign up</MenuButton>
+          </HStack>
+        )}
       </Stack>
     </Box>
   );

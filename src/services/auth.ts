@@ -8,7 +8,6 @@ export const getToken = () =>
 export const setToken = (token: string) =>
   typeof window !== 'undefined' ? localStorage.setItem(token_key, token) : '';
 
-export const removeToken = () => {
+export const signOut = () => {
   typeof window !== 'undefined' ? localStorage.removeItem(token_key) : '';
-  typeof window !== 'undefined' ? localStorage.removeItem('userType') : '';
 };

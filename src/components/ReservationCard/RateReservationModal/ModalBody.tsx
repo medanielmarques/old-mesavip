@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { RateReservation } from 'src/http/reservation';
 import { ReservationCardContext } from '../contexts/ReservationCardContext';
+import { ReservationContext } from 'src/pages/reservations';
 
 interface ModalBodyProps {
   closeModal(): void;
@@ -18,7 +19,11 @@ export function ModalBody({ closeModal }: ModalBodyProps) {
   const [comment, commentSet] = useState('');
   const [rating, ratingSet] = useState(0);
 
-  const { id: reservation_id = '' } = useContext(ReservationCardContext);
+  const { refreshPastReservations } = useContext(ReservationContext);
+
+  const {
+    reservation: { restaurant, restaurant_id, id: reservation_id },
+  } = useContext(ReservationCardContext);
 
   const toast = useToast();
 
@@ -26,11 +31,13 @@ export function ModalBody({ closeModal }: ModalBodyProps) {
     e.preventDefault();
 
     RateReservation({
+      restaurant_id,
       reservation_id,
       rating,
       comment,
     }).then(() => {
       closeModal();
+      refreshPastReservations();
       toast({
         title: 'Rate registered successfully!',
         status: 'success',
@@ -55,7 +62,10 @@ export function ModalBody({ closeModal }: ModalBodyProps) {
         gridGap='5'
         align='center'
       >
-        <Select placeholder='Rate' onChange={handleSelectChange}>
+        <Select
+          placeholder={`Rate your experience on ${restaurant}`}
+          onChange={handleSelectChange}
+        >
           <option value='1'>1 star</option>
           <option value='2'>2 stars</option>
           <option value='3'>3 stars</option>
@@ -67,7 +77,7 @@ export function ModalBody({ closeModal }: ModalBodyProps) {
         <Input
           name='comment'
           type='text'
-          placeholder='Your opinion on the restaurant'
+          placeholder={'Your opinion on the restaurant'}
           value={comment}
           onChange={(e: any) => commentSet(e.target.value)}
         />

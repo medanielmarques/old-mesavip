@@ -1,14 +1,10 @@
-import {
-  createContext,
-  ReactNode,
-  useEffect,
-  useReducer,
-  useState,
-} from 'react';
-import { reservationsReducer } from 'src/components/ReservationCard/reducers/reservationsReducer';
-import { Reservation, ReservationsType } from 'src/interfaces/reservation';
+import { useEffect, useState } from 'react';
+import { Reservation } from 'src/interfaces/reservation';
 import { api } from 'src/services/api';
 
+// Not using it for now, it works, but the rerender doesn't.
+// The variables are only passed once when called,
+// and are not received again on the caller function
 export function useReservationTests() {
   const [pastReservations, pastReservationsSet] = useState([] as Reservation[]);
   const [followingReservations, followingReservationsSet] = useState(

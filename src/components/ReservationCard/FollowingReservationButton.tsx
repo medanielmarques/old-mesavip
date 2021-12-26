@@ -1,20 +1,33 @@
 import { useContext, useState } from 'react';
-import { Flex, Button } from '@chakra-ui/react';
+import { Flex, Button, toast, useToast } from '@chakra-ui/react';
 
 import { CancelReservation } from 'src/http/reservation';
 import { ReservationCardContext } from './contexts/ReservationCardContext';
-import { useReservationTests } from 'src/hooks/useReservationsTest';
+import { ReservationContext } from 'src/pages/reservations';
 
 export function FollowingReservationButton() {
   const { reservation } = useContext(ReservationCardContext);
   const [isLoading, isLoadingSet] = useState(false);
 
-  const { refreshFollowingReservations } = useReservationTests();
-  function handleClick() {
+  const { refreshFollowingReservations } = useContext(ReservationContext);
+
+  const toast = useToast();
+
+  async function handleClick() {
     isLoadingSet(true);
-    CancelReservation(reservation.id)
+    await CancelReservation(reservation.id)
       .then(() => isLoadingSet(false))
-      .then(() => refreshFollowingReservations());
+      .then(() => refreshFollowingReservations())
+      .then(() =>
+        toast({
+          title: 'Reservation canceled!',
+          status: 'success',
+          duration: 2000,
+          variant: 'subtle',
+          position: 'top',
+          isClosable: true,
+        })
+      );
   }
 
   return (
