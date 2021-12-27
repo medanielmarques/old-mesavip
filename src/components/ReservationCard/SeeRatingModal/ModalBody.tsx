@@ -25,7 +25,7 @@ export function ModalBody() {
   }, []);
 
   return (
-    <ChakraModalBody>
+    <ChakraModalBody mb='2'>
       <Stack fontSize='18px'>
         <Flex gridGap='4' mb='2'>
           <HStack>

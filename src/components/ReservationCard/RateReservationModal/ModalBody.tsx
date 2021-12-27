@@ -5,6 +5,7 @@ import {
   Input,
   ModalBody as ChakraModalBody,
   Select,
+  Textarea,
   useToast,
 } from '@chakra-ui/react';
 import { RateReservation } from 'src/http/reservation';
@@ -74,15 +75,15 @@ export function ModalBody({ closeModal }: ModalBodyProps) {
         </Select>
 
         {/* Input e Select precisam estar preenchidos para enviar a requisição */}
-        <Input
+        <Textarea
           name='comment'
           type='text'
-          placeholder={'Your opinion on the restaurant'}
+          placeholder='Your opinion on the restaurant'
           value={comment}
           onChange={(e: any) => commentSet(e.target.value)}
         />
 
-        <Button type='submit' variant='outline'>
+        <Button type='submit' variant='outline' height='12'>
           Rate it!
         </Button>
       </Flex>
