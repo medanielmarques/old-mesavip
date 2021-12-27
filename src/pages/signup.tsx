@@ -81,14 +81,29 @@ export default function SignUp() {
             onChange={(e) => userSet({ ...user, password: e.target.value })}
           />
 
-          <Button type='submit' bg='red.400' _hover={{ bg: 'red.500' }}>
+          <Button
+            type='submit'
+            bg='red.400'
+            width='400px'
+            height='70px'
+            fontSize='20px'
+            color='#fff'
+            _hover={{ bg: 'red.500' }}
+          >
             Sign up
           </Button>
 
           <Divider />
 
           <Link as={NextLink} href='/signin'>
-            <Button bg='red.800' _hover={{ bg: 'red.900' }}>
+            <Button
+              bg='red.800'
+              width='400px'
+              height='70px'
+              fontSize='20px'
+              color='#fff'
+              _hover={{ bg: 'red.900' }}
+            >
               Already have an account? Sign in
             </Button>
           </Link>

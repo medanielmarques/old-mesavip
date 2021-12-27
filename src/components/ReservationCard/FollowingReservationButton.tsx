@@ -1,39 +1,44 @@
 import { useContext, useState } from 'react';
-import { Flex, Button, toast, useToast } from '@chakra-ui/react';
+import { Flex, Button, useToast, useDisclosure } from '@chakra-ui/react';
 
+import { CancelReservationAlert } from './CancelReservationAlert';
 import { CancelReservation } from 'src/http/reservation';
 import { ReservationCardContext } from './contexts/ReservationCardContext';
 import { ReservationContext } from 'src/pages/reservations';
 
 export function FollowingReservationButton() {
   const { reservation } = useContext(ReservationCardContext);
-  const [isLoading, isLoadingSet] = useState(false);
-
   const { refreshFollowingReservations } = useContext(ReservationContext);
 
-  const toast = useToast();
+  const [isLoading, isLoadingSet] = useState(false);
+  const { isOpen, onToggle } = useDisclosure();
 
-  async function handleClick() {
+  const toast = useToast();
+  function toastAction() {
+    toast({
+      title: 'Reservation canceled!',
+      status: 'success',
+      duration: 2000,
+      variant: 'subtle',
+      position: 'top',
+      isClosable: true,
+    });
+  }
+
+  async function cancelReservation() {
     isLoadingSet(true);
-    await CancelReservation(reservation.id)
-      .then(() => isLoadingSet(false))
-      .then(() => refreshFollowingReservations())
-      .then(() =>
-        toast({
-          title: 'Reservation canceled!',
-          status: 'success',
-          duration: 2000,
-          variant: 'subtle',
-          position: 'top',
-          isClosable: true,
-        })
-      );
+    await CancelReservation(reservation.id).then(() => {
+      onToggle();
+      isLoadingSet(false);
+      refreshFollowingReservations();
+      toastAction();
+    });
   }
 
   return (
     <Flex justify='center' m='12px 0'>
       <Button
-        onClick={handleClick}
+        onClick={onToggle}
         variant='outline'
         width='56'
         height='10'
@@ -46,6 +51,12 @@ export function FollowingReservationButton() {
         {/* There should be a button "Re-schedule" or smth */}
         {!!reservation.canceled ? 'Canceled' : 'Cancel reservation'}
       </Button>
+
+      <CancelReservationAlert
+        isOpen={isOpen}
+        onToggle={onToggle}
+        onClick={cancelReservation}
+      />
     </Flex>
   );
 }

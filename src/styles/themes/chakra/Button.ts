@@ -1,12 +1,3 @@
-const Solid = {
-  solid: () => ({
-    width: '400px',
-    height: '70px',
-    fontSize: '20px',
-    color: '#fff',
-  }),
-};
-
 const Outline = {
   outline: () => ({
     width: '160px',
@@ -18,7 +9,6 @@ const Outline = {
 export const Button = {
   Button: {
     variants: {
-      ...Solid,
       ...Outline,
     },
   },

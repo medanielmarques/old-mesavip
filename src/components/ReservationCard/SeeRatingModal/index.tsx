@@ -19,7 +19,7 @@ export function SeeRatingModal() {
   return (
     <Modal isOpen={isOpenSeeRatingModal} onClose={onToggleSeeRatingModal}>
       <ModalOverlay />
-      <ModalContent alignItems='center'>
+      <ModalContent>
         <ModalHeader>That was your rating on {restaurant}</ModalHeader>
 
         <ModalCloseButton />

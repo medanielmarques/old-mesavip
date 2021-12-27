@@ -8,21 +8,26 @@ import { RateReservationModal } from './RateReservationModal';
 import { PastReservationButton } from './PastReservationButton';
 import { FollowingReservationButton } from './FollowingReservationButton';
 import { SeeRatingModal } from './SeeRatingModal';
+import { CancelReservationAlert } from './CancelReservationAlert';
 
 import { ReservationCardContext } from './contexts/ReservationCardContext';
 import { Reservation } from 'src/interfaces/reservation';
 
 interface CardProps {
   reservation: Reservation;
-  past?: boolean;
 }
 
 export function ReservationCard(props: CardProps) {
-  const { past, reservation } = props;
+  const { reservation } = props;
 
   const { isOpen, onToggle } = useDisclosure();
   const { isOpen: isOpenSeeRatingModal, onToggle: onToggleSeeRatingModal } =
     useDisclosure();
+
+  const {
+    isOpen: isOpenCancelReservationAlert,
+    onToggle: onToggleCancelReservationAlert,
+  } = useDisclosure();
 
   return (
     <ReservationCardContext.Provider
@@ -32,6 +37,10 @@ export function ReservationCard(props: CardProps) {
         onToggle,
         isOpenSeeRatingModal,
         onToggleSeeRatingModal,
+        cancelReservationAlertProps: {
+          isOpen: isOpenCancelReservationAlert,
+          onToggle: onToggleCancelReservationAlert,
+        },
       }}
     >
       <Box w='92' h='52' p='4' borderRadius='md' shadow='base'>
@@ -47,10 +56,16 @@ export function ReservationCard(props: CardProps) {
 
         <Divider />
 
-        {!!past ? <PastReservationButton /> : <FollowingReservationButton />}
+        {/* Verify if the [rated] key exists in the reservation object */}
+        {Reflect.has(reservation, 'rated') ? (
+          <PastReservationButton />
+        ) : (
+          <FollowingReservationButton />
+        )}
 
         <RateReservationModal />
         <SeeRatingModal />
+        {/* <CancelReservationAlert /> */}
       </Box>
     </ReservationCardContext.Provider>
   );

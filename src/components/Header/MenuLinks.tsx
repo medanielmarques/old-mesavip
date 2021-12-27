@@ -39,14 +39,14 @@ export function MenuItens({ isOpen }: MenuItensProps) {
         </MenuItem>
 
         {isAuthenticated() ? (
-          <HStack>
+          <HStack spacing='4'>
             <MenuButton href='/reservations'>Reservations</MenuButton>
             <MenuButton href='/' onClick={handleSignOut}>
               Sign out
             </MenuButton>
           </HStack>
         ) : (
-          <HStack>
+          <HStack spacing='4'>
             <MenuButton href='/signin'>Sign in</MenuButton>
             <MenuButton href='/signup'>Sign up</MenuButton>
           </HStack>

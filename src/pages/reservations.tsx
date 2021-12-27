@@ -68,24 +68,18 @@ export default function Reservations() {
           Following Reservations
         </Text>
         <Grid templateColumns='repeat(auto-fill, minmax(384px, 1fr))' gap={6}>
-          {followingReservations &&
-            followingReservations.map((reservation) => (
-              <ReservationCard key={reservation.id} reservation={reservation} />
-            ))}
+          {followingReservations.map((reservation) => (
+            <ReservationCard key={reservation.id} reservation={reservation} />
+          ))}
         </Grid>
 
         <Text fontSize='20px' m='30px 0' align='center'>
           Past Reservations
         </Text>
         <Grid templateColumns='repeat(auto-fill, minmax(384px, 1fr))' gap={6}>
-          {pastReservations &&
-            pastReservations.map((reservation) => (
-              <ReservationCard
-                key={reservation.id}
-                reservation={reservation}
-                past
-              />
-            ))}
+          {pastReservations.map((reservation) => (
+            <ReservationCard key={reservation.id} reservation={reservation} />
+          ))}
         </Grid>
       </Box>
     </ReservationContext.Provider>
