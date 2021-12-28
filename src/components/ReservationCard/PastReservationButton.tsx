@@ -1,17 +1,26 @@
 import { useContext } from 'react';
-import { Flex, Button } from '@chakra-ui/react';
+import { Flex, Button, useDisclosure } from '@chakra-ui/react';
+
+import { RateReservationModal } from './RateReservationModal';
+import { SeeRatingModal } from './SeeRatingModal';
 import { ReservationCardContext } from './contexts/ReservationCardContext';
 
 export function PastReservationButton() {
-  const { onToggle, onToggleSeeRatingModal, reservation } = useContext(
-    ReservationCardContext
-  );
+  const { reservation } = useContext(ReservationCardContext);
+
+  const {
+    isOpen: isOpenRateReservationModal,
+    onToggle: onToggleRateReservationModal,
+  } = useDisclosure();
+
+  const { isOpen: isOpenSeeRatingModal, onToggle: onToggleSeeRatingModal } =
+    useDisclosure();
 
   function handleClick() {
     if (!!reservation.rated) {
       onToggleSeeRatingModal();
     } else {
-      onToggle();
+      onToggleRateReservationModal();
     }
   }
 
@@ -26,6 +35,16 @@ export function PastReservationButton() {
       >
         {!!reservation.rated ? 'See your rating' : 'Rate reservation'}
       </Button>
+
+      <RateReservationModal
+        isOpen={isOpenRateReservationModal}
+        onToggle={onToggleRateReservationModal}
+      />
+
+      <SeeRatingModal
+        isOpen={isOpenSeeRatingModal}
+        onToggle={onToggleSeeRatingModal}
+      />
     </Flex>
   );
 }

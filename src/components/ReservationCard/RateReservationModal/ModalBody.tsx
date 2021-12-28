@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 import {
   Button,
   Flex,
-  Input,
   ModalBody as ChakraModalBody,
   Select,
   Textarea,

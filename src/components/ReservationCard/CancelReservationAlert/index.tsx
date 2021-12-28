@@ -1,16 +1,13 @@
 import { useRef } from 'react';
 import {
   AlertDialog,
-  AlertDialogBody,
   AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
   AlertDialogOverlay,
-  Button,
-  Flex,
-  Heading,
-  Text,
 } from '@chakra-ui/react';
+
+import { AlertDialogFooter } from './AlertDialogFooter';
+import { AlertDialogBody } from './AlertDialogBody';
+import { AlertDialogHeader } from './AlertDialogHeader';
 
 interface CancelReservationAlertProps {
   isOpen: boolean;
@@ -18,11 +15,9 @@ interface CancelReservationAlertProps {
   onClick(): void;
 }
 
-export function CancelReservationAlert({
-  isOpen,
-  onToggle,
-  onClick,
-}: CancelReservationAlertProps) {
+export function CancelReservationAlert(props: CancelReservationAlertProps) {
+  const { isOpen, onToggle, onClick } = props;
+
   const cancelRef = useRef(null);
 
   return (
@@ -33,30 +28,15 @@ export function CancelReservationAlert({
     >
       <AlertDialogOverlay>
         <AlertDialogContent>
-          <AlertDialogHeader align='center' fontSize='lg' fontWeight='bold'>
-            <Heading size='lg'>Cancel reservation</Heading>
-          </AlertDialogHeader>
+          <AlertDialogHeader />
 
-          <AlertDialogBody align='center'>
-            <Text fontSize='lg' fontWeight='500'>
-              Are you sure? Do you want to cancel this reservation?
-            </Text>
-          </AlertDialogBody>
+          <AlertDialogBody />
 
-          <AlertDialogFooter justifyContent='center'>
-            <Button
-              background='gray.200'
-              size='lg'
-              ref={cancelRef}
-              onClick={onToggle}
-            >
-              No, I don't
-            </Button>
-
-            <Button colorScheme='red' size='lg' ml={3} onClick={onClick}>
-              Yes, I do
-            </Button>
-          </AlertDialogFooter>
+          <AlertDialogFooter
+            onClick={onClick}
+            onToggle={onToggle}
+            cancelRef={cancelRef}
+          />
         </AlertDialogContent>
       </AlertDialogOverlay>
     </AlertDialog>

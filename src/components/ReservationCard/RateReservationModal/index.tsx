@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import {
   Modal,
   ModalCloseButton,
@@ -6,15 +5,20 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react';
-import { ReservationCardContext } from '../contexts/ReservationCardContext';
 import { ModalBody } from './ModalBody';
 
-export function RateReservationModal() {
-  const { isOpen = false, onToggle } = useContext(ReservationCardContext);
+interface RateReservationModalProps {
+  isOpen: boolean;
+  onToggle(): void;
+}
+
+export function RateReservationModal(props: RateReservationModalProps) {
+  const { isOpen, onToggle } = props;
 
   return (
     <Modal isOpen={isOpen} onClose={onToggle}>
       <ModalOverlay />
+
       <ModalContent alignItems='center'>
         <ModalHeader>Rate your reservation</ModalHeader>
 

@@ -9,15 +9,20 @@ import {
 import { ReservationCardContext } from '../contexts/ReservationCardContext';
 import { ModalBody } from './ModalBody';
 
-export function SeeRatingModal() {
+interface SeeRatingModalProps {
+  isOpen: boolean;
+  onToggle(): void;
+}
+
+export function SeeRatingModal(props: SeeRatingModalProps) {
+  const { isOpen, onToggle } = props;
+
   const {
-    isOpenSeeRatingModal = false,
-    onToggleSeeRatingModal,
     reservation: { restaurant },
   } = useContext(ReservationCardContext);
 
   return (
-    <Modal isOpen={isOpenSeeRatingModal} onClose={onToggleSeeRatingModal}>
+    <Modal isOpen={isOpen} onClose={onToggle}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>That was your rating on {restaurant}</ModalHeader>
