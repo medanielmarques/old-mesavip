@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { RateReservation } from 'src/http/reservation';
 import { ReservationCardContext } from '../contexts/ReservationCardContext';
-import { ReservationContext } from 'src/pages/reservations';
+import { PastReservationsContext } from 'src/hooks/usePastReservations';
 
 interface ModalBodyProps {
   closeModal(): void;
@@ -19,7 +19,7 @@ export function ModalBody({ closeModal }: ModalBodyProps) {
   const [comment, commentSet] = useState('');
   const [rating, ratingSet] = useState(0);
 
-  const { refreshPastReservations } = useContext(ReservationContext);
+  const { refreshPastReservations } = useContext(PastReservationsContext);
 
   const {
     reservation: { restaurant, restaurant_id, id: reservation_id },

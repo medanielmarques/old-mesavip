@@ -4,11 +4,13 @@ import { Flex, Button, useToast, useDisclosure } from '@chakra-ui/react';
 import { CancelReservationAlert } from './CancelReservationAlert';
 import { CancelReservation } from 'src/http/reservation';
 import { ReservationCardContext } from './contexts/ReservationCardContext';
-import { ReservationContext } from 'src/pages/reservations';
+import { FollowingReservationsContext } from 'src/hooks/useFollowingReservations';
 
 export function FollowingReservationButton() {
   const { reservation } = useContext(ReservationCardContext);
-  const { refreshFollowingReservations } = useContext(ReservationContext);
+  const { refreshFollowingReservations } = useContext(
+    FollowingReservationsContext
+  );
 
   const [isLoading, isLoadingSet] = useState(false);
   const { isOpen, onToggle } = useDisclosure();
