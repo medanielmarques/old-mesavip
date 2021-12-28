@@ -2,8 +2,7 @@ import { TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 
 import { ReservationTabPanel } from './components/ReservationTabPanel';
 import { TabList } from './components/TabList';
-import { FollowingReservationsProvider } from 'src/hooks/useFollowingReservations';
-import { PastReservationsProvider } from 'src/hooks/usePastReservations';
+import { ReservationsProvider } from 'src/hooks/useReservationsContext';
 
 export default function Reservations() {
   return (
@@ -12,15 +11,15 @@ export default function Reservations() {
 
       <TabPanels>
         <TabPanel>
-          <FollowingReservationsProvider>
+          <ReservationsProvider reservationType='following'>
             <ReservationTabPanel />
-          </FollowingReservationsProvider>
+          </ReservationsProvider>
         </TabPanel>
 
         <TabPanel>
-          <PastReservationsProvider>
-            <ReservationTabPanel past />
-          </PastReservationsProvider>
+          <ReservationsProvider reservationType='past'>
+            <ReservationTabPanel />
+          </ReservationsProvider>
         </TabPanel>
       </TabPanels>
     </Tabs>

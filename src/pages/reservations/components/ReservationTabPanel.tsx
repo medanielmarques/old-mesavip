@@ -1,18 +1,11 @@
-import { Box, Grid } from '@chakra-ui/react';
 import { useContext } from 'react';
+import { Box, Grid } from '@chakra-ui/react';
+
 import { ReservationCard } from 'src/components/ReservationCard';
-import { FollowingReservationsContext } from 'src/hooks/useFollowingReservations';
-import { PastReservationsContext } from 'src/hooks/usePastReservations';
+import { ReservationsContext } from 'src/hooks/useReservationsContext';
 
-interface ReservationTabPanelProps {
-  past?: boolean;
-}
-
-export function ReservationTabPanel({ past }: ReservationTabPanelProps) {
-  const { followingReservations } = useContext(FollowingReservationsContext);
-  const { pastReservations } = useContext(PastReservationsContext);
-
-  const reservations = !!past ? pastReservations : followingReservations;
+export function ReservationTabPanel() {
+  const { reservations } = useContext(ReservationsContext);
 
   return (
     <Box

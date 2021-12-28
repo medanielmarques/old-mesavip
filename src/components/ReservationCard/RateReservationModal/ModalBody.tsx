@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { RateReservation } from 'src/http/reservation';
 import { ReservationCardContext } from '../contexts/ReservationCardContext';
-import { PastReservationsContext } from 'src/hooks/usePastReservations';
+import { ReservationsContext } from 'src/hooks/useReservationsContext';
 
 interface ModalBodyProps {
   closeModal(): void;
@@ -19,7 +19,7 @@ export function ModalBody({ closeModal }: ModalBodyProps) {
   const [comment, commentSet] = useState('');
   const [rating, ratingSet] = useState(0);
 
-  const { refreshPastReservations } = useContext(PastReservationsContext);
+  const { refreshReservations } = useContext(ReservationsContext);
 
   const {
     reservation: { restaurant, restaurant_id, id: reservation_id },
@@ -37,7 +37,7 @@ export function ModalBody({ closeModal }: ModalBodyProps) {
       comment,
     }).then(() => {
       closeModal();
-      refreshPastReservations();
+      refreshReservations();
       toast({
         title: 'Rate registered successfully!',
         status: 'success',
