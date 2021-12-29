@@ -22,7 +22,7 @@ export function ModalBody() {
     api
       .get(`ratings/list-by-id/${reservation_id}`)
       .then((response) => ratingSet(response.data));
-  }, []);
+  }, [reservation_id]);
 
   return (
     <ChakraModalBody mb='2'>

@@ -23,7 +23,7 @@ export function AlertDialogFooter({
         ref={cancelRef}
         onClick={onToggle}
       >
-        No, I don't
+        No, I don&apos;t
       </Button>
 
       <Button colorScheme='red' size='lg' ml={3} onClick={onClick}>
