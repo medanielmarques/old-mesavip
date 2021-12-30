@@ -3,9 +3,7 @@ import { Flex, Text } from '@chakra-ui/react';
 import { ReservationCardContext } from './contexts/ReservationCardContext';
 
 export function ScheduledDate() {
-  const {
-    reservation: { day, month },
-  } = useContext(ReservationCardContext);
+  const { day, month } = useContext(ReservationCardContext);
 
   return (
     <Flex

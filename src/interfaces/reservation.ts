@@ -7,7 +7,7 @@ export interface Reservation {
   day: string;
   month: string;
   time: string;
-  avg_rating: string;
+  avg_rating: number;
   city: string;
   address: string;
 }

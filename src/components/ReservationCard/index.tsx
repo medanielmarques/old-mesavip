@@ -3,7 +3,7 @@ import { Box, Flex, Divider } from '@chakra-ui/react';
 import { Address } from './Address';
 import { ScheduledDate } from './ScheduledDate';
 import { ScheduledTime } from './ScheduledTime';
-import { RestaurantNameAndRate } from './RestaurantNameAndRate';
+import { RestaurantNameAndRate } from '../RestaurantNameAndRate';
 import { PastReservationButton } from './PastReservationButton';
 import { FollowingReservationButton } from './FollowingReservationButton';
 
@@ -18,17 +18,16 @@ export function ReservationCard(props: CardProps) {
   const { reservation } = props;
 
   return (
-    <ReservationCardContext.Provider
-      value={{
-        reservation,
-      }}
-    >
+    <ReservationCardContext.Provider value={reservation}>
       <Box w='92' h='52' p='4' borderRadius='md' shadow='base'>
         <Flex w='68' h='32' ml='5px' m='0 auto' gridGap='3'>
           <ScheduledDate />
 
           <Flex width='100%' direction='column'>
-            <RestaurantNameAndRate />
+            <RestaurantNameAndRate
+              restaurant={reservation.restaurant}
+              avg_rating={reservation.avg_rating}
+            />
             <ScheduledTime />
             <Address />
           </Flex>

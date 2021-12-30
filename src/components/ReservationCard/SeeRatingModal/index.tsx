@@ -17,9 +17,7 @@ interface SeeRatingModalProps {
 export function SeeRatingModal(props: SeeRatingModalProps) {
   const { isOpen, onToggle } = props;
 
-  const {
-    reservation: { restaurant },
-  } = useContext(ReservationCardContext);
+  const { restaurant } = useContext(ReservationCardContext);
 
   return (
     <Modal isOpen={isOpen} onClose={onToggle}>

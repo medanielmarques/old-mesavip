@@ -12,9 +12,7 @@ import { useEffect } from 'react';
 import { api } from 'src/services/api';
 
 export function ModalBody() {
-  const {
-    reservation: { id: reservation_id },
-  } = useContext(ReservationCardContext);
+  const { id: reservation_id } = useContext(ReservationCardContext);
 
   const [rating, ratingSet] = useState({} as Rating);
 

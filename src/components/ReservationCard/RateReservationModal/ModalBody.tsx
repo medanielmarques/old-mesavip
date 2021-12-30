@@ -22,7 +22,9 @@ export function ModalBody({ closeModal }: ModalBodyProps) {
   const { refreshReservations } = useContext(ReservationsContext);
 
   const {
-    reservation: { restaurant, restaurant_id, id: reservation_id },
+    restaurant,
+    restaurant_id,
+    id: reservation_id,
   } = useContext(ReservationCardContext);
 
   const toast = useToast();

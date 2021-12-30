@@ -7,7 +7,7 @@ import { ReservationCardContext } from './contexts/ReservationCardContext';
 import { ReservationsContext } from 'src/hooks/useReservationsContext';
 
 export function FollowingReservationButton() {
-  const { reservation } = useContext(ReservationCardContext);
+  const { canceled, id: reservation_id } = useContext(ReservationCardContext);
 
   const { refreshReservations } = useContext(ReservationsContext);
 
@@ -28,7 +28,7 @@ export function FollowingReservationButton() {
 
   async function cancelReservation() {
     isLoadingSet(true);
-    await CancelReservation(reservation.id).then(() => {
+    await CancelReservation(reservation_id).then(() => {
       onToggle();
       isLoadingSet(false);
       refreshReservations();
@@ -47,10 +47,10 @@ export function FollowingReservationButton() {
         gridGap='2'
         isLoading={isLoading}
         loadingText='Cancelling'
-        isDisabled={!!reservation.canceled}
+        isDisabled={!!canceled}
       >
         {/* There should be a button "Re-schedule" or smth */}
-        {!!reservation.canceled ? 'Canceled' : 'Cancel reservation'}
+        {!!canceled ? 'Canceled' : 'Cancel reservation'}
       </Button>
 
       <CancelReservationAlert

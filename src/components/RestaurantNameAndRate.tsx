@@ -1,12 +1,13 @@
-import { useContext } from 'react';
 import { Flex, Text, Icon } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
-import { ReservationCardContext } from './contexts/ReservationCardContext';
 
-export function RestaurantNameAndRate() {
-  const {
-    reservation: { restaurant, avg_rating },
-  } = useContext(ReservationCardContext);
+interface RestaurantNameAndRateProps {
+  restaurant: string;
+  avg_rating: number;
+}
+
+export function RestaurantNameAndRate(props: RestaurantNameAndRateProps) {
+  const { restaurant, avg_rating } = props;
 
   return (
     <Flex justify='space-between'>

@@ -6,12 +6,13 @@ export interface Restaurant {
   site?: string;
   culinary: string;
   image: string;
+  bairro?: string;
   address?: string;
   cep?: string;
   logradouro?: string;
   numero?: string;
   complemento?: any;
-  avg_rating: string;
+  avg_rating: number;
   operation_hours: string;
   total_ratings?: string;
 }

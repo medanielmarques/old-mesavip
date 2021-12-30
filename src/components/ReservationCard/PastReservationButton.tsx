@@ -6,7 +6,7 @@ import { SeeRatingModal } from './SeeRatingModal';
 import { ReservationCardContext } from './contexts/ReservationCardContext';
 
 export function PastReservationButton() {
-  const { reservation } = useContext(ReservationCardContext);
+  const { rated } = useContext(ReservationCardContext);
 
   const {
     isOpen: isOpenRateReservationModal,
@@ -17,7 +17,7 @@ export function PastReservationButton() {
     useDisclosure();
 
   function handleClick() {
-    if (!!reservation.rated) {
+    if (!!rated) {
       onToggleSeeRatingModal();
     } else {
       onToggleRateReservationModal();
@@ -33,7 +33,7 @@ export function PastReservationButton() {
         height='10'
         fontSize='16px'
       >
-        {!!reservation.rated ? 'See your rating' : 'Rate reservation'}
+        {!!rated ? 'See your rating' : 'Rate reservation'}
       </Button>
 
       <RateReservationModal
