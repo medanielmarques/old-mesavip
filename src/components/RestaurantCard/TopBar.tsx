@@ -17,13 +17,11 @@ export function TopBar(props: TopBarProps) {
         base: '288px',
         md: '350px',
         lg: '432px',
-        xl: '596px',
       }}
       m={{
         base: '0 auto',
         md: '0 auto',
         lg: '0',
-        xl: '0',
       }}
     >
       <TotalRestaurantsText length={totalRestaurants} />

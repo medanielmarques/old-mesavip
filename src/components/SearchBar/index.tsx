@@ -18,7 +18,7 @@ export function SearchBar(props: SearchBarProps) {
     setTimeout(() => {
       searchRestaurantSet(search);
     }, 500);
-  }, [search]);
+  }, [search, searchRestaurantSet]);
 
   return (
     <Flex as='form'>
@@ -34,12 +34,13 @@ export function SearchBar(props: SearchBarProps) {
 
         {search && (
           <InputRightElement
-            children={<FaTimes />}
             cursor='pointer'
             borderRadius='5px'
             _hover={{ bg: 'gray.300' }}
             onClick={handleClearSearch}
-          />
+          >
+            <FaTimes />
+          </InputRightElement>
         )}
       </InputGroup>
     </Flex>

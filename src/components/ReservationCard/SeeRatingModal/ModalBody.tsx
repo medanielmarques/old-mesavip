@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import {
   Flex,
   HStack,
@@ -6,9 +6,9 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+
 import { ReservationCardContext } from '../contexts/ReservationCardContext';
 import { Rating } from 'src/interfaces/rating';
-import { useEffect } from 'react';
 import { api } from 'src/services/api';
 
 export function ModalBody() {
@@ -39,12 +39,7 @@ export function ModalBody() {
 
         <Stack>
           <Text as='b'>Your opinion: </Text>
-          <Text wordBreak='break-all'>
-            It was great! Crawfish were seasoned perfectly, even bought some
-            seasoning from the market inside of the restaurant. We were seated
-            quickly, service was wonderful. They were very accommodating to the
-            children in our party.
-          </Text>
+          <Text wordBreak='break-all'>{rating.comment}</Text>
         </Stack>
       </Stack>
     </ChakraModalBody>

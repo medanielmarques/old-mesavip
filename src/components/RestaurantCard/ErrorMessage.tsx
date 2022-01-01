@@ -12,9 +12,8 @@ export function ErrorMessage(props: ErrorMessageProps) {
       display={!!searchError ? 'block' : 'none'}
       fontSize='20px'
       align='center'
-      mt='8'
     >
-      Restaurant not found!
+      Sorry, restaurant not found!
     </Text>
   );
 }
