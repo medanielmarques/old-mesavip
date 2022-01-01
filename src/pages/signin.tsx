@@ -53,6 +53,13 @@ export default function SignIn() {
             placeholder='E-mail'
             value={user.email}
             onChange={(e) => userSet({ ...user, email: e.target.value })}
+            height='70px'
+            padding='20px'
+            width='400px'
+            fontSize='17px'
+            _placeholder={{
+              color: '#7d8791',
+            }}
           />
 
           <Input
@@ -61,6 +68,13 @@ export default function SignIn() {
             placeholder='Password'
             value={user.password}
             onChange={(e) => userSet({ ...user, password: e.target.value })}
+            height='70px'
+            padding='20px'
+            width='400px'
+            fontSize='17px'
+            _placeholder={{
+              color: '#7d8791',
+            }}
           />
 
           <Button

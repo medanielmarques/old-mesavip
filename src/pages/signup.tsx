@@ -55,6 +55,13 @@ export default function SignUp() {
             placeholder='Name'
             value={user.name}
             onChange={(e) => userSet({ ...user, name: e.target.value })}
+            height='70px'
+            padding='20px'
+            width='400px'
+            fontSize='17px'
+            _placeholder={{
+              color: '#7d8791',
+            }}
           />
 
           <Input
@@ -63,6 +70,13 @@ export default function SignUp() {
             placeholder='E-mail'
             value={user.email}
             onChange={(e) => userSet({ ...user, email: e.target.value })}
+            height='70px'
+            padding='20px'
+            width='400px'
+            fontSize='17px'
+            _placeholder={{
+              color: '#7d8791',
+            }}
           />
 
           <Input
@@ -71,6 +85,13 @@ export default function SignUp() {
             placeholder='CPF'
             value={user.cpf}
             onChange={(e) => userSet({ ...user, cpf: e.target.value })}
+            height='70px'
+            padding='20px'
+            width='400px'
+            fontSize='17px'
+            _placeholder={{
+              color: '#7d8791',
+            }}
           />
 
           <Input
@@ -79,6 +100,13 @@ export default function SignUp() {
             placeholder='Password'
             value={user.password}
             onChange={(e) => userSet({ ...user, password: e.target.value })}
+            height='70px'
+            padding='20px'
+            width='400px'
+            fontSize='17px'
+            _placeholder={{
+              color: '#7d8791',
+            }}
           />
 
           <Button

@@ -1,38 +1,56 @@
 import { useEffect, useState } from 'react';
-import { Box, SimpleGrid } from '@chakra-ui/react';
+import { Box, SimpleGrid, Stack } from '@chakra-ui/react';
 
-import { TotalRestaurantsText } from 'src/components/RestaurantCard/TotalRestaurantsText';
 import { RestaurantCard } from 'src/components/RestaurantCard';
+import { ErrorMessage } from 'src/components/RestaurantCard/ErrorMessage';
+import { TopBar } from 'src/components/RestaurantCard/TopBar';
+
 import { Restaurant } from 'src/interfaces/restaurant';
 import { api } from 'src/services/api';
 
 export default function Restaurants() {
   const [restaurants, restaurantsSet] = useState([] as Restaurant[]);
+  const [searchRestaurant, searchRestaurantSet] = useState('');
+  const [searchError, searchErrorSet] = useState(false);
 
   useEffect(() => {
-    api.get('restaurants').then((response) => {
-      restaurantsSet(response.data);
-    });
-  }, []);
+    searchErrorSet(false);
+
+    api
+      .get(`restaurants/${searchRestaurant}`)
+      .then((response) => {
+        restaurantsSet(response.data);
+      })
+      .catch(() => {
+        searchErrorSet(true);
+        restaurantsSet([]);
+      });
+  }, [searchRestaurant]);
 
   return (
-    // algo do tipo
-    // width={{
-    //   base: '288px',
-    //   md: '594px',
-    //   lg: '594px',
-    //   xl: '594px',
-    //   '2xl': '975px',
-    // }}
+    <Box
+      w={{
+        base: '288px',
+        md: '606px',
+        lg: '904px',
+        xl: '1212px',
+      }}
+      m='34px auto'
+    >
+      <Stack spacing={6}>
+        <TopBar
+          totalRestaurants={restaurants.length}
+          searchRestaurantSet={searchRestaurantSet}
+        />
 
-    <Box maxWidth='1200px' m='14px auto'>
-      <TotalRestaurantsText length={restaurants.length} />
+        <ErrorMessage searchError={searchError} />
 
-      <SimpleGrid columns={[1, 1, 2, 3, 4]} spacing={10}>
-        {restaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-        ))}
-      </SimpleGrid>
+        <SimpleGrid columns={[1, 1, 2, 3, 4]} spacing={5}>
+          {restaurants.map((restaurant) => (
+            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+          ))}
+        </SimpleGrid>
+      </Stack>
     </Box>
   );
 }

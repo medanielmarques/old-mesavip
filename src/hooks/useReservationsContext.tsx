@@ -26,9 +26,12 @@ export function ReservationsProvider({
   }
 
   useEffect(() => {
-    api.get(`reservations/list-${reservationType}`).then((response) => {
-      reservationsSet(response.data);
-    });
+    api
+      .get(`reservations/list-${reservationType}`)
+      .then((response) => {
+        reservationsSet(response.data);
+      })
+      .catch(() => {});
   }, [refresh]);
 
   return (

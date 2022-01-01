@@ -17,7 +17,16 @@ export function RestaurantCard(props: RestaurantCardProps) {
 
   return (
     <RestaurantCardContext.Provider value={restaurant}>
-      <Box w='72' h='60' m='0 auto' p='3' borderRadius='md' shadow='base'>
+      <Box
+        w='72'
+        h='60'
+        m='0 auto'
+        p='3'
+        borderRadius='md'
+        shadow='xs'
+        cursor='pointer'
+        _hover={{ bg: 'gray.100' }}
+      >
         <Thumbnail />
 
         <Stack spacing='1' mt='1'>

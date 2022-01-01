@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Image } from '@chakra-ui/react';
 
 import { NavBarContainer } from './NavBarContainer';
-import { MenuItem } from './MenuItem';
+import { MenuItem } from './MenuLinks/MenuItem';
 import { MenuToggle } from './MenuToggle';
 import { MenuItens } from './MenuLinks';
 
