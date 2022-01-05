@@ -5,8 +5,9 @@ import { RestaurantNameAndRate } from '../RestaurantNameAndRate';
 import { CulinaryAndPrice } from './CulinaryAndPrice';
 import { Bairro } from './Bairro';
 
-import { Restaurant } from 'src/interfaces/restaurant';
+import { Restaurant } from 'interfaces/restaurant';
 import { RestaurantCardContext } from './contexts/RestaurantCardContext';
+import { useRouter } from 'next/router';
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
@@ -14,6 +15,11 @@ interface RestaurantCardProps {
 
 export function RestaurantCard(props: RestaurantCardProps) {
   const { restaurant } = props;
+  const router = useRouter();
+
+  function handleClick() {
+    router.push(`/restaurant/${restaurant.id}`);
+  }
 
   return (
     <RestaurantCardContext.Provider value={restaurant}>
@@ -26,6 +32,7 @@ export function RestaurantCard(props: RestaurantCardProps) {
         shadow='xs'
         cursor='pointer'
         _hover={{ bg: 'gray.100' }}
+        onClick={handleClick}
       >
         <Thumbnail />
 

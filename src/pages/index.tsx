@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Box, SimpleGrid, Stack } from '@chakra-ui/react';
 
-import { RestaurantCard } from 'src/components/RestaurantCard';
-import { ErrorMessage } from 'src/components/RestaurantCard/ErrorMessage';
-import { TopBar } from 'src/components/RestaurantCard/TopBar';
+import { RestaurantCard } from 'components/RestaurantCard';
+import { ErrorMessage } from 'components/RestaurantCard/ErrorMessage';
+import { TopBar } from 'components/RestaurantCard/TopBar';
 
-import { Restaurant } from 'src/interfaces/restaurant';
-import { api } from 'src/services/api';
+import { Restaurant } from 'interfaces/restaurant';
+import { api } from 'services/api';
 
 export default function Restaurants() {
   const [restaurants, restaurantsSet] = useState([] as Restaurant[]);

@@ -8,8 +8,8 @@ import {
 } from '@chakra-ui/react';
 
 import { ReservationCardContext } from '../contexts/ReservationCardContext';
-import { Rating } from 'src/interfaces/rating';
-import { api } from 'src/services/api';
+import { Rating } from 'interfaces/rating';
+import { api } from 'services/api';
 
 export function ModalBody() {
   const { id: reservation_id } = useContext(ReservationCardContext);

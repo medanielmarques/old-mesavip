@@ -1,5 +1,5 @@
-import { Rating } from 'src/interfaces/rating';
-import { api } from 'src/services/api';
+import { Rating } from 'interfaces/rating';
+import { api } from 'services/api';
 
 interface rateReservation {
   reservation_id: string;

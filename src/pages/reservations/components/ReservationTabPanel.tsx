@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Box, Grid } from '@chakra-ui/react';
 
-import { ReservationCard } from 'src/components/ReservationCard';
-import { ReservationsContext } from 'src/hooks/useReservationsContext';
+import { ReservationCard } from 'components/ReservationCard';
+import { ReservationsContext } from 'hooks/useReservationsContext';
 
 export function ReservationTabPanel() {
   const { reservations } = useContext(ReservationsContext);

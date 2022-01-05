@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
-import { Reservation } from 'src/interfaces/reservation';
-import { api } from 'src/services/api';
+import { Reservation } from 'interfaces/reservation';
+import { api } from 'services/api';
 
 interface ReservationsProviderProps {
   children: ReactNode;

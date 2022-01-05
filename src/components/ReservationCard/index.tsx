@@ -8,7 +8,7 @@ import { PastReservationButton } from './PastReservationButton';
 import { FollowingReservationButton } from './FollowingReservationButton';
 
 import { ReservationCardContext } from './contexts/ReservationCardContext';
-import { Reservation } from 'src/interfaces/reservation';
+import { Reservation } from 'interfaces/reservation';
 
 interface CardProps {
   reservation: Reservation;

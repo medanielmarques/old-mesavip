@@ -1,11 +1,11 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
 
 import { MenuItem } from './MenuItem';
 import { MenuButton } from './MenuButton';
 import { MenuLinksContainer } from './MenuLinksContainer';
 
-import { isAuthenticated, signOut } from 'src/services/auth';
+import { isAuthenticated, signOut } from 'services/auth';
 import { ButtonsContainer } from './ButtonsContainer';
 
 interface MenuItensProps {

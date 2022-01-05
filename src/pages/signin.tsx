@@ -1,21 +1,15 @@
 import { useState } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import {
-  Flex,
-  Text,
-  Stack,
-  Input,
-  Button,
-  Divider,
-  Link,
-} from '@chakra-ui/react';
+import { Flex, Text, Stack, Button, Divider, Link } from '@chakra-ui/react';
 
 // Ver como usar
-import { signInFormSchema } from 'src/schemas/yup';
+// import { signInFormSchema } from 'schemas/yup';
 
-import { User } from 'src/interfaces/user';
-import { signInUser } from 'src/http/user';
+import { User } from 'interfaces/user';
+import { signInUser } from 'http/user';
+import { Input } from 'components/SignForms/Input';
+import { Slogan } from 'components/SignForms/Slogan';
 
 export default function SignIn() {
   const router = useRouter();
@@ -25,7 +19,7 @@ export default function SignIn() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     signInUser(user);
-    router.push('/sandbox');
+    router.push('/');
   };
 
   return (
@@ -39,12 +33,7 @@ export default function SignIn() {
         direction='column'
         onSubmit={handleSubmit}
       >
-        <Text fontSize={22} mb={50} align='center'>
-          <Text as='b' color='red.400'>
-            MESAVIP{' '}
-          </Text>
-          helps you to make reservations in your favorite restaurants.
-        </Text>
+        <Slogan />
 
         <Stack spacing={5} align='center'>
           <Input
@@ -53,13 +42,6 @@ export default function SignIn() {
             placeholder='E-mail'
             value={user.email}
             onChange={(e) => userSet({ ...user, email: e.target.value })}
-            height='70px'
-            padding='20px'
-            width='400px'
-            fontSize='17px'
-            _placeholder={{
-              color: '#7d8791',
-            }}
           />
 
           <Input
@@ -68,13 +50,6 @@ export default function SignIn() {
             placeholder='Password'
             value={user.password}
             onChange={(e) => userSet({ ...user, password: e.target.value })}
-            height='70px'
-            padding='20px'
-            width='400px'
-            fontSize='17px'
-            _placeholder={{
-              color: '#7d8791',
-            }}
           />
 
           <Button
@@ -104,7 +79,7 @@ export default function SignIn() {
             </Button>
           </Link>
 
-          <Link as={NextLink} href='/sandbox'>
+          <Link as={NextLink} href='/'>
             <a style={{ textDecoration: 'underline' }}>Forgot your password?</a>
           </Link>
         </Stack>

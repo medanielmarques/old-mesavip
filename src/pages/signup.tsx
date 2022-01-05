@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import {
-  Flex,
-  Text,
-  Stack,
-  Input,
-  Button,
-  Divider,
-  Link,
-} from '@chakra-ui/react';
+import { Flex, Text, Stack, Button, Divider, Link } from '@chakra-ui/react';
 
-import { User } from 'src/interfaces/user';
-import { signUpUser } from 'src/http/user';
+import { User } from 'interfaces/user';
+import { signUpUser } from 'http/user';
+import { Input } from 'components/SignForms/Input';
+import { Slogan } from 'components/SignForms/Slogan';
+import { cpfMask } from 'utils/cpf-mask';
 
 export default function SignUp() {
   const router = useRouter();
@@ -24,11 +19,16 @@ export default function SignUp() {
     password: '',
   });
 
-  const handleSubmit = (e: any) => {
+  function handleSubmit(e: any) {
     e.preventDefault();
     signUpUser(user);
-    router.push('/sandbox');
-  };
+    router.push('/');
+  }
+
+  function handleCpfChange(e: any) {
+    const cpf = cpfMask(e.target.value);
+    userSet({ ...user, cpf });
+  }
 
   return (
     <Flex justify='center' mt={50}>
@@ -41,12 +41,7 @@ export default function SignUp() {
         direction='column'
         onSubmit={handleSubmit}
       >
-        <Text fontSize={22} mb={50} align='center'>
-          <Text as='b' color='red.400'>
-            MESAVIP{' '}
-          </Text>
-          helps you to make reservations in your favorite restaurants.
-        </Text>
+        <Slogan />
 
         <Stack spacing={5} align='center'>
           <Input
@@ -55,13 +50,6 @@ export default function SignUp() {
             placeholder='Name'
             value={user.name}
             onChange={(e) => userSet({ ...user, name: e.target.value })}
-            height='70px'
-            padding='20px'
-            width='400px'
-            fontSize='17px'
-            _placeholder={{
-              color: '#7d8791',
-            }}
           />
 
           <Input
@@ -70,28 +58,14 @@ export default function SignUp() {
             placeholder='E-mail'
             value={user.email}
             onChange={(e) => userSet({ ...user, email: e.target.value })}
-            height='70px'
-            padding='20px'
-            width='400px'
-            fontSize='17px'
-            _placeholder={{
-              color: '#7d8791',
-            }}
           />
 
           <Input
             name='cpf'
-            type='number'
+            type='text'
             placeholder='CPF'
             value={user.cpf}
-            onChange={(e) => userSet({ ...user, cpf: e.target.value })}
-            height='70px'
-            padding='20px'
-            width='400px'
-            fontSize='17px'
-            _placeholder={{
-              color: '#7d8791',
-            }}
+            onChange={handleCpfChange}
           />
 
           <Input
@@ -100,13 +74,6 @@ export default function SignUp() {
             placeholder='Password'
             value={user.password}
             onChange={(e) => userSet({ ...user, password: e.target.value })}
-            height='70px'
-            padding='20px'
-            width='400px'
-            fontSize='17px'
-            _placeholder={{
-              color: '#7d8791',
-            }}
           />
 
           <Button
@@ -136,7 +103,7 @@ export default function SignUp() {
             </Button>
           </Link>
 
-          <Link as={NextLink} href='/sandbox'>
+          <Link as={NextLink} href='/'>
             <a style={{ textDecoration: 'underline' }}>Forgot your password?</a>
           </Link>
         </Stack>

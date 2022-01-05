@@ -2,9 +2,9 @@ import { useContext, useState } from 'react';
 import { Flex, Button, useToast, useDisclosure } from '@chakra-ui/react';
 
 import { CancelReservationAlert } from './CancelReservationAlert';
-import { CancelReservation } from 'src/http/reservation';
+import { CancelReservation } from 'http/reservation';
 import { ReservationCardContext } from './contexts/ReservationCardContext';
-import { ReservationsContext } from 'src/hooks/useReservationsContext';
+import { ReservationsContext } from 'hooks/useReservationsContext';
 
 export function FollowingReservationButton() {
   const { canceled, id: reservation_id } = useContext(ReservationCardContext);

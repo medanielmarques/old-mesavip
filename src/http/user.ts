@@ -1,8 +1,8 @@
-import { authResponse } from 'src/interfaces/authResponse';
-import { User } from 'src/interfaces/user';
+import { authResponse } from 'interfaces/authResponse';
+import { User } from 'interfaces/user';
 
-import { api } from 'src/services/api';
-import { setToken } from 'src/services/auth';
+import { api } from 'services/api';
+import { setToken } from 'services/auth';
 
 export async function signInUser(user: User) {
   await api.post('users/signin', user).then((response) => {

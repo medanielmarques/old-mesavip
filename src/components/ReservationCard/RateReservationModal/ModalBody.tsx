@@ -7,9 +7,9 @@ import {
   Textarea,
   useToast,
 } from '@chakra-ui/react';
-import { RateReservation } from 'src/http/reservation';
+import { RateReservation } from 'http/reservation';
 import { ReservationCardContext } from '../contexts/ReservationCardContext';
-import { ReservationsContext } from 'src/hooks/useReservationsContext';
+import { ReservationsContext } from 'hooks/useReservationsContext';
 
 interface ModalBodyProps {
   closeModal(): void;
