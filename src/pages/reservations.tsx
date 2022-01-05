@@ -1,7 +1,7 @@
 import { TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 
-import { ReservationTabPanel } from './components/ReservationTabPanel';
-import { TabList } from './components/TabList';
+import { ReservationTabPanel } from '../components/pages/Reservations/ReservationTabPanel';
+import { TabList } from 'components/pages/Reservations/TabList';
 import { ReservationsProvider } from 'hooks/useReservationsContext';
 
 export default function Reservations() {
