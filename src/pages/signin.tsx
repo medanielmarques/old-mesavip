@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Flex, Text, Stack, Button, Divider, Link } from '@chakra-ui/react';
+import { Flex, Stack, Button, Divider, Link } from '@chakra-ui/react';
 
 // Ver como usar
 // import { signInFormSchema } from 'schemas/yup';
