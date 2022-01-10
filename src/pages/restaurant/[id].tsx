@@ -1,12 +1,28 @@
-import { useEffect, useState } from 'react';
+import { createContext } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { Box } from '@chakra-ui/react';
 import { ParsedUrlQuery } from 'querystring';
 
+import { Breadcrumb } from 'components/pages/Restaurants/Breadcrumb';
 import { Restaurant as IRestaurant } from 'interfaces/restaurant';
 import { api } from 'services/api';
 
-export default function Restaurant(restaurant: IRestaurant) {
-  return <div>oi</div>;
+export const RestaurantContext = createContext({} as IRestaurant);
+
+interface RestaurantProps {
+  restaurant: IRestaurant;
+}
+
+export default function Restaurant(props: RestaurantProps) {
+  const { restaurant } = props;
+
+  return (
+    <RestaurantContext.Provider value={{ ...restaurant }}>
+      <Box>
+        <Breadcrumb />
+      </Box>
+    </RestaurantContext.Provider>
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
