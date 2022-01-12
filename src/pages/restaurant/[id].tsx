@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { ParsedUrlQuery } from 'querystring';
 
 import { Topbar } from 'components/pages/Restaurants/Topbar';
@@ -12,18 +12,18 @@ export const RestaurantContext = createContext({} as IRestaurant);
 
 interface RestaurantProps {
   restaurant: IRestaurant;
+  banner_url: string;
 }
 
 export default function Restaurant(props: RestaurantProps) {
-  const { restaurant } = props;
+  const { restaurant, banner_url } = props;
 
   return (
     <RestaurantContext.Provider value={{ ...restaurant }}>
-      <Box m='0 150px' w={800}>
+      <Flex direction='column' gap='4' m='0 150px' w={800}>
         <Topbar />
-
-        <Banner />
-      </Box>
+        <Banner banner_url={banner_url} />
+      </Flex>
     </RestaurantContext.Provider>
   );
 }
@@ -53,9 +53,14 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const { id } = ctx.params as Params;
   const { data: restaurant } = await api.get(`restaurants/list-by-id/${id}`);
 
+  const banner_url = await api
+    .get(`files/list/${id}/banner`)
+    .then((response) => response.data[0].path);
+
   return {
     props: {
       restaurant,
+      banner_url,
     },
     revalidate: 60 * 60 * 24, // 24 hours
   };

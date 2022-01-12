@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { Breadcrumb as ChakraBreadcrumb } from '@chakra-ui/react';
 import { FaChevronRight } from 'react-icons/fa';
 
-import { RestaurantContext } from 'pages/restaurant/[id]';
 import { BreadcrumbItem } from './BreadcrumbItem';
+import { RestaurantContext } from 'pages/restaurant/[id]';
 
 export function Breadcrumb() {
   const { name, address } = useContext(RestaurantContext);

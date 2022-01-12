@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { Badge, Box, Flex, Text } from '@chakra-ui/react';
 
-import { RestaurantContext } from 'pages/restaurant/[id]';
 import { Breadcrumb } from '../Breadcrumb';
 import { RestaurantNameAndRate } from 'components/RestaurantNameAndRate';
 import { BairroCulinaryAndPrice } from './BairroCulinaryAndPrice';
 import { Badges } from '../Breadcrumb/Badges';
+import { RestaurantContext } from 'pages/restaurant/[id]';
 
 export function Topbar() {
   const { name, avg_rating, total_reviews } = useContext(RestaurantContext);

@@ -17,8 +17,6 @@ interface RestaurantNameAndRateProps {
 export function RestaurantNameAndRate(props: RestaurantNameAndRateProps) {
   const { restaurant, avg_rating, total_reviews, styles } = props;
 
-  console.log(total_reviews);
-
   return (
     <Flex
       justify='space-between'
