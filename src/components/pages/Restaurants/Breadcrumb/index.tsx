@@ -11,7 +11,7 @@ export function Breadcrumb() {
   return (
     <ChakraBreadcrumb
       color='gray.500'
-      fontSize='sm'
+      fontSize='xs'
       alignContent='center'
       separator={<FaChevronRight size='10px' />}
     >

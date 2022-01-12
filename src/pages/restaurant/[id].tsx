@@ -3,7 +3,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Box } from '@chakra-ui/react';
 import { ParsedUrlQuery } from 'querystring';
 
-import { Breadcrumb } from 'components/pages/Restaurants/Breadcrumb';
+import { Topbar } from 'components/pages/Restaurants/Topbar';
+import { Banner } from 'components/pages/Restaurants/Banner';
 import { Restaurant as IRestaurant } from 'interfaces/restaurant';
 import { api } from 'services/api';
 
@@ -18,8 +19,10 @@ export default function Restaurant(props: RestaurantProps) {
 
   return (
     <RestaurantContext.Provider value={{ ...restaurant }}>
-      <Box>
-        <Breadcrumb />
+      <Box m='0 150px' w={800}>
+        <Topbar />
+
+        <Banner />
       </Box>
     </RestaurantContext.Provider>
   );
