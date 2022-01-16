@@ -1,28 +1,36 @@
-import { Flex, Stack, Text } from '@chakra-ui/react';
-import { RestaurantContext } from 'pages/restaurant/[id]';
 import { useContext } from 'react';
+import { Flex, Link, Stack, Text } from '@chakra-ui/react';
 import { FaLink, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import { RestaurantContext } from 'pages/restaurant/[id]';
 
 export function Info() {
-  const { site, phone, address } = useContext(RestaurantContext);
-
-  console.log(address);
+  const {
+    name,
+    site,
+    phone,
+    address: { logradouro, cidade },
+  } = useContext(RestaurantContext);
 
   return (
-    <Stack>
-      <Flex>
+    <Stack spacing='6' textDecoration='underline'>
+      <Flex gap='4' align='center'>
         <FaLink />
-        <Text>{site}</Text>
+        <Link href={site} target='_blank'>
+          Website
+        </Link>
       </Flex>
 
-      <Flex>
+      <Flex gap='4' align='center'>
         <FaPhone />
         <Text>{phone}</Text>
       </Flex>
 
-      <Flex>
+      <Flex gap='4'>
         <FaMapMarkerAlt />
-        {/* <Text>{address}</Text> */}
+        <Flex direction='column'>
+          <Text>{name}</Text>
+          <Text>{`${logradouro}, ${cidade}`}</Text>
+        </Flex>
       </Flex>
     </Stack>
   );

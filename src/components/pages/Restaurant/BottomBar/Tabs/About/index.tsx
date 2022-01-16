@@ -1,5 +1,11 @@
 import { useContext } from 'react';
-import { Heading, TabPanel, TabPanelProps } from '@chakra-ui/react';
+import {
+  Divider,
+  Flex,
+  Heading,
+  TabPanel,
+  TabPanelProps,
+} from '@chakra-ui/react';
 
 import { RestaurantContext } from 'pages/restaurant/[id]';
 import { Info } from './Info';
@@ -9,13 +15,16 @@ export function About({ ...rest }: TabPanelProps) {
   const { name } = useContext(RestaurantContext);
 
   return (
-    <TabPanel {...rest}>
+    <TabPanel {...rest} mt='3'>
       <Heading fontWeight='500' fontSize='25px'>
         About {name}
       </Heading>
 
-      <Info />
-      <Schedule />
+      <Flex gap='16' h='56' mt='12' align='center'>
+        <Info />
+        <Divider orientation='vertical' />
+        <Schedule />
+      </Flex>
     </TabPanel>
   );
 }
