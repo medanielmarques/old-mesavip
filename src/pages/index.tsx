@@ -18,9 +18,7 @@ export default function Restaurants() {
 
     api
       .get(`restaurants/${searchRestaurant}`)
-      .then((response) => {
-        restaurantsSet(response.data);
-      })
+      .then((response) => restaurantsSet(response.data))
       .catch(() => {
         searchErrorSet(true);
         restaurantsSet([]);

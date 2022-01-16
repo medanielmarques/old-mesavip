@@ -9,11 +9,16 @@ interface MenuButtonProps {
 }
 
 export function MenuButton({ children, href, onClick }: MenuButtonProps) {
-  const buttonVariant = useBreakpointValue({ base: 'unstyled', md: 'outline' });
+  const buttonVariant = useBreakpointValue({ base: 'unstyled', md: 'solid' });
 
   return (
     <Link href={href} passHref>
-      <Button variant={buttonVariant} onClick={onClick}>
+      <Button
+        variant={buttonVariant}
+        width='120px'
+        height='45px'
+        onClick={onClick}
+      >
         {children}
       </Button>
     </Link>

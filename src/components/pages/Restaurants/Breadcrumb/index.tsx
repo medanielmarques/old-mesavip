@@ -12,7 +12,6 @@ export function Breadcrumb() {
     <ChakraBreadcrumb
       color='gray.500'
       fontSize='xs'
-      alignContent='center'
       separator={<FaChevronRight size='10px' />}
     >
       <BreadcrumbItem text='Restaurants' href='/' />

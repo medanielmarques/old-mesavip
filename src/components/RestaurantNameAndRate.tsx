@@ -37,9 +37,11 @@ export function RestaurantNameAndRate(props: RestaurantNameAndRateProps) {
           <Text ml='1'>{avg_rating}</Text>
         </Flex>
 
-        <Text fontSize='14px' fontWeight='400'>
-          {total_reviews} reviews
-        </Text>
+        {total_reviews && (
+          <Text fontSize='14px' fontWeight='400'>
+            {total_reviews} reviews
+          </Text>
+        )}
       </Flex>
     </Flex>
   );

@@ -4,7 +4,7 @@ import { Badge, Box, Flex, Text } from '@chakra-ui/react';
 import { Breadcrumb } from '../Breadcrumb';
 import { RestaurantNameAndRate } from 'components/RestaurantNameAndRate';
 import { BairroCulinaryAndPrice } from './BairroCulinaryAndPrice';
-import { Badges } from '../Breadcrumb/Badges';
+import { Badges } from '../Badges';
 import { RestaurantContext } from 'pages/restaurant/[id]';
 
 export function Topbar() {

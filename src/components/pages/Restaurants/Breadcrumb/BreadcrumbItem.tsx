@@ -17,8 +17,8 @@ export function BreadcrumbItem(props: BreadcrumbItemProps) {
     <ChakraBreadcrumbItem isCurrentPage={isCurrentPage} {...rest}>
       <BreadcrumbLink
         href={href}
-        textDecoration={!!isCurrentPage ? 'underline' : 'none'}
-        cursor={!!!isCurrentPage ? 'pointer' : ''}
+        textDecoration={!!isCurrentPage ? 'none' : 'underline'}
+        cursor={!!isCurrentPage ? '' : 'pointer'}
         _hover={{ color: '#000' }}
       >
         {text}
