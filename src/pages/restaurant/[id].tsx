@@ -3,8 +3,9 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Flex } from '@chakra-ui/react';
 import { ParsedUrlQuery } from 'querystring';
 
-import { Topbar } from 'components/pages/Restaurants/Topbar';
-import { Banner } from 'components/pages/Restaurants/Banner';
+import { Topbar } from 'components/pages/Restaurant/Topbar';
+import { Banner } from 'components/pages/Restaurant/Banner';
+import { BottomBar } from 'components/pages/Restaurant/BottomBar';
 import { Restaurant as IRestaurant } from 'interfaces/restaurant';
 import { api } from 'services/api';
 
@@ -22,7 +23,10 @@ export default function Restaurant(props: RestaurantProps) {
     <RestaurantContext.Provider value={{ ...restaurant }}>
       <Flex direction='column' gap='4' m='0 150px' w={800}>
         <Topbar />
+
         <Banner banner_url={banner_url} />
+
+        <BottomBar />
       </Flex>
     </RestaurantContext.Provider>
   );
