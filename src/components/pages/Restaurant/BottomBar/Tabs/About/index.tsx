@@ -20,7 +20,7 @@ export function About({ ...rest }: TabPanelProps) {
         About {name}
       </Heading>
 
-      <Flex gap='16' h='56' mt='12' align='center'>
+      <Flex gap='16' h='56' mt='12'>
         <Info />
         <Divider orientation='vertical' />
         <Schedule />

@@ -8,7 +8,7 @@ import { Reviews } from './Tabs/Reviews';
 
 export function BottomBar() {
   return (
-    <Tabs isLazy>
+    <Tabs colorScheme='red' isLazy lazyBehavior='keepMounted'>
       <TabList />
 
       <TabPanels>
