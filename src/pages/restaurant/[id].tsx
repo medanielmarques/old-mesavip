@@ -4,7 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import { ParsedUrlQuery } from 'querystring';
 
 import { Topbar } from 'components/pages/Restaurant/Topbar';
-import { Banner } from 'components/pages/Restaurant/Banner';
+import { Image as Banner } from 'components/pages/Restaurant/Image';
 import { BottomBar } from 'components/pages/Restaurant/BottomBar';
 import { Restaurant as IRestaurant } from 'interfaces/restaurant';
 import { api } from 'services/api';
@@ -24,9 +24,13 @@ export default function Restaurant(props: RestaurantProps) {
       <Flex direction='column' gap='4' m='0 150px' w={800}>
         <Topbar />
 
-        <Banner banner_url={banner_url} />
+        <Banner image_url={banner_url} />
 
         <BottomBar />
+
+        {/* Side Bar goes here somewhere */}
+        {/* The reservation Component */}
+        {/* Basically the most important thing on this app */}
       </Flex>
     </RestaurantContext.Provider>
   );

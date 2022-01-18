@@ -1,4 +1,4 @@
-import { TabPanels, Tabs } from '@chakra-ui/react';
+import { TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 
 import { TabList } from './TabList';
 import { About } from './Tabs/About';
@@ -12,10 +12,21 @@ export function BottomBar() {
       <TabList />
 
       <TabPanels>
-        <About />
-        <Menu />
-        <Reviews />
-        <Photos />
+        <TabPanel>
+          <About />
+        </TabPanel>
+
+        <TabPanel>
+          <Menu />
+        </TabPanel>
+
+        <TabPanel>
+          <Reviews />
+        </TabPanel>
+
+        <TabPanel>
+          <Photos />
+        </TabPanel>
       </TabPanels>
     </Tabs>
   );
