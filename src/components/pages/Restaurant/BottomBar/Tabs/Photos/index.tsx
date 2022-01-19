@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
-import { Box, Stack, Text } from '@chakra-ui/react';
+import { Box, Stack } from '@chakra-ui/react';
 
 import { RestaurantContext } from 'pages/restaurant/[id]';
 import { Image } from 'components/pages/Restaurant/Image';
-import { api } from 'services/api';
 import { Texts } from './Texts';
+import { api } from 'services/api';
 
 interface Photo {
   id: string;
@@ -12,14 +12,15 @@ interface Photo {
 }
 
 export function Photos() {
-  const { id, name } = useContext(RestaurantContext);
+  const { id } = useContext(RestaurantContext);
 
   const [photos, photosSet] = useState([] as Photo[]);
 
   useEffect(() => {
     api
       .get(`files/list/${id}/gallery`)
-      .then((response) => photosSet(response.data));
+      .then((response) => photosSet(response.data))
+      .catch(() => {});
   }, []);
 
   return (

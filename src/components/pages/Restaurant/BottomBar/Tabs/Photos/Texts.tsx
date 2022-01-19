@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { RestaurantContext } from 'pages/restaurant/[id]';
-import { useContext } from 'react';
 
 interface TextsProps {
   total_photos: number;

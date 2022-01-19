@@ -19,7 +19,8 @@ export function ModalBody() {
   useEffect(() => {
     api
       .get(`ratings/list-by-id/${reservation_id}`)
-      .then((response) => ratingSet(response.data));
+      .then((response) => ratingSet(response.data))
+      .catch(() => {});
   }, [reservation_id]);
 
   return (
