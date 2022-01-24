@@ -11,7 +11,7 @@ export function Topbar() {
   const { name, avg_rating, total_reviews } = useContext(RestaurantContext);
 
   return (
-    <Flex direction='column' gap='3' mt='3'>
+    <Flex direction='column' gridGap='3' mt='3' mb='6'>
       <Breadcrumb />
 
       <Badges />

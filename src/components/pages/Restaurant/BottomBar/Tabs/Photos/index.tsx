@@ -27,7 +27,7 @@ export function Photos() {
     <Box>
       <Texts total_photos={photos.length} />
 
-      <Stack gap='8'>
+      <Stack gridGap='8'>
         {photos.map((photo) => (
           <Image key={photo.id} image_url={photo.path} />
         ))}

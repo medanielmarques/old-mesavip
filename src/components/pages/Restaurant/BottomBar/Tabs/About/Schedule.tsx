@@ -20,7 +20,7 @@ export function Schedule() {
 
   return (
     <Box fontSize='14px'>
-      <Flex gap='3' align='center' mb='3'>
+      <Flex gridGap='3' align='center' mb='3'>
         <BsClock color='#9ca1a9' size='24px' />
         <Text color='red.400' fontWeight='bold'>
           Closed Now

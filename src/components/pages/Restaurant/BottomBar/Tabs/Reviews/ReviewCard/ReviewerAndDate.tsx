@@ -11,7 +11,7 @@ export function ReviewerAndDate(props: ReviewerAndDateProps) {
 
   return (
     <Flex justify='space-between'>
-      <Flex gap='3' align='center'>
+      <Flex gridGap='3' align='center'>
         <FaUserCircle size='20' />
         <Text>{client}</Text>
       </Flex>

@@ -9,8 +9,8 @@ export function BairroCulinaryAndPrice() {
   } = useContext(RestaurantContext);
 
   return (
-    <Flex direction='column' gap='2' fontSize='14px'>
-      <Flex gap='2'>
+    <Flex direction='column' gridGap='2' fontSize='14px'>
+      <Flex gridGap='2'>
         <Text fontWeight='500'>{bairro}</Text>
         <Text> &bull; </Text>
         <Text decoration='underline'>{culinary}</Text>

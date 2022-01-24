@@ -14,7 +14,7 @@ export function About() {
         About {name}
       </Heading>
 
-      <Flex gap='16' h='56' mt='12'>
+      <Flex gridGap='16' h='56' mt='12'>
         <Info />
         <Divider orientation='vertical' />
         <Schedule />

@@ -13,19 +13,19 @@ export function Info() {
 
   return (
     <Stack spacing='6' textDecoration='underline'>
-      <Flex gap='4' align='center'>
+      <Flex gridGap='4' align='center'>
         <FaLink color='#949494' />
         <Link href={site} target='_blank'>
           Website
         </Link>
       </Flex>
 
-      <Flex gap='4' align='center'>
+      <Flex gridGap='4' align='center'>
         <FaPhone color='#949494' />
         <Text>{phone}</Text>
       </Flex>
 
-      <Flex gap='4'>
+      <Flex gridGap='4'>
         <FaMapMarkerAlt color='#949494' />
         <Flex direction='column'>
           <Text>{name}</Text>
