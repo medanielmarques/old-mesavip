@@ -6,7 +6,7 @@ import { ReservationsProvider } from 'hooks/useReservationsContext';
 
 export default function Reservations() {
   return (
-    <Tabs isFitted>
+    <Tabs isFitted isLazy lazyBehavior='keepMounted'>
       <TabList />
 
       <TabPanels>

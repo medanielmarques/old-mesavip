@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Flex, Text, Stack, Button, Divider, Link } from '@chakra-ui/react';
+import { Flex, Stack, Button, Divider, Link } from '@chakra-ui/react';
 
 // Ver como usar
 // import { signInFormSchema } from 'schemas/yup';
@@ -26,8 +26,7 @@ export default function SignIn() {
     <Flex justify='center' mt={50}>
       <Flex
         as='form'
-        w={400}
-        h={440}
+        width={{ base: '320px', md: '400px' }}
         pt={15}
         align='center'
         direction='column'
@@ -55,7 +54,7 @@ export default function SignIn() {
           <Button
             type='submit'
             bg='red.400'
-            width='400px'
+            width={{ base: '320px', md: '400px' }}
             height='70px'
             fontSize='20px'
             color='#fff'
@@ -69,7 +68,7 @@ export default function SignIn() {
           <Link as={NextLink} href='/signup'>
             <Button
               bg='red.800'
-              width='400px'
+              width={{ base: '320px', md: '400px' }}
               height='70px'
               fontSize='20px'
               color='#fff'
