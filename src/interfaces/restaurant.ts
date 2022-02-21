@@ -11,6 +11,7 @@ interface Address {
 export interface Restaurant {
   id?: string;
   name: string;
+  bairro?: string;
   about?: string;
   phone?: string;
   site?: string;
