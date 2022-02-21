@@ -14,6 +14,7 @@ export function NavBarContainer({ children }: NavBarContainerProps) {
       wrap='wrap'
       w='100%'
       p='0 12px'
+      borderBottom='1px solid #f0f2f5'
     >
       {children}
     </Flex>

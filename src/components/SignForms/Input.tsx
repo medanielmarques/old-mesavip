@@ -3,13 +3,11 @@ import { Input as ChakraInput, InputProps } from '@chakra-ui/react';
 export function Input({ ...rest }: InputProps) {
   return (
     <ChakraInput
-      height='70px'
-      padding='20px'
-      width='400px'
-      fontSize='17px'
-      _placeholder={{
-        color: '#7d8791',
-      }}
+      w={{ base: '320px', md: '400px' }}
+      h='70px'
+      p='5'
+      fontSize='md'
+      _placeholder={{ color: 'gray.500' }}
       {...rest}
     />
   );

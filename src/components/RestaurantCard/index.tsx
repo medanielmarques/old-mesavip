@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { Box, Stack } from '@chakra-ui/react';
 
 import { Thumbnail } from './Image';
@@ -7,7 +8,6 @@ import { Bairro } from './Bairro';
 
 import { Restaurant } from 'interfaces/restaurant';
 import { RestaurantCardContext } from './contexts/RestaurantCardContext';
-import { useRouter } from 'next/router';
 
 interface RestaurantCardProps {
   restaurant: Restaurant;

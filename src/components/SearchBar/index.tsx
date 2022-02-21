@@ -27,7 +27,7 @@ export function SearchBar(props: SearchBarProps) {
           fontSize='16px'
           name='search'
           type='text'
-          placeholder='Search your favorite restaurants'
+          placeholder='Find restaurants or cuisines'
           value={search}
           onChange={(e) => searchSet(e.target.value)}
         />

@@ -16,9 +16,10 @@ export function MenuLinksContainer(props: MenuLinksContainerProps) {
         base: '100%',
         md: 'auto',
       }}
+      mb={{ base: '4', md: '0' }}
     >
       <Stack
-        spacing={{ sm: '4', md: '8' }}
+        spacing={{ base: '4', md: '8' }}
         direction={{ base: 'column', md: 'row' }}
         align='center'
         justify={{ base: 'center', md: 'flex-end' }}

@@ -10,9 +10,9 @@ export function ButtonsContainer(props: ButtonsContainerProps) {
 
   return (
     <Flex
-      gridGap={{ sm: '2', md: '4' }}
+      gridGap={{ base: '2', md: '4' }}
       direction={{
-        sm: 'column',
+        base: 'column',
         md: 'row',
       }}
     >

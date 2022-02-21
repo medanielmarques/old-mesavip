@@ -28,7 +28,7 @@ export function MenuItens({ isOpen }: MenuItensProps) {
       <MenuItem href='/'>
         <Text
           fontSize={{
-            sm: 'inherit',
+            base: 'inherit',
             md: '18px',
           }}
         >
