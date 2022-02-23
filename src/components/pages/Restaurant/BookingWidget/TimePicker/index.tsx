@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Stack } from '@chakra-ui/react';
 
 import { TimePickerHeader } from './TimePickerHeader';
@@ -22,8 +22,18 @@ export function TimePicker({ selectedDate }: TimePickerProps) {
     [selectedDate]
   );
 
-  const { selectedTime, handleIsTimeSelected, handleClickSelectedTime } =
-    useTimePicker(availableHours!);
+  const {
+    selectedTime,
+    selectedTimeSet,
+    handleIsTimeSelected,
+    handleClickSelectedTime,
+  } = useTimePicker(availableHours!);
+
+  useEffect(() => {
+    if (availableHours) {
+      selectedTimeSet(availableHours[0]);
+    }
+  }, [availableHours]);
 
   return (
     <Stack pl='4' mt='10' spacing='10' w={350}>

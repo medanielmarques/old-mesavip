@@ -8,6 +8,7 @@ export async function signInUser(user: User) {
   await api.post('users/signin', user).then((response) => {
     const { token }: authResponse = response.data;
     setToken(token);
+    document.location.reload();
   });
 }
 

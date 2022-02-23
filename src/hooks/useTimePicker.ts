@@ -16,5 +16,10 @@ export function useTimePicker(availableHours: Hour[]) {
     return false;
   }
 
-  return { selectedTime, handleClickSelectedTime, handleIsTimeSelected };
+  return {
+    selectedTime,
+    selectedTimeSet,
+    handleClickSelectedTime,
+    handleIsTimeSelected,
+  };
 }

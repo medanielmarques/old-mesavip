@@ -12,7 +12,7 @@ export function Info() {
   } = useContext(RestaurantContext);
 
   return (
-    <Stack spacing='6' textDecoration='underline'>
+    <Stack spacing='6' my='auto' textDecoration='underline'>
       <Flex gridGap='4' align='center'>
         <FaLink color='#949494' />
         <Link href={site} target='_blank'>

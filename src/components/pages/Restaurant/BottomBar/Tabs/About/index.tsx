@@ -1,15 +1,10 @@
 import { useContext } from 'react';
-import {
-  Box,
-  Divider,
-  Flex,
-  Heading,
-  useBreakpointValue,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 
 import { RestaurantContext } from 'pages/restaurant/[id]';
 import { Info } from './Info';
 import { Schedule } from './Schedule';
+import { Divider } from 'components/Divider';
 
 export function About() {
   const { name } = useContext(RestaurantContext);
@@ -26,13 +21,9 @@ export function About() {
         direction={{ base: 'column', lg: 'row' }}
       >
         <Info />
-        <Divider
-          h={{ base: '0', lg: '56' }}
-          orientation={useBreakpointValue({
-            base: 'horizontal',
-            lg: 'vertical',
-          })}
-        />
+
+        <Divider />
+
         <Schedule />
       </Flex>
     </Box>

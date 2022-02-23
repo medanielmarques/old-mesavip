@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Flex, Stack, Button, Divider, Link } from '@chakra-ui/react';
 
 import { User } from 'interfaces/user';
-import { signUpUser } from 'http/user';
+import { signInUser, signUpUser } from 'http/user';
 import { Input } from 'components/SignForms/Input';
 import { Slogan } from 'components/SignForms/Slogan';
 import { cpfMask } from 'utils/cpf-mask';
@@ -21,7 +21,9 @@ export default function SignUp() {
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    signUpUser(user);
+    signUpUser(user).finally(() => {
+      signInUser(user);
+    });
     router.push('/');
   }
 

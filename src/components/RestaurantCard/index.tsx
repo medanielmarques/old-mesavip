@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
-import { Box, Stack } from '@chakra-ui/react';
+import Link from 'next/link';
+import { Box, Stack, Link as ChakraLink } from '@chakra-ui/react';
 
 import { Thumbnail } from './Image';
 import { RestaurantNameAndRate } from '../RestaurantNameAndRate';
@@ -13,40 +13,35 @@ interface RestaurantCardProps {
   restaurant: Restaurant;
 }
 
-export function RestaurantCard(props: RestaurantCardProps) {
-  const { restaurant } = props;
-  const router = useRouter();
-
-  function handleClick() {
-    router.push(`/restaurant/${restaurant.id}`);
-  }
-
+export function RestaurantCard({ restaurant }: RestaurantCardProps) {
   return (
     <RestaurantCardContext.Provider value={restaurant}>
-      <Box
-        w='72'
-        h='60'
-        m='0 auto'
-        p='3'
-        borderRadius='md'
-        shadow='xs'
-        cursor='pointer'
-        _hover={{ bg: 'gray.100' }}
-        onClick={handleClick}
-      >
-        <Thumbnail />
+      <Link href={`/restaurant/${restaurant.id}`} passHref>
+        <ChakraLink _hover={{ outline: 'none' }}>
+          <Box
+            w='72'
+            h='64'
+            mx='auto'
+            p='3'
+            borderRadius='md'
+            shadow='xs'
+            _hover={{ bg: 'gray.100' }}
+          >
+            <Thumbnail />
 
-        <Stack spacing='1' mt='1'>
-          <RestaurantNameAndRate
-            restaurant={restaurant.name}
-            avg_rating={restaurant.avg_rating}
-          />
+            <Stack spacing='1' mt='1'>
+              <RestaurantNameAndRate
+                restaurant={restaurant.name}
+                avg_rating={restaurant.avg_rating}
+              />
 
-          <CulinaryAndPrice />
+              <CulinaryAndPrice />
 
-          <Bairro />
-        </Stack>
-      </Box>
+              <Bairro />
+            </Stack>
+          </Box>
+        </ChakraLink>
+      </Link>
     </RestaurantCardContext.Provider>
   );
 }
