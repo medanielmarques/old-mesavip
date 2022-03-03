@@ -23,16 +23,12 @@ export default function Restaurant(props: RestaurantProps) {
   return (
     <RestaurantContext.Provider value={{ ...restaurant }}>
       <Flex
-        mx='auto'
-        w={[350, 450, 600, 800, 1185]}
         direction={['column', 'column', 'column', 'column', 'row']}
+        w={[350, 450, 600, 800, 1185]}
+        minH='100vh'
+        mx='auto'
       >
-        <Flex
-          direction='column'
-          gridGap='6'
-          mx={{ base: 'auto', xl: '0' }}
-          mr={{ base: '0', xl: '10' }}
-        >
+        <Flex direction='column' gridGap='6' mx={{ base: 'auto', xl: 'auto' }}>
           <Topbar />
 
           <Banner image_url={banner_url} alt='Banner' />

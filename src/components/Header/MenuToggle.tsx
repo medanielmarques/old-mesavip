@@ -1,12 +1,16 @@
+import { useContext } from 'react';
 import { Box } from '@chakra-ui/react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
+import { HeaderContext } from '.';
+
 interface MenuToggleProps {
-  toggle?(): any;
   isOpen?: boolean;
 }
 
-export function MenuToggle({ toggle, isOpen }: MenuToggleProps) {
+export function MenuToggle({ isOpen }: MenuToggleProps) {
+  const { toggle } = useContext(HeaderContext);
+
   return (
     <Box
       display={{ base: 'block', md: 'none' }}

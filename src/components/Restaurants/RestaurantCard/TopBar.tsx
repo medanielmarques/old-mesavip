@@ -1,14 +1,15 @@
 import { Stack } from '@chakra-ui/react';
-import { SearchBar } from '../SearchBar';
+import { SearchBar } from 'components/SearchBar';
 import { TotalRestaurantsText } from './TotalRestaurantsText';
 
 interface TopBarProps {
   totalRestaurants: number;
+  searchRestaurant: string;
   searchRestaurantSet(name: string): void;
 }
 
 export function TopBar(props: TopBarProps) {
-  const { totalRestaurants, searchRestaurantSet } = props;
+  const { totalRestaurants, searchRestaurant, searchRestaurantSet } = props;
 
   return (
     <Stack
@@ -18,14 +19,17 @@ export function TopBar(props: TopBarProps) {
         md: '350px',
         lg: '432px',
       }}
-      m={{
-        base: '0 auto',
-        md: '0 auto',
+      mx={{
+        base: 'auto',
+        md: 'auto',
         lg: '0',
       }}
     >
       <TotalRestaurantsText length={totalRestaurants} />
-      <SearchBar searchRestaurantSet={searchRestaurantSet} />
+      <SearchBar
+        searchRestaurant={searchRestaurant}
+        searchRestaurantSet={searchRestaurantSet}
+      />
     </Stack>
   );
 }

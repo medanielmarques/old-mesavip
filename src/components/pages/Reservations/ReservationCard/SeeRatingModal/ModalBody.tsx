@@ -26,7 +26,7 @@ export function ModalBody() {
   return (
     <ChakraModalBody mb='2'>
       <Stack fontSize='18px'>
-        <Flex gridGap='4' mb='2'>
+        <Flex direction='column' gridGap='4' mb='2'>
           <HStack>
             <Text as='b'>Date: </Text>
             <Text>{rating.date}</Text>

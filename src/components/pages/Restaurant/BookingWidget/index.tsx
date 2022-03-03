@@ -6,13 +6,13 @@ import { TimePicker } from './TimePicker';
 
 import { useDatePicker } from 'hooks/useDatePicker';
 
-interface BookingWidgetContextData {
-  toggleAccordionDatePicker(): void;
-}
-
 export const BookingWidgetContext = createContext(
   {} as BookingWidgetContextData
 );
+
+interface BookingWidgetContextData {
+  toggleAccordionDatePicker(): void;
+}
 
 export function BookingWidget() {
   const { selectedDate, today, handleDateChange, formatedDate } =
@@ -26,7 +26,7 @@ export function BookingWidget() {
 
   return (
     <BookingWidgetContext.Provider value={{ toggleAccordionDatePicker }}>
-      <Box mt='8' mx='auto'>
+      <Box mt='8' mx={{ base: 'auto', xl: '10' }}>
         <Box position={{ base: 'static', xl: 'sticky' }} top='12'>
           <Accordion
             allowToggle

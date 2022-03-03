@@ -1,37 +1,33 @@
-import { useState } from 'react';
+import { GetServerSideProps } from 'next';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Flex, Stack, Button, Divider, Link } from '@chakra-ui/react';
+import { FormEvent, useContext, useState } from 'react';
+import { parseCookies } from 'nookies';
+import { Flex, Stack, Divider, Link } from '@chakra-ui/react';
 
-// Ver como usar
-// import { signInFormSchema } from 'schemas/yup';
-
-import { User } from 'interfaces/user';
-import { signInUser } from 'http/user';
-import { Input } from 'components/SignForms/Input';
+import { FormContainer } from 'components/SignForms/FormContainer';
 import { Slogan } from 'components/SignForms/Slogan';
+import { Input } from 'components/SignForms/Input';
+import { FormButton } from 'components/SignForms/FormButton';
+
+import { AuthContext } from 'contexts/AuthContext';
+import { User } from 'interfaces/user';
 
 export default function SignIn() {
   const router = useRouter();
+  const { signIn } = useContext(AuthContext);
 
   const [user, userSet] = useState<User>({ email: '', password: '' });
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault();
-    signInUser(user);
+    signIn(user);
     router.push('/');
   };
 
   return (
-    <Flex justify='center' mt={50}>
-      <Flex
-        as='form'
-        width={{ base: '320px', md: '400px' }}
-        pt={15}
-        align='center'
-        direction='column'
-        onSubmit={handleSubmit}
-      >
+    <Flex justify='center' mt='14'>
+      <FormContainer onSubmit={handleSubmit}>
         <Slogan />
 
         <Stack spacing={5} align='center'>
@@ -51,38 +47,40 @@ export default function SignIn() {
             onChange={(e) => userSet({ ...user, password: e.target.value })}
           />
 
-          <Button
-            type='submit'
-            bg='red.400'
-            width={{ base: '320px', md: '400px' }}
-            height='70px'
-            fontSize='20px'
-            color='#fff'
-            _hover={{ bg: 'red.500' }}
-          >
+          <FormButton bg='red.400' _hover={{ bg: 'red.500' }}>
             Sign in
-          </Button>
+          </FormButton>
 
           <Divider />
 
           <Link as={NextLink} href='/signup'>
-            <Button
-              bg='red.800'
-              width={{ base: '320px', md: '400px' }}
-              height='70px'
-              fontSize='20px'
-              color='#fff'
-              _hover={{ bg: 'red.900' }}
-            >
+            <FormButton bg='red.800' _hover={{ bg: 'red.900' }}>
               Create a new account
-            </Button>
+            </FormButton>
           </Link>
 
           <Link as={NextLink} href='/'>
             <a style={{ textDecoration: 'underline' }}>Forgot your password?</a>
           </Link>
         </Stack>
-      </Flex>
+      </FormContainer>
     </Flex>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = parseCookies(ctx);
+
+  if (cookies['mesavip.token']) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

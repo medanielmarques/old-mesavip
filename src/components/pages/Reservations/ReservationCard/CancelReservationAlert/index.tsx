@@ -20,6 +20,7 @@ export function CancelReservationAlert(props: CancelReservationAlertProps) {
 
   const cancelRef = useRef(null);
 
+  // adapt this later to the useModal hook, or create a useAlert hook
   return (
     <AlertDialog
       isOpen={isOpen}
@@ -27,7 +28,7 @@ export function CancelReservationAlert(props: CancelReservationAlertProps) {
       onClose={onToggle}
     >
       <AlertDialogOverlay>
-        <AlertDialogContent>
+        <AlertDialogContent w={{ base: '80', md: 'inherit' }}>
           <AlertDialogHeader />
 
           <AlertDialogBody />

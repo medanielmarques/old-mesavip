@@ -1,17 +1,19 @@
 import Link from 'next/link';
+import { createContext } from 'react';
 import { Box, Stack, Link as ChakraLink } from '@chakra-ui/react';
 
 import { Thumbnail } from './Image';
-import { RestaurantNameAndRate } from '../RestaurantNameAndRate';
+import { RestaurantNameAndRate } from 'components/RestaurantNameAndRate';
 import { CulinaryAndPrice } from './CulinaryAndPrice';
 import { Bairro } from './Bairro';
 
 import { Restaurant } from 'interfaces/restaurant';
-import { RestaurantCardContext } from './contexts/RestaurantCardContext';
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
 }
+
+export const RestaurantCardContext = createContext({} as Restaurant);
 
 export function RestaurantCard({ restaurant }: RestaurantCardProps) {
   return (

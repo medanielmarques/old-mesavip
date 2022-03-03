@@ -1,14 +1,16 @@
 import { useContext, useEffect } from 'react';
 import { Stack } from '@chakra-ui/react';
+import { useQuery } from 'react-query';
 
 import { TimePickerHeader } from './TimePickerHeader';
 import { AvailableHours } from './AvailableHours';
 import { BookTableButton } from '../BookTableButton';
+import { AvailableHoursSkeleton } from 'components/Feedback/Skeleton/AvailableHoursSkeleton';
 
 import { RestaurantContext } from 'pages/restaurant/[id]';
 import { Hour } from 'interfaces/hour';
-import { useFetch } from 'hooks/useFetch';
 import { useTimePicker } from 'hooks/useTimePicker';
+import { api } from 'services/api';
 
 interface TimePickerProps {
   selectedDate: Date;
@@ -17,10 +19,17 @@ interface TimePickerProps {
 export function TimePicker({ selectedDate }: TimePickerProps) {
   const { id } = useContext(RestaurantContext);
 
-  const { data: availableHours } = useFetch<Hour[]>(
-    `restaurants/available-hours/${id}/${selectedDate.toDateString()}`,
-    [selectedDate]
-  );
+  const {
+    data: availableHours,
+    isLoading,
+    isFetching,
+  } = useQuery(['available-hours', selectedDate], async () => {
+    return api
+      .get<Hour[]>(
+        `restaurants/available-hours/${id}/${selectedDate.toDateString()}`
+      )
+      .then((res) => res.data);
+  });
 
   const {
     selectedTime,
@@ -33,17 +42,21 @@ export function TimePicker({ selectedDate }: TimePickerProps) {
     if (availableHours) {
       selectedTimeSet(availableHours[0]);
     }
-  }, [availableHours]);
+  }, [availableHours, selectedTimeSet]);
 
   return (
     <Stack pl='4' mt='10' spacing='10' w={350}>
       <TimePickerHeader />
 
-      <AvailableHours
-        availableHours={availableHours!}
-        handleIsTimeSelected={handleIsTimeSelected}
-        handleClickSelectedTime={handleClickSelectedTime}
-      />
+      {isLoading || isFetching ? (
+        <AvailableHoursSkeleton />
+      ) : (
+        <AvailableHours
+          availableHours={availableHours!}
+          handleIsTimeSelected={handleIsTimeSelected}
+          handleClickSelectedTime={handleClickSelectedTime}
+        />
+      )}
 
       <BookTableButton
         selectedTime={selectedTime!}

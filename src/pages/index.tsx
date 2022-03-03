@@ -1,29 +1,39 @@
-import { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
+import { useState } from 'react';
 import { Box, SimpleGrid, Stack } from '@chakra-ui/react';
+import { useQuery } from 'react-query';
 
-import { RestaurantCard } from 'components/RestaurantCard';
-import { ErrorMessage } from 'components/RestaurantCard/ErrorMessage';
-import { TopBar } from 'components/RestaurantCard/TopBar';
+import { RestaurantCard } from 'components/Restaurants/RestaurantCard';
+import { TopBar } from 'components/Restaurants/RestaurantCard/TopBar';
+import { ErrorMessage } from 'components/Restaurants/RestaurantCard/ErrorMessage';
+import { RestaurandCardSkeleton } from 'components/Feedback/Skeleton/RestaurantCardSkeleton';
 
 import { Restaurant } from 'interfaces/restaurant';
 import { api } from 'services/api';
 
-export default function Restaurants() {
-  const [restaurants, restaurantsSet] = useState([] as Restaurant[]);
+interface RestaurantsProps {
+  initialData: Restaurant[];
+}
+
+export default function Restaurants({ initialData }: RestaurantsProps) {
   const [searchRestaurant, searchRestaurantSet] = useState('');
-  const [searchError, searchErrorSet] = useState(false);
 
-  useEffect(() => {
-    searchErrorSet(false);
-
-    api
-      .get(`restaurants/${searchRestaurant}`)
-      .then((response) => restaurantsSet(response.data))
-      .catch(() => {
-        searchErrorSet(true);
-        restaurantsSet([]);
-      });
-  }, [searchRestaurant]);
+  const {
+    data: restaurants,
+    isLoading,
+    error,
+  } = useQuery(
+    ['get-restaurants', searchRestaurant],
+    async () => {
+      return api
+        .get<Restaurant[]>(`restaurants/${searchRestaurant}`)
+        .then((res) => res.data);
+    },
+    {
+      initialData,
+      enabled: searchRestaurant ? true : false,
+    }
+  );
 
   return (
     <Box
@@ -33,22 +43,41 @@ export default function Restaurants() {
         lg: '904px',
         xl: '1212px',
       }}
-      m='34px auto'
+      minHeight='100vh'
+      mx='auto'
+      my='8'
     >
       <Stack spacing={6}>
-        <TopBar
-          totalRestaurants={restaurants.length}
-          searchRestaurantSet={searchRestaurantSet}
-        />
+        {!isLoading && (
+          <TopBar
+            totalRestaurants={restaurants!.length}
+            searchRestaurant={searchRestaurant}
+            searchRestaurantSet={searchRestaurantSet}
+          />
+        )}
 
-        <ErrorMessage searchError={searchError} />
-
-        <SimpleGrid columns={[1, 1, 2, 3, 4]} spacing={5}>
-          {restaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-          ))}
-        </SimpleGrid>
+        {isLoading ? (
+          <RestaurandCardSkeleton />
+        ) : error ? (
+          <ErrorMessage />
+        ) : (
+          <SimpleGrid columns={[1, 1, 2, 3, 4]} spacing={5}>
+            {restaurants!.map((restaurant) => (
+              <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+            ))}
+          </SimpleGrid>
+        )}
       </Stack>
     </Box>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data: initialData } = await api.get('restaurants');
+
+  return {
+    props: {
+      initialData,
+    },
+  };
+};

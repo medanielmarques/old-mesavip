@@ -5,6 +5,7 @@ import { Breadcrumb } from '../Breadcrumb';
 import { RestaurantNameAndRate } from 'components/RestaurantNameAndRate';
 import { BairroCulinaryAndPrice } from './BairroCulinaryAndPrice';
 import { Badges } from '../Badges';
+
 import { RestaurantContext } from 'pages/restaurant/[id]';
 
 export function Topbar() {
@@ -23,7 +24,7 @@ export function Topbar() {
         styles={{
           fontSize: { base: '20px', md: '28px', lg: '36px' },
           fontWeight: '700',
-          ratingFontSize: '22px',
+          ratingFontSize: '2xl',
         }}
       />
 

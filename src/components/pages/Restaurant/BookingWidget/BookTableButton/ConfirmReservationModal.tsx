@@ -10,6 +10,7 @@ import {
 import { RestaurantContext } from 'pages/restaurant/[id]';
 import { Hour } from 'interfaces/hour';
 import { api } from 'services/api';
+import { queryClient } from 'services/queryClient';
 
 export interface ConfirmReservationModalProps {
   onToggle(): void;
@@ -21,14 +22,15 @@ export function ConfirmReservationModal(props: ConfirmReservationModalProps) {
   const { onToggle, selectedTime, selectedDate } = props;
   const { id: restaurant_id } = useContext(RestaurantContext);
 
-  function handleBookTable() {
-    api
+  async function handleBookTable() {
+    await api
       .post('/reservations/create', {
         restaurant_id,
         time: selectedTime.hour,
         date: selectedDate,
       })
       .finally(() => {
+        queryClient.invalidateQueries('available-hours');
         onToggle();
         toastAction();
       });
@@ -58,8 +60,8 @@ export function ConfirmReservationModal(props: ConfirmReservationModalProps) {
         </Text>
       </ModalBody>
 
-      <ModalFooter mr='4' borderColor='gray.200' borderBottomRadius='md' py='6'>
-        <Button color='gray.500' variant='ghost' h='12' onClick={onToggle}>
+      <ModalFooter mr='4' py='6' borderColor='gray.200' borderBottomRadius='md'>
+        <Button variant='ghost' h='12' color='gray.500' onClick={onToggle}>
           Cancel
         </Button>
 

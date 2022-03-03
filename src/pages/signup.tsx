@@ -1,16 +1,27 @@
-import { useState } from 'react';
+import { GetServerSideProps } from 'next';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { Flex, Stack, Button, Divider, Link } from '@chakra-ui/react';
+import { FormEvent, useContext, useState } from 'react';
+import { parseCookies } from 'nookies';
+import { Flex, Stack, Divider, Link } from '@chakra-ui/react';
 
-import { User } from 'interfaces/user';
-import { signInUser, signUpUser } from 'http/user';
-import { Input } from 'components/SignForms/Input';
+import { FormContainer } from 'components/SignForms/FormContainer';
 import { Slogan } from 'components/SignForms/Slogan';
+import { Input } from 'components/SignForms/Input';
+import { FormButton } from 'components/SignForms/FormButton';
+
+import { AuthContext } from 'contexts/AuthContext';
+import { api } from 'services/api';
+import { User } from 'interfaces/user';
 import { cpfMask } from 'utils/cpf-mask';
+
+export async function signUpUser(user: User) {
+  await api.post('users/create', user).catch(() => {});
+}
 
 export default function SignUp() {
   const router = useRouter();
+  const { signIn } = useContext(AuthContext);
 
   const [user, userSet] = useState<User>({
     name: '',
@@ -19,10 +30,10 @@ export default function SignUp() {
     password: '',
   });
 
-  function handleSubmit(e: any) {
+  function handleSubmit(e: FormEvent<HTMLDivElement>) {
     e.preventDefault();
     signUpUser(user).finally(() => {
-      signInUser(user);
+      signIn(user);
     });
     router.push('/');
   }
@@ -34,14 +45,7 @@ export default function SignUp() {
 
   return (
     <Flex justify='center' mt={50}>
-      <Flex
-        as='form'
-        width={{ base: '320px', md: '400px' }}
-        pt={15}
-        align='center'
-        direction='column'
-        onSubmit={handleSubmit}
-      >
+      <FormContainer onSubmit={handleSubmit}>
         <Slogan />
 
         <Stack spacing={5} align='center'>
@@ -77,38 +81,40 @@ export default function SignUp() {
             onChange={(e) => userSet({ ...user, password: e.target.value })}
           />
 
-          <Button
-            type='submit'
-            bg='red.400'
-            width={{ base: '320px', md: '400px' }}
-            height='70px'
-            fontSize='20px'
-            color='#fff'
-            _hover={{ bg: 'red.500' }}
-          >
+          <FormButton bg='red.400' _hover={{ bg: 'red.500' }}>
             Sign up
-          </Button>
+          </FormButton>
 
           <Divider />
 
           <Link as={NextLink} href='/signin'>
-            <Button
-              bg='red.800'
-              width={{ base: '320px', md: '400px' }}
-              height='70px'
-              fontSize='20px'
-              color='#fff'
-              _hover={{ bg: 'red.900' }}
-            >
+            <FormButton bg='red.800' _hover={{ bg: 'red.900' }}>
               Already have an account?
-            </Button>
+            </FormButton>
           </Link>
 
           <Link as={NextLink} href='/'>
             <a style={{ textDecoration: 'underline' }}>Forgot your password?</a>
           </Link>
         </Stack>
-      </Flex>
+      </FormContainer>
     </Flex>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = parseCookies(ctx);
+
+  if (cookies['mesavip.token']) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

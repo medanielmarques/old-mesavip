@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import {
   Modal,
-  ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react';
-import { ReservationCardContext } from '../contexts/ReservationCardContext';
+
 import { ModalBody } from './ModalBody';
+
+import { ReservationCardContext } from '../contexts/ReservationCardContext';
 
 interface SeeRatingModalProps {
   isOpen: boolean;
@@ -22,10 +23,8 @@ export function SeeRatingModal(props: SeeRatingModalProps) {
   return (
     <Modal isOpen={isOpen} onClose={onToggle}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent w={{ base: '80', md: 'inherit' }}>
         <ModalHeader>That was your rating on {restaurant}</ModalHeader>
-
-        <ModalCloseButton />
 
         <ModalBody />
       </ModalContent>

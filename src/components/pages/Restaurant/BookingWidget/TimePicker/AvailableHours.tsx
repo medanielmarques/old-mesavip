@@ -13,7 +13,7 @@ export function AvailableHours(props: AvailableHoursProps) {
     props;
 
   return (
-    <Flex width={334} flexFlow='wrap' gridGap='3'>
+    <Flex gridGap='3' flexFlow='wrap' width={334}>
       {availableHours?.map((availableHour, i) => (
         <Button
           key={i}
