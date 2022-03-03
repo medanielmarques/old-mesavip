@@ -1,4 +1,5 @@
 import { Tab, TabList as ChakraTabList } from '@chakra-ui/react';
+import { queryClient } from 'services/queryClient';
 
 export function TabList() {
   return (
@@ -6,14 +7,15 @@ export function TabList() {
       width={{
         base: '288px',
         md: '594px',
-        lg: '594px',
-        xl: '594px',
         '2xl': '975px',
       }}
-      m='30px auto'
+      mx='auto'
+      my='7'
     >
       <Tab>Following Reservations</Tab>
-      <Tab>Past Reservations</Tab>
+      <Tab onClick={() => queryClient.refetchQueries('past-reservations')}>
+        Past Reservations
+      </Tab>
     </ChakraTabList>
   );
 }

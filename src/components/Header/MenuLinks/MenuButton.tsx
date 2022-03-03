@@ -1,6 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 import Link from 'next/link';
 import { Flex, Text, Link as ChakraLink } from '@chakra-ui/react';
+
+import { HeaderContext } from '..';
 
 interface MenuButtonProps {
   children: ReactNode;
@@ -9,9 +11,11 @@ interface MenuButtonProps {
 }
 
 export function MenuButton({ children, href, onClick }: MenuButtonProps) {
+  const { toggle } = useContext(HeaderContext);
+
   return (
     <Link href={href} passHref>
-      <ChakraLink _hover={{ outline: 'none' }}>
+      <ChakraLink _hover={{ outline: 'none' }} onClick={toggle}>
         <Flex
           alignItems='center'
           w='32'

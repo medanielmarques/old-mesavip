@@ -1,6 +1,7 @@
-import { Flex, Text } from '@chakra-ui/react';
 import { useContext } from 'react';
-import { RestaurantCardContext } from './contexts/RestaurantCardContext';
+import { Flex, Text } from '@chakra-ui/react';
+
+import { RestaurantCardContext } from '.';
 
 export function CulinaryAndPrice() {
   const { culinary } = useContext(RestaurantCardContext);

@@ -1,23 +1,22 @@
+import { useContext } from 'react';
 import { Text } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
 
+import { MenuLinksContainer } from './MenuLinksContainer';
+import { ButtonsContainer } from './ButtonsContainer';
 import { MenuItem } from './MenuItem';
 import { MenuButton } from './MenuButton';
-import { MenuLinksContainer } from './MenuLinksContainer';
 
-import { isAuthenticated, signOut } from 'services/auth';
-import { ButtonsContainer } from './ButtonsContainer';
+import { AuthContext } from 'contexts/AuthContext';
 
 interface MenuItensProps {
   isOpen: boolean;
 }
 
 export function MenuItens({ isOpen }: MenuItensProps) {
-  const github_link = 'https://github.com/Mesavip/mesavip-web-tsc-next';
+  const { isAuthenticated, signOut } = useContext(AuthContext);
 
-  function handleSignOut() {
-    signOut();
-  }
+  const github_link = 'https://github.com/Mesavip/mesavip-web-tsc-next';
 
   return (
     <MenuLinksContainer isOpen={isOpen}>
@@ -29,17 +28,17 @@ export function MenuItens({ isOpen }: MenuItensProps) {
         <Text
           fontSize={{
             base: 'inherit',
-            md: '18px',
+            md: 'lg',
           }}
         >
           Restaurants
         </Text>
       </MenuItem>
 
-      {isAuthenticated() ? (
+      {isAuthenticated ? (
         <ButtonsContainer>
           <MenuButton href='/reservations'>Reservations</MenuButton>
-          <MenuButton href='/' onClick={handleSignOut}>
+          <MenuButton href='/' onClick={signOut}>
             Sign out
           </MenuButton>
         </ButtonsContainer>

@@ -1,10 +1,12 @@
-import { Button } from '@chakra-ui/react';
+import { useContext } from 'react';
+import { Button, Tooltip } from '@chakra-ui/react';
 
+import { ConfirmReservationModal } from './ConfirmReservationModal';
+
+import { RestaurantContext } from 'pages/restaurant/[id]';
+import { AuthContext } from 'contexts/AuthContext';
 import { Hour } from 'interfaces/hour';
 import { useModal } from 'hooks/useModal';
-import { ConfirmReservationModal } from './ConfirmReservationModal';
-import { useContext } from 'react';
-import { RestaurantContext } from 'pages/restaurant/[id]';
 
 interface BookTableButtonProps {
   selectedTime: Hour;
@@ -14,6 +16,7 @@ interface BookTableButtonProps {
 export function BookTableButton(props: BookTableButtonProps) {
   const { selectedTime, selectedDate } = props;
   const { name } = useContext(RestaurantContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
   const { Modal, onToggle } = useModal({
     title: `Confirm reservation at ${name}?`,
@@ -21,17 +24,24 @@ export function BookTableButton(props: BookTableButtonProps) {
 
   return (
     <>
-      <Button
-        w={326}
-        h='14'
-        bg='red.300'
-        _hover={{ bg: 'red.400' }}
-        color='white'
-        fontSize='xl'
-        onClick={onToggle}
+      <Tooltip
+        shouldWrapChildren
+        isDisabled={isAuthenticated}
+        label='You need to be signed in to reserve a table!'
       >
-        Reserve a table at {selectedTime.hour}
-      </Button>
+        <Button
+          w={326}
+          h='14'
+          bg='red.300'
+          _hover={{ bg: 'red.400' }}
+          color='white'
+          fontSize='xl'
+          onClick={onToggle}
+          disabled={!isAuthenticated}
+        >
+          Reserve a table at {selectedTime.hour}
+        </Button>
+      </Tooltip>
 
       <Modal>
         <ConfirmReservationModal

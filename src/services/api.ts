@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { getToken } from './auth';
+import { parseCookies } from 'nookies';
 
-const token = getToken();
+const cookies = parseCookies(undefined);
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_REACT_APP_API_URL,
   headers: {
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${cookies['mesavip.token']}`,
   },
 });

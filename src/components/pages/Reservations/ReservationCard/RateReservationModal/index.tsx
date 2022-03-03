@@ -19,10 +19,8 @@ export function RateReservationModal(props: RateReservationModalProps) {
     <Modal isOpen={isOpen} onClose={onToggle}>
       <ModalOverlay />
 
-      <ModalContent alignItems='center'>
+      <ModalContent alignItems='center' w={{ base: '80', md: 'inherit' }}>
         <ModalHeader>Rate your reservation</ModalHeader>
-
-        <ModalCloseButton />
 
         <ModalBody closeModal={onToggle} />
       </ModalContent>

@@ -5,7 +5,8 @@ export function Badges() {
     <Box>
       <Badge
         variant='solid'
-        p='2px 8px'
+        px='2'
+        py='0.5'
         borderRadius='md'
         bg='#F8B333'
         fontSize='xs'

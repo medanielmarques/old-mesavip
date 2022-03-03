@@ -1,29 +1,43 @@
-import { useContext } from 'react';
 import { Box, Grid } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
-import { ReservationCard } from 'components/ReservationCard';
-import { ReservationsContext } from 'hooks/useReservationsContext';
+import { ReservationCard } from './ReservationCard';
+import { ReservationCardSkeleton } from 'components/Feedback/Skeleton/ReservationCardSkeleton';
 
-export function ReservationTabPanel() {
-  const { reservations } = useContext(ReservationsContext);
+import { Reservation } from 'interfaces/reservation';
 
+interface ReservationTabPanelProps {
+  reservations: Reservation[];
+  isLoading: boolean;
+  isFetching: boolean;
+}
+
+export function ReservationTabPanel({
+  reservations,
+  isLoading,
+  isFetching,
+}: ReservationTabPanelProps) {
   return (
-    <Box
-      m='0 auto'
-      w={{
-        base: '384px',
-        md: '792px',
-        lg: '792px',
-        xl: '792px',
-        '2xl': '1300px',
-      }}
-      display='table'
-    >
-      <Grid templateColumns='repeat(auto-fill, minmax(384px, 1fr))' gap={6}>
-        {reservations.map((reservation) => (
-          <ReservationCard key={reservation.id} reservation={reservation} />
-        ))}
-      </Grid>
-    </Box>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <Box
+        w={{
+          base: '384px',
+          md: '792px',
+          '2xl': '1300px',
+        }}
+        mx='auto'
+        display='table'
+      >
+        {isLoading || isFetching ? (
+          <ReservationCardSkeleton />
+        ) : (
+          <Grid templateColumns='repeat(auto-fill, minmax(384px, 1fr))' gap={6}>
+            {reservations.map((reservation) => (
+              <ReservationCard key={reservation.id} reservation={reservation} />
+            ))}
+          </Grid>
+        )}
+      </Box>
+    </motion.div>
   );
 }

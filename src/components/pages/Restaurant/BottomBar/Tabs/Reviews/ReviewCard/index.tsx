@@ -1,9 +1,10 @@
 import { Box, Stack } from '@chakra-ui/react';
 
-import { Rating as Review } from 'interfaces/rating';
 import { Score } from './Score';
 import { ReviewerAndDate } from './ReviewerAndDate';
 import { Description } from './Description';
+
+import { Rating as Review } from 'interfaces/rating';
 
 interface ReviewProps {
   review: Review;

@@ -6,7 +6,7 @@ export function TimePickerHeader() {
     <Flex gridGap='4' align='center'>
       <FaRegClock size='22' color='gray' />
 
-      <Text color='red.400' fontWeight='500'>
+      <Text fontWeight='500' color='red.400'>
         Choose a time:
       </Text>
     </Flex>

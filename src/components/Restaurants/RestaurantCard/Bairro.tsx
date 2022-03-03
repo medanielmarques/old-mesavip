@@ -1,6 +1,7 @@
-import { Text } from '@chakra-ui/react';
 import { useContext } from 'react';
-import { RestaurantCardContext } from './contexts/RestaurantCardContext';
+import { Text } from '@chakra-ui/react';
+
+import { RestaurantCardContext } from '.';
 
 export function Bairro() {
   const { bairro } = useContext(RestaurantCardContext);
