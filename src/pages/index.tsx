@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { Box, SimpleGrid, Stack } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 
-import { RestaurantCard } from 'components/Restaurants/RestaurantCard';
-import { TopBar } from 'components/Restaurants/RestaurantCard/TopBar';
-import { ErrorMessage } from 'components/Restaurants/RestaurantCard/ErrorMessage';
+import { RestaurantCard } from 'components/pages/Restaurants/RestaurantCard';
+import { TopBar } from 'components/pages/Restaurants/RestaurantCard/TopBar';
+import { ErrorMessage } from 'components/pages/Restaurants/RestaurantCard/ErrorMessage';
 import { RestaurandCardSkeleton } from 'components/Feedback/Skeleton/RestaurantCardSkeleton';
 
-import { Restaurant } from 'interfaces/restaurant';
+import { Restaurant } from 'types/restaurant';
 import { api } from 'services/api';
 
 interface RestaurantsProps {

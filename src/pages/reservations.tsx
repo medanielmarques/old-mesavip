@@ -7,7 +7,7 @@ import { ReservationTabPanel } from '../components/pages/Reservations/Reservatio
 import { TabList } from 'components/pages/Reservations/TabList';
 
 import { api } from 'services/api';
-import { Reservation } from 'interfaces/reservation';
+import { Reservation } from 'types/reservation';
 
 interface ReservationsProps {
   initialData: Reservation[];

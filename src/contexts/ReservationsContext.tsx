@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
-import { Reservation } from 'interfaces/reservation';
+import { Reservation } from 'types/reservation';
 import { api } from 'services/api';
 
 interface ReservationsProviderProps {

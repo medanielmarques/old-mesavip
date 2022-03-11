@@ -7,7 +7,7 @@ import { Topbar } from 'components/pages/Restaurant/Topbar';
 import { Image as Banner } from 'components/pages/Restaurant/Image';
 import { BottomBar } from 'components/pages/Restaurant/BottomBar';
 import { BookingWidget } from 'components/pages/Restaurant/BookingWidget';
-import { Restaurant as IRestaurant } from 'interfaces/restaurant';
+import { Restaurant as IRestaurant } from 'types/restaurant';
 import { api } from 'services/api';
 
 export const RestaurantContext = createContext({} as IRestaurant);

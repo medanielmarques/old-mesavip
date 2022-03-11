@@ -4,7 +4,7 @@ import { Score } from './Score';
 import { ReviewerAndDate } from './ReviewerAndDate';
 import { Description } from './Description';
 
-import { Rating as Review } from 'interfaces/rating';
+import { Rating as Review } from 'types/rating';
 
 interface ReviewProps {
   review: Review;

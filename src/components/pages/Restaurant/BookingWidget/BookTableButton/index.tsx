@@ -5,8 +5,9 @@ import { ConfirmReservationModal } from './ConfirmReservationModal';
 
 import { RestaurantContext } from 'pages/restaurant/[id]';
 import { AuthContext } from 'contexts/AuthContext';
-import { Hour } from 'interfaces/hour';
+import { useConfirmReservation } from 'hooks/useConfirmReservation';
 import { useModal } from 'hooks/useModal';
+import { Hour } from 'types/hour';
 
 interface BookTableButtonProps {
   selectedTime: Hour;
@@ -20,6 +21,12 @@ export function BookTableButton(props: BookTableButtonProps) {
 
   const { Modal, onToggle } = useModal({
     title: `Confirm reservation at ${name}?`,
+  });
+
+  const { bookTableQuery } = useConfirmReservation({
+    onToggle,
+    selectedDate,
+    selectedTime,
   });
 
   return (
@@ -48,6 +55,7 @@ export function BookTableButton(props: BookTableButtonProps) {
           onToggle={onToggle}
           selectedTime={selectedTime}
           selectedDate={selectedDate}
+          bookTableQuery={bookTableQuery}
         />
       </Modal>
     </>

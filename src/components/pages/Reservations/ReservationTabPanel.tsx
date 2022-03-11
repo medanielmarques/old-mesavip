@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { ReservationCard } from './ReservationCard';
 import { ReservationCardSkeleton } from 'components/Feedback/Skeleton/ReservationCardSkeleton';
 
-import { Reservation } from 'interfaces/reservation';
+import { Reservation } from 'types/reservation';
 
 interface ReservationTabPanelProps {
   reservations: Reservation[];

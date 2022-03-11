@@ -1,6 +1,6 @@
 import { Button, Flex } from '@chakra-ui/react';
 
-import { Hour } from 'interfaces/hour';
+import { Hour } from 'types/hour';
 
 interface AvailableHoursProps {
   availableHours: Hour[];

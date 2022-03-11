@@ -6,7 +6,7 @@ import { ReviewCardSkeleton } from 'components/Feedback/Skeleton/ReviewCardSkele
 import { ReviewCard } from './ReviewCard';
 
 import { RestaurantContext } from 'pages/restaurant/[id]';
-import { Rating as Review } from 'interfaces/rating';
+import { Rating as Review } from 'types/rating';
 import { api } from 'services/api';
 
 export function Reviews() {

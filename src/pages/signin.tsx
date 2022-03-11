@@ -5,13 +5,13 @@ import { FormEvent, useContext, useState } from 'react';
 import { parseCookies } from 'nookies';
 import { Flex, Stack, Divider, Link } from '@chakra-ui/react';
 
-import { FormContainer } from 'components/SignForms/FormContainer';
-import { Slogan } from 'components/SignForms/Slogan';
-import { Input } from 'components/SignForms/Input';
-import { FormButton } from 'components/SignForms/FormButton';
+import { FormContainer } from 'components/pages/SignForms/FormContainer';
+import { Slogan } from 'components/pages/SignForms/Slogan';
+import { Input } from 'components/pages/SignForms/Input';
+import { FormButton } from 'components/pages/SignForms/FormButton';
 
 import { AuthContext } from 'contexts/AuthContext';
-import { User } from 'interfaces/user';
+import { User } from 'types/user';
 
 export default function SignIn() {
   const router = useRouter();

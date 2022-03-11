@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Hour } from 'interfaces/hour';
+import { Hour } from 'types/hour';
 
 export function useTimePicker(availableHours: Hour[]) {
   const [selectedTime, selectedTimeSet] = useState({} as Hour);

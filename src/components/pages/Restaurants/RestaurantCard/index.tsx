@@ -7,7 +7,7 @@ import { RestaurantNameAndRate } from 'components/RestaurantNameAndRate';
 import { CulinaryAndPrice } from './CulinaryAndPrice';
 import { Bairro } from './Bairro';
 
-import { Restaurant } from 'interfaces/restaurant';
+import { Restaurant } from 'types/restaurant';
 
 interface RestaurantCardProps {
   restaurant: Restaurant;

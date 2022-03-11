@@ -8,7 +8,7 @@ import { BookTableButton } from '../BookTableButton';
 import { AvailableHoursSkeleton } from 'components/Feedback/Skeleton/AvailableHoursSkeleton';
 
 import { RestaurantContext } from 'pages/restaurant/[id]';
-import { Hour } from 'interfaces/hour';
+import { Hour } from 'types/hour';
 import { useTimePicker } from 'hooks/useTimePicker';
 import { api } from 'services/api';
 

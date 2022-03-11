@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Flex, Text } from '@chakra-ui/react';
-import { ReservationCardContext } from './contexts/ReservationCardContext';
+import { ReservationCardContext } from '.';
 
 export function Address() {
   const { city, address } = useContext(ReservationCardContext);

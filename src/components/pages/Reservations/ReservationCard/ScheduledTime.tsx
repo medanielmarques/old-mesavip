@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Text } from '@chakra-ui/react';
-import { ReservationCardContext } from './contexts/ReservationCardContext';
+import { ReservationCardContext } from '.';
 
 export function ScheduledTime() {
   const { time } = useContext(ReservationCardContext);
