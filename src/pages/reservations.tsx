@@ -20,7 +20,11 @@ export default function Reservations({ initialData }: ReservationsProps) {
     isFetching: isFetchingFollowing,
   } = useQuery(
     'following-reservations',
-    async () => api.get('reservations/list-following').then((res) => res.data),
+    async () =>
+      api
+        .get('reservations/list-following')
+        .then((res) => res.data)
+        .catch((e) => console.error(e)),
     { initialData, enabled: false }
   );
 
@@ -30,7 +34,11 @@ export default function Reservations({ initialData }: ReservationsProps) {
     isFetching: isFetchingPast,
   } = useQuery(
     'past-reservations',
-    async () => api.get('reservations/list-past').then((res) => res.data),
+    async () =>
+      api
+        .get('reservations/list-past')
+        .then((res) => res.data)
+        .catch((e) => console.error(e)),
     { enabled: false }
   );
 
@@ -79,11 +87,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     .get<Reservation[]>('reservations/list-following', {
       headers: { Authorization: `Bearer ${cookies['mesavip.token']}` },
     })
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((e) => console.error(e));
 
   return {
     props: {
-      initialData,
+      initialData: initialData ?? [],
     },
   };
 };

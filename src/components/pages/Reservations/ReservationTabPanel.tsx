@@ -1,4 +1,4 @@
-import { Box, Grid } from '@chakra-ui/react';
+import { Box, Grid, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 import { ReservationCard } from './ReservationCard';
@@ -17,6 +17,14 @@ export function ReservationTabPanel({
   isLoading,
   isFetching,
 }: ReservationTabPanelProps) {
+  if (!reservations.length || !reservations) {
+    return (
+      <Text w='60' mx='auto'>
+        No reservations were found!
+      </Text>
+    );
+  }
+
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Box
