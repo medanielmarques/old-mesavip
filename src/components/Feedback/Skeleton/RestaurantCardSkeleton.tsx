@@ -1,15 +1,15 @@
-import { SimpleGrid, Skeleton, Stack } from '@chakra-ui/react';
+import { Skeleton, Stack } from '@chakra-ui/react';
 
 export function RestaurandCardSkeleton() {
   return (
-    <SimpleGrid columns={[1, 1, 2, 3, 4]} spacing={5}>
+    <Stack spacing={4} mt='12'>
       {Array.from({ length: 20 }).map((_, i) => (
-        <Stack key={i} w='66' spacing={3}>
-          <Skeleton h='32' />
-          <Skeleton h='4' />
-          <Skeleton h='4' />
-        </Stack>
+        <Skeleton
+          key={i}
+          w={{ base: 300, md: 700 }}
+          h={{ base: 125, md: 140 }}
+        />
       ))}
-    </SimpleGrid>
+    </Stack>
   );
 }

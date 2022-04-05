@@ -4,11 +4,10 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import { Header } from 'components/Header';
-import { Footer } from 'components/Footer';
 
 import { AuthProvider } from 'contexts/AuthContext';
 import { queryClient } from 'services/queryClient';
-import { theme } from 'styles/themes/chakra';
+import { theme } from 'chakra/styles';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -17,7 +16,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <ChakraProvider theme={theme}>
           <Header />
           <Component {...pageProps} />
-          <Footer />
         </ChakraProvider>
 
         <ReactQueryDevtools />

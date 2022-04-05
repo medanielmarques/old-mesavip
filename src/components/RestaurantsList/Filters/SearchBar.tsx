@@ -1,31 +1,12 @@
-import { useState } from 'react';
 import { Flex, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
+import { useSearchBar } from 'hooks/restaurants/useSearchBar';
 
-interface SearchBarProps {
-  searchRestaurant: string;
-  searchRestaurantSet(name: string): void;
-}
-
-export function SearchBar(props: SearchBarProps) {
-  const { searchRestaurant, searchRestaurantSet } = props;
-  const [search, searchSet] = useState('');
-
-  function handleClick() {
-    if (searchRestaurant) {
-      clearSearch();
-    } else {
-      searchRestaurantSet(search);
-    }
-  }
-
-  function clearSearch() {
-    searchSet('');
-    searchRestaurantSet('');
-  }
+export function SearchBar() {
+  const { search, searchSet, searchRestaurant, handleClick } = useSearchBar();
 
   return (
-    <Flex as='form'>
+    <Flex as='form' bg='white' mx='auto' w='100%'>
       <InputGroup size='lg'>
         <Input
           fontSize='md'
@@ -38,8 +19,8 @@ export function SearchBar(props: SearchBarProps) {
 
         <InputRightElement
           cursor='pointer'
-          borderRadius='md'
-          _hover={{ bg: 'gray.300' }}
+          borderRightRadius='md'
+          _hover={{ bg: 'gray.200' }}
           onClick={handleClick}
         >
           {searchRestaurant ? <FaTimes /> : <FaSearch />}

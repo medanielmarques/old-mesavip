@@ -1,5 +1,4 @@
 import { extendTheme } from '@chakra-ui/react';
-import { Button } from './Button';
 
 export const theme = extendTheme({
   colors: {
@@ -15,16 +14,24 @@ export const theme = extendTheme({
       '100': '#FED7D7',
       '50': '#FFF5F5',
     },
-    styles: {
-      global: {
-        body: {
-          color: '#000',
-        },
-      },
+    yellow: {
+      '900': '#5F370E',
+      '800': '#744210',
+      '700': '#975A16',
+      '600': '#B7791F',
+      '500': '#F8B333',
+      '400': '#FFC534',
+      '300': '#FFD233',
+      '200': '#FAF089',
+      '100': '#FEFCBF',
+      '50': '#FFFFF0',
     },
   },
-
-  components: {
-    ...Button,
+  styles: {
+    global: {
+      body: {
+        color: 'gray.600',
+      },
+    },
   },
 });
