@@ -20,5 +20,5 @@ export interface Restaurant {
   address: Address;
   avg_rating: number;
   operation_hours: string;
-  total_reviews?: number;
+  total_reviews: number;
 }

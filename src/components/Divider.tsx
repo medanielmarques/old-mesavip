@@ -1,5 +1,5 @@
-import { Box } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
 
-export function Divider() {
-  return <Box border='0.1px solid #eef1f6'></Box>;
+export function Divider({ ...rest }: BoxProps) {
+  return <Box border='0.1px solid #eef1f6' {...rest}></Box>;
 }

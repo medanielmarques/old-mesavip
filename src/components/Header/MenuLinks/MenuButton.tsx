@@ -21,10 +21,10 @@ export function MenuButton({ children, href, onClick }: MenuButtonProps) {
           w='32'
           h='12'
           onClick={onClick}
-          bg={{ base: '', md: 'gray.100' }}
-          _hover={{ bg: { base: '', md: 'gray.200' } }}
+          color='gray.500'
+          _hover={{ bg: { base: '', md: 'gray.100' } }}
           textAlign='center'
-          rounded='md'
+          rounded='lg'
         >
           <Text
             fontWeight='500'

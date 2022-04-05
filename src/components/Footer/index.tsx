@@ -9,7 +9,6 @@ export function Footer() {
       height='40'
       mt='20'
       bg='gray.700'
-      position='absolute'
     >
       <Text fontSize='lg' mx='auto' color='white'>
         Footer

@@ -9,6 +9,7 @@ import { FormContainer } from 'components/pages/SignForms/FormContainer';
 import { Slogan } from 'components/pages/SignForms/Slogan';
 import { Input } from 'components/pages/SignForms/Input';
 import { FormButton } from 'components/pages/SignForms/FormButton';
+import { Footer } from 'components/Footer';
 
 import { AuthContext } from 'contexts/AuthContext';
 import { User } from 'types/user';
@@ -26,45 +27,50 @@ export default function SignIn() {
   };
 
   return (
-    <Flex justify='center' mt='14'>
-      <FormContainer onSubmit={handleSubmit}>
-        <Slogan />
+    <>
+      <Flex justify='center' mt='14'>
+        <FormContainer onSubmit={handleSubmit}>
+          <Slogan />
 
-        <Stack spacing={5} align='center'>
-          <Input
-            name='email'
-            type='email'
-            placeholder='E-mail'
-            value={user.email}
-            onChange={(e) => userSet({ ...user, email: e.target.value })}
-          />
+          <Stack spacing={5} align='center'>
+            <Input
+              name='email'
+              type='email'
+              placeholder='E-mail'
+              value={user.email}
+              onChange={(e) => userSet({ ...user, email: e.target.value })}
+            />
 
-          <Input
-            name='password'
-            type='password'
-            placeholder='Password'
-            value={user.password}
-            onChange={(e) => userSet({ ...user, password: e.target.value })}
-          />
+            <Input
+              name='password'
+              type='password'
+              placeholder='Password'
+              value={user.password}
+              onChange={(e) => userSet({ ...user, password: e.target.value })}
+            />
 
-          <FormButton bg='red.400' _hover={{ bg: 'red.500' }}>
-            Sign in
-          </FormButton>
-
-          <Divider />
-
-          <Link as={NextLink} href='/signup'>
-            <FormButton bg='red.800' _hover={{ bg: 'red.900' }}>
-              Create a new account
+            <FormButton bg='red.400' _hover={{ bg: 'red.500' }}>
+              Sign in
             </FormButton>
-          </Link>
 
-          <Link as={NextLink} href='/'>
-            <a style={{ textDecoration: 'underline' }}>Forgot your password?</a>
-          </Link>
-        </Stack>
-      </FormContainer>
-    </Flex>
+            <Divider />
+
+            <Link as={NextLink} href='/signup'>
+              <FormButton bg='red.800' _hover={{ bg: 'red.900' }}>
+                Create a new account
+              </FormButton>
+            </Link>
+
+            <Link as={NextLink} href='/'>
+              <a style={{ textDecoration: 'underline' }}>
+                Forgot your password?
+              </a>
+            </Link>
+          </Stack>
+        </FormContainer>
+      </Flex>
+      <Footer />
+    </>
   );
 }
 

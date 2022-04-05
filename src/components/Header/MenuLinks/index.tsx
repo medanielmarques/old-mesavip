@@ -24,16 +24,7 @@ export function MenuItens({ isOpen }: MenuItensProps) {
         <FaGithub size='25' />
       </MenuItem>
 
-      <MenuItem href='/'>
-        <Text
-          fontSize={{
-            base: 'inherit',
-            md: 'lg',
-          }}
-        >
-          Restaurants
-        </Text>
-      </MenuItem>
+      <MenuButton href='/'>Restaurants</MenuButton>
 
       {isAuthenticated ? (
         <ButtonsContainer>
