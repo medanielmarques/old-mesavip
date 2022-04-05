@@ -8,6 +8,7 @@ import { TabList } from 'components/pages/Reservations/TabList';
 
 import { api } from 'services/api';
 import { Reservation } from 'types/reservation';
+import { Footer } from 'components/Footer';
 
 interface ReservationsProps {
   initialData: Reservation[];
@@ -20,7 +21,11 @@ export default function Reservations({ initialData }: ReservationsProps) {
     isFetching: isFetchingFollowing,
   } = useQuery(
     'following-reservations',
-    async () => api.get('reservations/list-following').then((res) => res.data),
+    async () =>
+      api
+        .get('reservations/list-following')
+        .then((res) => res.data)
+        .catch((e) => console.error(e)),
     { initialData, enabled: false }
   );
 
@@ -30,36 +35,43 @@ export default function Reservations({ initialData }: ReservationsProps) {
     isFetching: isFetchingPast,
   } = useQuery(
     'past-reservations',
-    async () => api.get('reservations/list-past').then((res) => res.data),
+    async () =>
+      api
+        .get('reservations/list-past')
+        .then((res) => res.data)
+        .catch((e) => console.error(e)),
     { enabled: false }
   );
 
   return (
-    <Tabs isFitted isLazy lazyBehavior='keepMounted' minH='100vh'>
-      <TabList />
+    <>
+      <Tabs isFitted isLazy lazyBehavior='keepMounted' minH='100vh'>
+        <TabList />
 
-      <TabPanels>
-        <TabPanel>
-          {followingReservations && (
-            <ReservationTabPanel
-              reservations={followingReservations}
-              isLoading={isLoadingFollowing}
-              isFetching={isFetchingFollowing}
-            />
-          )}
-        </TabPanel>
+        <TabPanels>
+          <TabPanel>
+            {followingReservations && (
+              <ReservationTabPanel
+                reservations={followingReservations}
+                isLoading={isLoadingFollowing}
+                isFetching={isFetchingFollowing}
+              />
+            )}
+          </TabPanel>
 
-        <TabPanel>
-          {pastReservations && (
-            <ReservationTabPanel
-              reservations={pastReservations}
-              isLoading={isLoadingPast}
-              isFetching={isFetchingPast}
-            />
-          )}
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+          <TabPanel>
+            {pastReservations && (
+              <ReservationTabPanel
+                reservations={pastReservations}
+                isLoading={isLoadingPast}
+                isFetching={isFetchingPast}
+              />
+            )}
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+      <Footer />
+    </>
   );
 }
 
@@ -79,11 +91,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     .get<Reservation[]>('reservations/list-following', {
       headers: { Authorization: `Bearer ${cookies['mesavip.token']}` },
     })
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((e) => console.error(e));
 
   return {
     props: {
-      initialData,
+      initialData: initialData ?? [],
     },
   };
 };

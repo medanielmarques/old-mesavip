@@ -13,7 +13,8 @@ export function NavBarContainer({ children }: NavBarContainerProps) {
       justify='space-between'
       wrap='wrap'
       w='100%'
-      p='0 12px'
+      px='3'
+      bg='white'
       borderBottom='1px solid #f0f2f5'
     >
       {children}

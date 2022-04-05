@@ -7,6 +7,8 @@ import { Topbar } from 'components/pages/Restaurant/Topbar';
 import { Image as Banner } from 'components/pages/Restaurant/Image';
 import { BottomBar } from 'components/pages/Restaurant/BottomBar';
 import { BookingWidget } from 'components/pages/Restaurant/BookingWidget';
+import { Footer } from 'components/Footer';
+
 import { Restaurant as IRestaurant } from 'types/restaurant';
 import { api } from 'services/api';
 
@@ -38,12 +40,13 @@ export default function Restaurant(props: RestaurantProps) {
 
         <BookingWidget />
       </Flex>
+      <Footer />
     </RestaurantContext.Provider>
   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await api.get('restaurants');
+  const { data } = await api.get('restaurants/list-all');
 
   const paths = data.map((restaurant: IRestaurant) => {
     return {

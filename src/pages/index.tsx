@@ -1,15 +1,19 @@
 import { GetServerSideProps } from 'next';
-import { useState } from 'react';
-import { Box, SimpleGrid, Stack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import { Divider, Stack } from '@chakra-ui/react';
 
-import { RestaurantCard } from 'components/pages/Restaurants/RestaurantCard';
-import { TopBar } from 'components/pages/Restaurants/RestaurantCard/TopBar';
-import { ErrorMessage } from 'components/pages/Restaurants/RestaurantCard/ErrorMessage';
+import { ErrorMessage } from 'components/RestaurantsList/ErrorMessage';
 import { RestaurandCardSkeleton } from 'components/Feedback/Skeleton/RestaurantCardSkeleton';
+import { RestaurantCard } from 'components/RestaurantsList/RestaurantCard';
+import { TotalRestaurantsText } from 'components/RestaurantsList/TotalRestaurantsText';
+import { Wrapper } from 'components/RestaurantsList/Wrapper';
+import { Filters } from 'components/RestaurantsList/Filters';
 
 import { Restaurant } from 'types/restaurant';
 import { api } from 'services/api';
+import { queryClient } from 'services/queryClient';
+import { RestaurantsFiltersContext } from 'contexts/RestaurantsFiltersContext';
 
 interface RestaurantsProps {
   initialData: Restaurant[];
@@ -17,63 +21,80 @@ interface RestaurantsProps {
 
 export default function Restaurants({ initialData }: RestaurantsProps) {
   const [searchRestaurant, searchRestaurantSet] = useState('');
+  const [selectedCuisine, selectedCuisineSet] = useState('');
+  const [score, scoreSet] = useState(2);
 
   const {
     data: restaurants,
     isLoading,
+    isFetching,
     error,
   } = useQuery(
-    ['get-restaurants', searchRestaurant],
+    'list-restaurants',
     async () => {
       return api
-        .get<Restaurant[]>(`restaurants/${searchRestaurant}`)
-        .then((res) => res.data);
+        .get<Restaurant[]>(`restaurants/list-all`, {
+          params: {
+            name: searchRestaurant,
+            cuisine: selectedCuisine,
+            avg_rating: score,
+          },
+        })
+        .then((res) => res.data)
+        .catch((e) => {
+          console.log(e);
+        });
     },
     {
       initialData,
-      enabled: searchRestaurant ? true : false,
+      enabled: false,
     }
   );
 
-  return (
-    <Box
-      w={{
-        base: '288px',
-        md: '606px',
-        lg: '904px',
-        xl: '1212px',
-      }}
-      minHeight='100vh'
-      mx='auto'
-      my='8'
-    >
-      <Stack spacing={6}>
-        {!isLoading && (
-          <TopBar
-            totalRestaurants={restaurants!.length}
-            searchRestaurant={searchRestaurant}
-            searchRestaurantSet={searchRestaurantSet}
-          />
-        )}
+  useEffect(() => {
+    queryClient.fetchQuery('list-restaurants');
+  }, [searchRestaurant, selectedCuisine, score]);
 
-        {isLoading ? (
-          <RestaurandCardSkeleton />
-        ) : error ? (
-          <ErrorMessage />
-        ) : (
-          <SimpleGrid columns={[1, 1, 2, 3, 4]} spacing={5}>
-            {restaurants!.map((restaurant) => (
-              <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-            ))}
-          </SimpleGrid>
-        )}
-      </Stack>
-    </Box>
+  return (
+    <Wrapper>
+      <RestaurantsFiltersContext.Provider
+        value={{
+          searchRestaurant,
+          searchRestaurantSet,
+          selectedCuisine,
+          selectedCuisineSet,
+          score,
+          scoreSet,
+        }}
+      >
+        <Filters />
+      </RestaurantsFiltersContext.Provider>
+
+      {isLoading || isFetching ? (
+        <RestaurandCardSkeleton />
+      ) : error ? (
+        <ErrorMessage />
+      ) : (
+        <Stack spacing={6}>
+          <TotalRestaurantsText length={restaurants?.length} />
+
+          {restaurants?.map((restaurant) => (
+            <Stack spacing={4} key={restaurant.id}>
+              <RestaurantCard restaurant={restaurant} />
+              <Divider display={{ base: 'block', md: 'none' }} />
+            </Stack>
+          ))}
+        </Stack>
+      )}
+    </Wrapper>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: initialData } = await api.get('restaurants');
+  const { data: initialData } = await api.get<Restaurant[]>(
+    'restaurants/list-all',
+    { params: { avg_rating: 2 } }
+  );
 
   return {
     props: {

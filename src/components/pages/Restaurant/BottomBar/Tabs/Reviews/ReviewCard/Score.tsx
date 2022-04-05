@@ -1,23 +1,12 @@
-import { useEffect, useState } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
-
-import { reviewScore } from 'utils/reviewScore';
-
-interface ScoreRankData {
-  message: string;
-  color: string;
-}
+import { useReviewScore } from 'hooks/useReviewScore';
 
 interface ScoreProps {
   score: number;
 }
 
 export function Score({ score }: ScoreProps) {
-  const [scoreRank, scoreRankSet] = useState({} as ScoreRankData);
-
-  useEffect(() => {
-    scoreRankSet(reviewScore(score));
-  }, [score]);
+  const scoreRank = useReviewScore(Math.round(score));
 
   return (
     <Flex justify='space-between' align='center'>
