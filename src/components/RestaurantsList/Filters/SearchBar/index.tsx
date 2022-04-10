@@ -23,7 +23,11 @@ export function SearchBar() {
           _hover={{ bg: 'gray.200' }}
           onClick={handleClick}
         >
-          {searchRestaurant ? <FaTimes /> : <FaSearch />}
+          {searchRestaurant ? (
+            <FaTimes aria-label='close-icon' />
+          ) : (
+            <FaSearch aria-label='search-icon' />
+          )}
         </InputRightElement>
       </InputGroup>
     </Flex>

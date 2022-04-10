@@ -17,8 +17,7 @@ export interface Restaurant {
   site?: string;
   culinary: string;
   image: string;
-  address: Address;
+  address?: Address;
   avg_rating: number;
-  operation_hours: string;
   total_reviews: number;
 }

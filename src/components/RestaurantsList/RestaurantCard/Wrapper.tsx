@@ -14,6 +14,7 @@ export function Wrapper({ children }: LinkProps) {
           borderRadius='lg'
           shadow={{ base: 'none', md: 'base' }}
           _hover={{ shadow: { base: 'none', md: 'md' } }}
+          role='restaurant-card'
         >
           {children}
         </Flex>
