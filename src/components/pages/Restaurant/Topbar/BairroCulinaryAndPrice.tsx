@@ -3,15 +3,12 @@ import { RestaurantContext } from 'pages/restaurant/[id]';
 import { useContext } from 'react';
 
 export function BairroCulinaryAndPrice() {
-  const {
-    address: { bairro },
-    culinary,
-  } = useContext(RestaurantContext);
+  const { address, culinary } = useContext(RestaurantContext);
 
   return (
     <Flex direction='column' gridGap='2' fontSize='sm'>
       <Flex gridGap='2'>
-        <Text fontWeight='500'>{bairro}</Text>
+        <Text fontWeight='500'>{address?.bairro}</Text>
         <Text> &bull; </Text>
         <Text decoration='underline'>{culinary}</Text>
       </Flex>

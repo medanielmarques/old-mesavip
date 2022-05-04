@@ -16,8 +16,8 @@ export function Breadcrumb() {
       display={{ base: 'none', md: 'block' }}
     >
       <BreadcrumbItem text='Restaurants' href='/' />
-      <BreadcrumbItem text={address.cidade} href='/' />
-      <BreadcrumbItem text={address.bairro} href='/' />
+      <BreadcrumbItem text={address!.cidade} href='/' />
+      <BreadcrumbItem text={address!.bairro} href='/' />
       <BreadcrumbItem text={name} isCurrentPage />
     </ChakraBreadcrumb>
   );
