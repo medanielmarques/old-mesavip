@@ -1,6 +1,5 @@
 import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 import { Divider, Stack } from '@chakra-ui/react';
 
 import { ErrorMessage } from 'components/RestaurantsList/ErrorMessage';
@@ -14,6 +13,7 @@ import { Restaurant } from 'types/restaurant';
 import { api } from 'services/api';
 import { queryClient } from 'services/queryClient';
 import { RestaurantsFiltersContext } from 'contexts/RestaurantsFiltersContext';
+import { useRestaurants } from 'hooks/restaurants/useRestaurants';
 
 interface RestaurantsProps {
   initialData: Restaurant[];
@@ -29,27 +29,17 @@ export default function Home({ initialData }: RestaurantsProps) {
     isLoading,
     isFetching,
     error,
-  } = useQuery(
-    'list-restaurants',
-    async () => {
-      return api
-        .get<Restaurant[]>(`restaurants/list-all`, {
-          params: {
-            name: searchRestaurant,
-            cuisine: selectedCuisine,
-            avg_rating: score,
-          },
-        })
-        .then((res) => res.data)
-        .catch((e) => {
-          console.log(e);
-        });
+  } = useRestaurants({
+    filters: {
+      name: searchRestaurant,
+      cuisine: selectedCuisine,
+      avg_rating: score,
     },
-    {
-      initialData,
+    options: {
       enabled: false,
-    }
-  );
+      initialData,
+    },
+  });
 
   useEffect(() => {
     queryClient.fetchQuery('list-restaurants');

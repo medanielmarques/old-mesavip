@@ -4,12 +4,7 @@ import { FaLink, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 import { RestaurantContext } from 'pages/restaurant/[id]';
 
 export function Info() {
-  const {
-    name,
-    site,
-    phone,
-    address: { logradouro, cidade },
-  } = useContext(RestaurantContext);
+  const { name, site, phone, address } = useContext(RestaurantContext);
 
   return (
     <Stack spacing='6' my='auto' textDecoration='underline'>
@@ -29,7 +24,7 @@ export function Info() {
         <FaMapMarkerAlt color='#949494' />
         <Flex direction='column'>
           <Text>{name}</Text>
-          <Text>{`${logradouro}, ${cidade}`}</Text>
+          <Text>{`${address?.logradouro}, ${address?.cidade}`}</Text>
         </Flex>
       </Flex>
     </Stack>
