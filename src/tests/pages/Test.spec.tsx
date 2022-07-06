@@ -1,12 +1,12 @@
 import { render, within } from '@testing-library/react';
-import { mocked } from 'ts-jest/utils';
+// import { mocked } from 'ts-jest/utils';
 import { api } from 'services/api';
 import Test, { getServerSideProps } from 'pages/test-page';
 import { restaurantsList } from 'tests/mocks/restaurantsList';
 
 jest.mock('next/router');
 jest.mock('services/api');
-const mockedApi = mocked(api, true);
+// const mockedApi = mocked(api, true);
 
 describe('Test Page', () => {
   it('renders correctly', () => {
@@ -27,7 +27,7 @@ describe('Test Page', () => {
   });
 
   it('loads initial data', async () => {
-    mockedApi.get.mockResolvedValue({ data: restaurantsList });
+    // mockedApi.get.mockResolvedValue({ data: restaurantsList });
 
     const response = await getServerSideProps();
 

@@ -1,4 +1,4 @@
-import { Restaurant } from 'types/restaurant';
+import { Restaurant } from 'types';
 
 export const restaurantsList: Restaurant[] = [
   {

@@ -1,0 +1,31 @@
+import { Flex, Link, Stack, Text } from '@chakra-ui/react';
+import { FaLink, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import { useRestaurantCtx } from 'pages/restaurant/hooks';
+
+export function Info() {
+  const { name, site, phone, address } = useRestaurantCtx();
+
+  return (
+    <Stack spacing='6' my='auto' textDecoration='underline'>
+      <Flex gridGap='4' align='center'>
+        <FaLink color='#949494' />
+        <Link href={site} target='_blank'>
+          Website
+        </Link>
+      </Flex>
+
+      <Flex gridGap='4' align='center'>
+        <FaPhone color='#949494' />
+        <Text>{phone}</Text>
+      </Flex>
+
+      <Flex gridGap='4'>
+        <FaMapMarkerAlt color='#949494' />
+        <Flex direction='column'>
+          <Text>{name}</Text>
+          <Text>{`${address?.logradouro}, ${address?.cidade}`}</Text>
+        </Flex>
+      </Flex>
+    </Stack>
+  );
+}
