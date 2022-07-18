@@ -16,7 +16,7 @@ export function Score({ score }: ScoreProps) {
       <Box
         w={12}
         h={6}
-        alignItems='center'
+        textAlign='center'
         bg={scoreRank.color}
         color='white'
         borderRadius='xl'
