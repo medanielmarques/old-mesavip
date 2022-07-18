@@ -20,7 +20,10 @@ export function Cuisines() {
             _hover={{ color: 'yellow.400' }}
             onChange={() => handleClick(index)}
           >
-            <Text color='gray.500'>{cuisine.name} (1)</Text>
+            <Text color='gray.500'>
+              {/* &#40; &#41; - left and right parentheses */}
+              {cuisine.name} &#40;{cuisine.total}&#41;
+            </Text>
           </Checkbox>
         ))}
       </Stack>
