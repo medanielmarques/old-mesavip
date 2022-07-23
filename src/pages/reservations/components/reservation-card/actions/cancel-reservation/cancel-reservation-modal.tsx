@@ -3,8 +3,8 @@ import { Button, ModalBody, ModalFooter, Text } from '@chakra-ui/react';
 
 import { CancelReservationContext } from '..';
 import { queryClient } from 'services/query-client';
-import { useReservationCardCtx } from 'pages/reservations/hooks/reservation-context';
-import { useCancelReservation } from 'pages/reservations/hooks/use-cancel-reservation';
+import { useReservationCardCtx } from 'pages/reservations/hooks';
+import { useCancelReservation } from 'pages/reservations/hooks';
 
 export function CancelReservationModal() {
   const { id } = useReservationCardCtx();

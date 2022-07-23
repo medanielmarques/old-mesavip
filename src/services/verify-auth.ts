@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 import { parseCookies } from 'nookies';
 
-export function verifyAuth(ctx: GetServerSidePropsContext) {
+export function verifyAuthOnPublicPages(ctx: GetServerSidePropsContext) {
   const cookies = parseCookies(ctx);
 
   if (cookies['mesavip.token']) {
@@ -16,4 +16,17 @@ export function verifyAuth(ctx: GetServerSidePropsContext) {
   return {
     props: {},
   };
+}
+
+export function verifyAuthOnPrivatePages(ctx: GetServerSidePropsContext) {
+  const cookies = parseCookies(ctx);
+
+  if (!cookies['mesavip.token']) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
 }

@@ -1,23 +1,22 @@
 import { useState } from 'react';
-import { useRestaurantsFiltersCtx } from 'contexts';
+import { useRestaurantFiltersCtx } from 'contexts';
 
 export function useSearchBar() {
-  const { searchRestaurant, searchRestaurantSet } = useRestaurantsFiltersCtx();
-
+  const { filters, dispatchFilters } = useRestaurantFiltersCtx();
   const [search, searchSet] = useState('');
 
   function handleClick() {
-    if (searchRestaurant) {
+    if (filters.name) {
       clearSearch();
     } else {
-      searchRestaurantSet(search);
+      dispatchFilters({ type: 'name', payload: { name: search } });
     }
   }
 
   function clearSearch() {
     searchSet('');
-    searchRestaurantSet('');
+    dispatchFilters({ type: 'name', payload: { name: '' } });
   }
 
-  return { search, searchSet, searchRestaurant, handleClick };
+  return { search, searchSet, searchRestaurant: filters.name, handleClick };
 }

@@ -6,7 +6,7 @@ import { Texts } from './texts';
 import { api } from 'services/api';
 import { useRestaurantCtx } from 'pages/restaurant/hooks';
 import { Image } from 'pages/restaurant/components/image';
-import { PhotosTabSkeleton } from 'core/feedback/skeleton/images-skeleton';
+import { PhotosTabSkeleton } from 'core/feedback/skeleton';
 
 interface Photo {
   id: string;

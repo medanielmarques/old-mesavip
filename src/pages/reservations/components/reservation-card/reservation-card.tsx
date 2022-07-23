@@ -1,6 +1,6 @@
 import { Divider } from '@chakra-ui/react';
 
-import { ReservationCardWrapper } from '../reservation-card-wrapper';
+import { ReservationCardWrapper } from './reservation-card-wrapper';
 import { ReservationCardContent } from './reservation-card-content';
 import { Actions } from './actions';
 

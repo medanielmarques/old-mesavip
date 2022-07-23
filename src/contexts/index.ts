@@ -1,5 +1,5 @@
 export { AuthContext, AuthProvider, useAuth, signOut } from './auth-context';
 export {
   RestaurantsFiltersContext,
-  useRestaurantsFiltersCtx,
+  useRestaurantFiltersCtx,
 } from './restaurants-filters-context';

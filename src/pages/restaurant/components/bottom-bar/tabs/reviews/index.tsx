@@ -6,7 +6,7 @@ import { ReviewCard } from './review-card';
 import { Rating as Review } from 'types';
 import { api } from 'services/api';
 import { useRestaurantCtx } from 'pages/restaurant/hooks';
-import { ReviewCardSkeleton } from 'core/feedback/skeleton/review-card-skeleton';
+import { ReviewCardSkeleton } from 'core/feedback/skeleton';
 
 export function Reviews() {
   const { id, name } = useRestaurantCtx();

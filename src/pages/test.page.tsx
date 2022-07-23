@@ -1,6 +1,6 @@
 import { api } from 'services/api';
 import { Restaurant } from 'types';
-import { useRestaurants } from './home/hooks/use-restaurants';
+import { useRestaurants } from './home/hooks/use-restaurants/use-restaurants';
 
 export default function Test({ restaurants }: { restaurants: Restaurant[] }) {
   const { data, isLoading } = useRestaurants({

@@ -1,6 +1,6 @@
 import { Flex, HStack, ModalBody, Stack, Text } from '@chakra-ui/react';
 
-import { useRating } from 'pages/reservations/hooks/use-ratings';
+import { useRating } from 'pages/reservations/hooks';
 
 export function ShowRatingModal() {
   const { rating } = useRating();
