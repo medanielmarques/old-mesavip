@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 import { TimePickerHeader } from './time-picker-header';
 import { AvailableHours } from './available-hours';
 import { BookTableButton } from '../book-table-button';
-import { AvailableHoursSkeleton } from 'core/feedback/skeleton/available-hours-skeleton';
+import { AvailableHoursSkeleton } from 'core/feedback/skeleton';
 
 import { Hour } from 'types';
 import { api } from 'services/api';

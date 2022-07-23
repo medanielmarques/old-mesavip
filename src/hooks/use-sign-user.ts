@@ -38,9 +38,7 @@ export function useSignUser(signType: SignType) {
 
   function handleSubmit(e: FormEvent<HTMLDivElement>) {
     e.preventDefault();
-
     signType === 'sign-in' ? signIn(user) : signUpUser(user);
-
     router.push('/');
   }
 

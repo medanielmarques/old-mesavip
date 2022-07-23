@@ -2,7 +2,7 @@ import { ShowRatingButton } from './show-rating-button';
 import { ShowRatingModal } from './show-rating-modal';
 
 import { useModal } from 'hooks';
-import { useReservationCardCtx } from 'pages/reservations/hooks/reservation-context';
+import { useReservationCardCtx } from 'pages/reservations/hooks';
 
 export function ShowRating() {
   const { restaurant } = useReservationCardCtx();

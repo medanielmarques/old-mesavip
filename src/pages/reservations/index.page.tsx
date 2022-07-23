@@ -1,73 +1,38 @@
 import { GetServerSideProps } from 'next';
-import { parseCookies } from 'nookies';
-import { TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
-import { useQuery } from 'react-query';
+import { TabPanels, Tabs } from '@chakra-ui/react';
 
-import { ReservationTabPanel } from './components/reservation-tab-panel';
-import { TabList } from './components/tab-list';
 import { Footer } from 'core/footer';
+import {
+  TabList,
+  FollowingReservationsTabPanel,
+  PastReservationsTabPanel,
+} from './components/tabs';
 
-import { api } from 'services/api';
 import { Reservation } from 'types';
+import { getReservationsSSR } from 'services/queries/get-reservations';
+import { verifyAuthOnPrivatePages } from 'services/verify-auth';
+import { parseCookies } from 'nookies';
 
 interface ReservationsProps {
-  initialData: Reservation[];
+  SSRFollowingReservations: Reservation[];
+  SSRPastReservations: Reservation[];
 }
 
-export default function Reservations({ initialData }: ReservationsProps) {
-  const {
-    data: followingReservations,
-    isLoading: isLoadingFollowing,
-    isFetching: isFetchingFollowing,
-  } = useQuery(
-    'following-reservations',
-    async () =>
-      api
-        .get('reservations/list-following')
-        .then((res) => res.data)
-        .catch((e) => console.error(e)),
-    { initialData, enabled: false }
-  );
-
-  const {
-    data: pastReservations,
-    isLoading: isLoadingPast,
-    isFetching: isFetchingPast,
-  } = useQuery(
-    'past-reservations',
-    async () =>
-      api
-        .get('reservations/list-past')
-        .then((res) => res.data)
-        .catch((e) => console.error(e)),
-    { enabled: false }
-  );
-
+export default function Reservations({
+  SSRFollowingReservations,
+  SSRPastReservations,
+}: ReservationsProps) {
   return (
     <>
       <Tabs isFitted isLazy lazyBehavior='keepMounted' minH='100vh'>
         <TabList />
 
         <TabPanels>
-          <TabPanel>
-            {followingReservations && (
-              <ReservationTabPanel
-                reservations={followingReservations}
-                isLoading={isLoadingFollowing}
-                isFetching={isFetchingFollowing}
-              />
-            )}
-          </TabPanel>
+          <FollowingReservationsTabPanel
+            SSRFollowingReservations={SSRFollowingReservations}
+          />
 
-          <TabPanel>
-            {pastReservations && (
-              <ReservationTabPanel
-                reservations={pastReservations}
-                isLoading={isLoadingPast}
-                isFetching={isFetchingPast}
-              />
-            )}
-          </TabPanel>
+          <PastReservationsTabPanel SSRPastReservations={SSRPastReservations} />
         </TabPanels>
       </Tabs>
       <Footer />
@@ -87,16 +52,20 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
-  const initialData = await api
-    .get<Reservation[]>('reservations/list-following', {
-      headers: { Authorization: `Bearer ${cookies['mesavip.token']}` },
-    })
-    .then((res) => res.data)
-    .catch((e) => console.error(e));
+  const SSRFollowingReservations = await getReservationsSSR({
+    type: 'following',
+    ctx,
+  });
+
+  const SSRPastReservations = await getReservationsSSR({
+    type: 'past',
+    ctx,
+  });
 
   return {
     props: {
-      initialData: initialData ?? [],
+      SSRFollowingReservations,
+      SSRPastReservations,
     },
   };
 };

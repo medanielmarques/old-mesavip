@@ -4,7 +4,7 @@ import { useToast } from '@chakra-ui/react';
 
 import { api } from 'services/api';
 import { queryClient } from 'services/query-client';
-import { useReservationCardCtx } from './reservation-context';
+import { useReservationCardCtx } from '.';
 import { CancelReservationContext } from '../components/reservation-card/actions';
 
 export function useCancelReservation() {

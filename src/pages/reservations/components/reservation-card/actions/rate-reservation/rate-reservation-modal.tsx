@@ -1,8 +1,8 @@
 import { FormEvent, useState, useEffect } from 'react';
 import { Button, Flex, ModalBody, Select, Textarea } from '@chakra-ui/react';
 
-import { useReservationCardCtx } from 'pages/reservations/hooks/reservation-context';
-import { useRateReservation } from 'pages/reservations/hooks/use-rate-reservation';
+import { useReservationCardCtx } from 'pages/reservations/hooks';
+import { useRateReservation } from 'pages/reservations/hooks';
 
 export function RateResevationModal() {
   const {

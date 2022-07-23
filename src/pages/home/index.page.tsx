@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import { useEffect, useState } from 'react';
 import { Divider, Stack } from '@chakra-ui/react';
 
 import { ErrorMessage } from './components/error-message';
@@ -9,53 +8,28 @@ import { RestaurantsWrapper } from './components/restaurants-wrapper';
 import { Filters } from './components/filters';
 
 import { Restaurant } from 'types';
-import { queryClient } from 'services/query-client';
 import { RestaurantsFiltersContext } from 'contexts';
-import { getRestaurants, useRestaurants } from './hooks/use-restaurants';
-import { RestaurandCardSkeleton } from 'core/feedback/skeleton/restaurant-card-skeleton';
+import { RestaurandCardSkeleton } from 'core/feedback/skeleton';
+import { getRestaurants } from 'services/queries/get-restaurants';
+import { useRestaurants } from './hooks/use-restaurants';
 
 interface RestaurantsProps {
   initialData: Restaurant[];
 }
 
 export default function Home({ initialData }: RestaurantsProps) {
-  const [searchRestaurant, searchRestaurantSet] = useState('');
-  const [selectedCuisine, selectedCuisineSet] = useState('');
-  const [score, scoreSet] = useState(2);
-
   const {
-    data: restaurants,
+    restaurants,
     isLoading,
     isFetching,
     error,
-  } = useRestaurants({
-    filters: {
-      name: searchRestaurant,
-      cuisine: selectedCuisine,
-      avg_rating: score,
-    },
-    options: {
-      enabled: false,
-      initialData,
-    },
-  });
-
-  useEffect(() => {
-    queryClient.fetchQuery('list-restaurants');
-  }, [searchRestaurant, selectedCuisine, score]);
+    filters,
+    dispatchFilters,
+  } = useRestaurants(initialData);
 
   return (
     <RestaurantsWrapper>
-      <RestaurantsFiltersContext.Provider
-        value={{
-          searchRestaurant,
-          searchRestaurantSet,
-          selectedCuisine,
-          selectedCuisineSet,
-          score,
-          scoreSet,
-        }}
-      >
+      <RestaurantsFiltersContext.Provider value={{ filters, dispatchFilters }}>
         <Filters />
       </RestaurantsFiltersContext.Provider>
 

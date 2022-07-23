@@ -1,4 +1,4 @@
-import { useReservationCardCtx } from 'pages/reservations/hooks/reservation-context';
+import { useReservationCardCtx } from 'pages/reservations/hooks';
 import { RateReservation, ShowRating, CancelReservation } from '.';
 
 export function Actions() {

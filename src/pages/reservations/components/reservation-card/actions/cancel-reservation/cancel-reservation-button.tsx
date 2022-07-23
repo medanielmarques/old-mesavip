@@ -3,7 +3,7 @@ import { useIsFetching } from 'react-query';
 import { Button, Flex } from '@chakra-ui/react';
 
 import { CancelReservationContext } from '..';
-import { useReservationCardCtx } from 'pages/reservations/hooks/reservation-context';
+import { useReservationCardCtx } from 'pages/reservations/hooks';
 
 export function CancelReservationButton() {
   const { id, canceled } = useReservationCardCtx();

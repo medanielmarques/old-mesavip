@@ -4,7 +4,7 @@ import { ScheduledDate } from './scheduled-date';
 import { RestaurantNameAndRate } from 'core/restaurant-name-and-rate';
 import { ScheduledTime } from './scheduled-time';
 import { Address } from './address';
-import { useReservationCardCtx } from 'pages/reservations/hooks/reservation-context';
+import { useReservationCardCtx } from 'pages/reservations/hooks';
 
 export function ReservationCardContent() {
   const { restaurant, avg_rating } = useReservationCardCtx();

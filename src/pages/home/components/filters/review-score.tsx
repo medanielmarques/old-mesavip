@@ -8,18 +8,18 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { useRestaurantsFiltersCtx } from 'contexts';
+import { useRestaurantFiltersCtx } from 'contexts';
 
 export function ReviewScore() {
-  const { score, scoreSet } = useRestaurantsFiltersCtx();
+  const { filters, dispatchFilters } = useRestaurantFiltersCtx();
 
   function handleIsSelected(i: number) {
-    if (score === i) return true;
+    if (filters.avg_rating === i) return true;
   }
 
   return (
     <Stack spacing={3}>
-      <Text as='b'>Review score ({score} and above)</Text>
+      <Text as='b'>Review score ({filters.avg_rating} and above)</Text>
 
       <Box my='auto'>
         <Slider
@@ -28,7 +28,12 @@ export function ReviewScore() {
           max={4}
           step={1}
           colorScheme='yellow'
-          onChangeEnd={(value) => scoreSet(value)}
+          onChangeEnd={(score) =>
+            dispatchFilters({
+              type: 'avg_rating',
+              payload: { avg_rating: score },
+            })
+          }
         >
           <SliderTrack>
             <SliderFilledTrack />

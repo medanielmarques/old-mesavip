@@ -2,13 +2,10 @@ import { GetServerSideProps } from 'next';
 import NextLink from 'next/link';
 import { Flex, Stack, Divider, Link } from '@chakra-ui/react';
 
-import { FormContainer } from 'core/sign-forms/form-container';
-import { Slogan } from 'core/sign-forms/slogan';
-import { Input } from 'core/sign-forms/input';
-import { FormButton } from 'core/sign-forms/form-button';
+import { FormContainer, FormButton, Input, Slogan } from 'core/sign-forms';
 import { Footer } from 'core/footer';
 import { useSignUser } from 'hooks/use-sign-user';
-import { verifyAuth } from 'services/verify-auth';
+import { verifyAuthOnPublicPages } from 'services/verify-auth';
 
 export default function SignUp() {
   const { user, userSet, handleSubmit, handleCpfChange } =
@@ -79,5 +76,5 @@ export default function SignUp() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  return verifyAuth(ctx);
+  return verifyAuthOnPublicPages(ctx);
 };

@@ -1,5 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
-import { useReservationCardCtx } from 'pages/reservations/hooks/reservation-context';
+import { useReservationCardCtx } from 'pages/reservations/hooks';
 
 export function Address() {
   const { city, address } = useReservationCardCtx();

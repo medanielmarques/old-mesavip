@@ -1,17 +1,15 @@
-import { createContext, useContext } from 'react';
+import { RestaurantFilters } from 'pages/home/hooks/use-restaurants';
+import { FiltersAction } from 'pages/home/hooks/use-restaurants';
+import { createContext, Dispatch, useContext } from 'react';
 
 interface RestaurantsFiltersContextData {
-  searchRestaurant: string;
-  selectedCuisine: string;
-  score: number;
-  searchRestaurantSet: (value: string) => void;
-  selectedCuisineSet: (value: string) => void;
-  scoreSet: (value: number) => void;
+  filters: RestaurantFilters;
+  dispatchFilters: Dispatch<FiltersAction>;
 }
 
 export const RestaurantsFiltersContext = createContext(
   {} as RestaurantsFiltersContextData
 );
 
-export const useRestaurantsFiltersCtx = () =>
+export const useRestaurantFiltersCtx = () =>
   useContext(RestaurantsFiltersContext);
