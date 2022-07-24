@@ -22,7 +22,7 @@ export function Header() {
   return (
     <HeaderContext.Provider value={{ toggle }}>
       <NavBarContainer>
-        <MenuItem href='/'>
+        <MenuItem href='/home'>
           <Image w='40' h='20' src={logo} alt='Mesavip logo' />
         </MenuItem>
 

@@ -21,12 +21,12 @@ export function MenuItens({ isOpen }: MenuItensProps) {
         <FaGithub size='25' />
       </MenuItem>
 
-      <MenuButton href='/'>Restaurants</MenuButton>
+      <MenuButton href='/home'>Restaurants</MenuButton>
 
       {isAuthenticated ? (
         <ButtonsContainer>
           <MenuButton href='/reservations'>Reservations</MenuButton>
-          <MenuButton href='/' onClick={signOut}>
+          <MenuButton href='/home' onClick={signOut}>
             Sign out
           </MenuButton>
         </ButtonsContainer>

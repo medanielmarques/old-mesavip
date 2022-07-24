@@ -14,9 +14,9 @@ export function Breadcrumb() {
       separator={<FaChevronRight size='10px' />}
       display={{ base: 'none', md: 'block' }}
     >
-      <BreadcrumbItem text='Restaurants' href='/' />
-      <BreadcrumbItem text={address!.cidade} href='/' />
-      <BreadcrumbItem text={address!.bairro} href='/' />
+      <BreadcrumbItem text='Restaurants' href='/home' />
+      <BreadcrumbItem text={address!.cidade} href='/home' />
+      <BreadcrumbItem text={address!.bairro} href='/home' />
       <BreadcrumbItem text={name} isCurrentPage />
     </ChakraBreadcrumb>
   );
