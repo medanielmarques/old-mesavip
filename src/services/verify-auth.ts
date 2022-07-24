@@ -7,7 +7,7 @@ export function verifyAuthOnPublicPages(ctx: GetServerSidePropsContext) {
   if (cookies['mesavip.token']) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/home',
         permanent: false,
       },
     };
@@ -24,7 +24,7 @@ export function verifyAuthOnPrivatePages(ctx: GetServerSidePropsContext) {
   if (!cookies['mesavip.token']) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/home',
         permanent: false,
       },
     };

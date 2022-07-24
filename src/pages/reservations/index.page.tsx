@@ -46,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!cookies['mesavip.token']) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/home',
         permanent: false,
       },
     };

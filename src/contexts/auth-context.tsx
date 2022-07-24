@@ -40,10 +40,10 @@ export const useAuth = () => useContext(AuthContext);
 export function signOut() {
   destroyCookie(undefined, 'mesavip.token');
 
-  if (Router.pathname === '/') {
+  if (Router.pathname === '/home') {
     Router.reload();
   } else {
-    Router.push('/');
+    Router.push('/home');
     Router.reload();
   }
 }

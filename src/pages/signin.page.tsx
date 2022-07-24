@@ -46,7 +46,7 @@ export default function SignIn() {
               </FormButton>
             </Link>
 
-            <Link as={NextLink} href='/'>
+            <Link as={NextLink} href='/home'>
               <a style={{ textDecoration: 'underline' }}>
                 Forgot your password?
               </a>
