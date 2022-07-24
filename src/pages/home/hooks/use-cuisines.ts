@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { useRestaurantFiltersCtx } from 'contexts';
+
 import { api } from 'services/api';
 import { Cuisine } from 'types';
+import { useRestaurantFiltersStore } from './use-restaurants';
 
 export function useCuisines() {
-  const { dispatchFilters } = useRestaurantFiltersCtx();
+  const { updateCuisine } = useRestaurantFiltersStore();
   const [cuisines, cuisinesSet] = useState([] as Cuisine[]);
 
   useQuery(
@@ -28,12 +29,7 @@ export function useCuisines() {
   );
 
   function handleSetCuisine(cuisine: Cuisine) {
-    dispatchFilters({
-      type: 'cuisine',
-      payload: {
-        cuisine: !cuisine.isChecked ? cuisine.name : '',
-      },
-    });
+    updateCuisine(!cuisine.isChecked ? cuisine.name : '');
   }
 
   function handleClick(index: number) {

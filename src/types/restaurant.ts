@@ -21,3 +21,9 @@ export interface Restaurant {
   avg_rating: number;
   total_reviews: number;
 }
+
+export interface RestaurantFilters {
+  name?: string;
+  cuisine?: string;
+  avg_rating?: number;
+}

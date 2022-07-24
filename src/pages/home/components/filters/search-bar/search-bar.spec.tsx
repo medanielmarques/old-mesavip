@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import { SearchBar } from '.';
-import { RestaurantsFiltersContext } from 'contexts';
 
 describe('Restaurants Filters -> SearchBar Component', () => {
   it('displays the search and close icon according to the current Search state', () => {
@@ -10,18 +9,18 @@ describe('Restaurants Filters -> SearchBar Component', () => {
     expect(searchIcon).toBeInTheDocument();
 
     rerender(
-      <RestaurantsFiltersContext.Provider
-        value={{
-          searchRestaurant: 'searchRestaurant',
-          selectedCuisine: 'string',
-          score: 5,
-          searchRestaurantSet: jest.fn(),
-          selectedCuisineSet: jest.fn(),
-          scoreSet: jest.fn(),
-        }}
-      >
-        <SearchBar />
-      </RestaurantsFiltersContext.Provider>
+      // <RestaurantsFiltersContext.Provider
+      //   value={{
+      //     searchRestaurant: 'searchRestaurant',
+      //     selectedCuisine: 'string',
+      //     score: 5,
+      //     searchRestaurantSet: jest.fn(),
+      //     selectedCuisineSet: jest.fn(),
+      //     scoreSet: jest.fn(),
+      //   }}
+      // >
+      // {/* </RestaurantsFiltersContext.Provider> */}
+      <SearchBar />
     );
 
     const closeIcon = screen.getByLabelText('close-icon');
@@ -30,18 +29,18 @@ describe('Restaurants Filters -> SearchBar Component', () => {
     //userEvent.type(searchRestaurant, 'my-search-here')
 
     rerender(
-      <RestaurantsFiltersContext.Provider
-        value={{
-          searchRestaurant: '',
-          selectedCuisine: 'string',
-          score: 5,
-          searchRestaurantSet: jest.fn(),
-          selectedCuisineSet: jest.fn(),
-          scoreSet: jest.fn(),
-        }}
-      >
-        <SearchBar />
-      </RestaurantsFiltersContext.Provider>
+      // <RestaurantsFiltersContext.Provider
+      //   value={{
+      //     searchRestaurant: '',
+      //     selectedCuisine: 'string',
+      //     score: 5,
+      //     searchRestaurantSet: jest.fn(),
+      //     selectedCuisineSet: jest.fn(),
+      //     scoreSet: jest.fn(),
+      //   }}
+      // >
+      // </RestaurantsFiltersContext.Provider>
+      <SearchBar />
     );
 
     const newSearchIcon = screen.getByLabelText('search-icon');

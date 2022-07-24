@@ -8,10 +8,10 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { useRestaurantFiltersCtx } from 'contexts';
+import { useRestaurantFiltersStore } from 'pages/home/hooks/use-restaurants';
 
 export function ReviewScore() {
-  const { filters, dispatchFilters } = useRestaurantFiltersCtx();
+  const { filters, updateAvgRating } = useRestaurantFiltersStore();
 
   function handleIsSelected(i: number) {
     if (filters.avg_rating === i) return true;
@@ -28,12 +28,9 @@ export function ReviewScore() {
           max={4}
           step={1}
           colorScheme='yellow'
-          onChangeEnd={(score) =>
-            dispatchFilters({
-              type: 'avg_rating',
-              payload: { avg_rating: score },
-            })
-          }
+          onChangeEnd={(score) => {
+            updateAvgRating(score.toString());
+          }}
         >
           <SliderTrack>
             <SliderFilledTrack />

@@ -1,16 +1,10 @@
 import { useQuery } from 'react-query';
 import { getRestaurants } from 'services/queries/get-restaurants';
 import { Restaurant } from 'types';
-import { useFiltersReducer } from './use-filters-reducer';
-
-export interface RestaurantFilters {
-  name?: string;
-  cuisine?: string;
-  avg_rating?: number;
-}
+import { useRestaurantFiltersStore } from './restaurant-filters-store';
 
 export function useRestaurants(initialData: Restaurant[]) {
-  const { filters, dispatchFilters } = useFiltersReducer();
+  const { filters } = useRestaurantFiltersStore();
 
   const {
     data: restaurants,
@@ -27,8 +21,6 @@ export function useRestaurants(initialData: Restaurant[]) {
   );
 
   return {
-    filters,
-    dispatchFilters,
     restaurants,
     isLoading,
     isFetching,
