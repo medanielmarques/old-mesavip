@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { SearchBar } from '.';
+import { SearchBar } from 'pages/home/components/filters';
 
 describe('Restaurants Filters -> SearchBar Component', () => {
   it('displays the search and close icon according to the current Search state', () => {

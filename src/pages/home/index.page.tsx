@@ -1,12 +1,10 @@
 import { GetServerSideProps } from 'next';
-import { Divider, Stack } from '@chakra-ui/react';
+import { Box, BoxProps, Divider, Flex, Stack, Text } from '@chakra-ui/react';
 
-import { RestaurantsWrapper } from './components/restaurants-wrapper';
 import { Filters } from './components/filters';
 import { RestaurandCardSkeleton } from 'core/feedback/skeleton';
-import { ErrorMessage } from './components/error-message';
-import { TotalRestaurantsText } from './components/total-restaurants-text';
 import { RestaurantCard } from './components/restaurant-card';
+import { Footer } from 'core/footer';
 
 import { Restaurant } from 'types';
 import { getRestaurants } from 'services/queries/get-restaurants';
@@ -41,6 +39,40 @@ export default function Home({ initialData }: RestaurantsProps) {
         </Stack>
       )}
     </RestaurantsWrapper>
+  );
+}
+
+function RestaurantsWrapper({ children }: BoxProps) {
+  return (
+    <>
+      <Box bg={{ base: 'inherit', md: 'gray.50' }} minHeight='100vh'>
+        <Box px={{ base: '6', md: '24' }} pt='8'>
+          <Stack spacing={6}>
+            <Flex gridGap='12' mx='auto'>
+              {children}
+            </Flex>
+          </Stack>
+        </Box>
+      </Box>
+
+      <Footer />
+    </>
+  );
+}
+
+function TotalRestaurantsText({ length }: { length: number | undefined }) {
+  return (
+    <Text fontSize='sm' fontWeight='400'>
+      {length} {length! > 1 ? 'results' : 'result'}
+    </Text>
+  );
+}
+
+function ErrorMessage() {
+  return (
+    <Text fontSize='20px' align='center'>
+      Sorry, restaurant not found!
+    </Text>
   );
 }
 
