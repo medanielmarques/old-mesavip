@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { api } from 'services/api';
 import { Rating } from 'types';
-import { useReservationCardCtx } from 'pages/reservations/hooks';
+import { useReservationCardCtx } from '../components/reservation-card';
 
 export async function getRating(id: string) {
   const { data } = await api.get<Rating>(`ratings/list-by-id/${id}`);

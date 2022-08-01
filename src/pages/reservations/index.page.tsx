@@ -1,17 +1,16 @@
 import { GetServerSideProps } from 'next';
 import { TabPanels, Tabs } from '@chakra-ui/react';
+import { parseCookies } from 'nookies';
 
-import { Footer } from 'core/footer';
 import {
   TabList,
   FollowingReservationsTabPanel,
   PastReservationsTabPanel,
 } from './components/tabs';
+import { Footer } from 'core/footer';
 
 import { Reservation } from 'types';
 import { getReservationsSSR } from 'services/queries/get-reservations';
-import { verifyAuthOnPrivatePages } from 'services/verify-auth';
-import { parseCookies } from 'nookies';
 
 interface ReservationsProps {
   SSRFollowingReservations: Reservation[];

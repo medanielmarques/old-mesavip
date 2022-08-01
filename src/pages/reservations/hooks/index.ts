@@ -1,8 +1,3 @@
-export {
-  ReservationCardContext,
-  useReservationCardCtx,
-} from './reservation-context';
-
 export { useCancelReservation } from './use-cancel-reservation';
 export { useRateReservation } from './use-rate-reservation';
 export { useRating, getRating } from './use-ratings';

@@ -4,13 +4,12 @@ import { useToast } from '@chakra-ui/react';
 
 import { api } from 'services/api';
 import { queryClient } from 'services/query-client';
-import { useReservationCardCtx } from '.';
-import { CancelReservationContext } from '../components/reservation-card/actions';
+import { useReservationCardCtx } from '../components/reservation-card';
+import { useCancelReservationCtx } from '../components/reservation-card/actions/cancel-reservation';
 
 export function useCancelReservation() {
   const { id } = useReservationCardCtx();
-  const { onToggle } = useContext(CancelReservationContext);
-
+  const { toggleCancelReservationModal } = useCancelReservationCtx();
   const toast = useToast({
     title: 'Reservation canceled!',
     status: 'success',
@@ -26,7 +25,7 @@ export function useCancelReservation() {
       await api
         .delete(`reservations/cancel/${id}`)
         .then(() => queryClient.refetchQueries('following-reservations'))
-        .then(() => onToggle())
+        .then(() => toggleCancelReservationModal())
         .then(() => toast());
     },
     { enabled: false }

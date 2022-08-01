@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import { useToast } from '@chakra-ui/react';
 
 import { api } from 'services/api';
 import { queryClient } from 'services/query-client';
 import { RateReservation } from 'types';
-import { RateReservationContext } from '../components/reservation-card/actions';
+import { useRateReservationCtx } from '../components/reservation-card/actions/rate-reservation';
 
 interface IsFormEmptyProps {
   comment: string;
@@ -12,7 +11,7 @@ interface IsFormEmptyProps {
 }
 
 export function useRateReservation() {
-  const { onToggle } = useContext(RateReservationContext);
+  const { toggleRateReservationModal } = useRateReservationCtx();
 
   const RateSuccessToast = useToast({
     title: 'Rate registered successfully!',
@@ -40,7 +39,7 @@ export function useRateReservation() {
     await api
       .post('ratings/create', { rating })
       .then(() => queryClient.refetchQueries('past-reservations'))
-      .then(() => onToggle())
+      .then(() => toggleRateReservationModal())
       .then(() => RateSuccessToast());
   }
 

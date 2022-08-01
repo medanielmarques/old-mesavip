@@ -1,10 +1,62 @@
-import { FormEvent, useState, useEffect } from 'react';
+import { createContext, FormEvent, useContext, useState } from 'react';
 import { Button, Flex, ModalBody, Select, Textarea } from '@chakra-ui/react';
-
-import { useReservationCardCtx } from 'pages/reservations/hooks';
+import { useIsFetching } from 'react-query';
+import { useModal } from 'hooks';
+import { useReservationCardCtx } from '..';
 import { useRateReservation } from 'pages/reservations/hooks';
 
-export function RateResevationModal() {
+interface RateReservationContextData {
+  toggleRateReservationModal: () => void;
+}
+
+export const RateReservationContext = createContext(
+  {} as RateReservationContextData
+);
+export const useRateReservationCtx = () => useContext(RateReservationContext);
+
+export function RateReservation() {
+  const { Modal, onToggle: toggleRateReservationModal } = useModal({
+    title: 'Rate reservation',
+    closeButton: false,
+  });
+
+  return (
+    <RateReservationContext.Provider value={{ toggleRateReservationModal }}>
+      <RateReservationButton />
+
+      <Modal>
+        <RateResevationModal />
+      </Modal>
+    </RateReservationContext.Provider>
+  );
+}
+
+function RateReservationButton() {
+  const { id } = useReservationCardCtx();
+  const { toggleRateReservationModal } = useRateReservationCtx();
+
+  const isLoading =
+    useIsFetching(`cancel-reservation-${id}`) > 0 ? true : false;
+
+  return (
+    <Flex justify='center' my='3'>
+      <Button
+        variant='outline'
+        width='56'
+        height='10'
+        gridGap='2'
+        fontSize='md'
+        isLoading={isLoading}
+        loadingText='Cancelling'
+        onClick={toggleRateReservationModal}
+      >
+        Rate reservation
+      </Button>
+    </Flex>
+  );
+}
+
+function RateResevationModal() {
   const {
     restaurant,
     restaurant_id,
@@ -15,10 +67,6 @@ export function RateResevationModal() {
 
   const [comment, commentSet] = useState('');
   const [score, scoreSet] = useState(0);
-
-  useEffect(() => {
-    console.log(score);
-  }, [score]);
 
   async function handleSubmit(e: FormEvent<HTMLDivElement>) {
     e.preventDefault();
