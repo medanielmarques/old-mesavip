@@ -2,11 +2,7 @@ import { GetServerSideProps } from 'next';
 import { TabPanels, Tabs } from '@chakra-ui/react';
 import { parseCookies } from 'nookies';
 
-import {
-  TabList,
-  FollowingReservationsTabPanel,
-  PastReservationsTabPanel,
-} from './components/tabs';
+import { ReservationsTabPanel, TabList } from './components/tabs';
 import { Footer } from 'core/footer';
 
 import { Reservation } from 'types';
@@ -27,11 +23,15 @@ export default function Reservations({
         <TabList />
 
         <TabPanels>
-          <FollowingReservationsTabPanel
-            SSRFollowingReservations={SSRFollowingReservations}
+          <ReservationsTabPanel
+            SSRReservations={SSRFollowingReservations}
+            type='following'
           />
 
-          <PastReservationsTabPanel SSRPastReservations={SSRPastReservations} />
+          <ReservationsTabPanel
+            SSRReservations={SSRPastReservations}
+            type='past'
+          />
         </TabPanels>
       </Tabs>
       <Footer />
