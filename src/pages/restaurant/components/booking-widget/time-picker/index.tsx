@@ -9,7 +9,8 @@ import { AvailableHoursSkeleton } from 'core/feedback/skeleton';
 
 import { Hour } from 'types';
 import { api } from 'services/api';
-import { useRestaurantCtx, useTimePicker } from 'pages/restaurant/hooks';
+import { useTimePicker } from 'pages/restaurant/hooks';
+import { useRestaurantCtx } from 'pages/restaurant/[id].page';
 
 interface TimePickerProps {
   selectedDate: Date;

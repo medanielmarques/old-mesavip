@@ -1,9 +1,14 @@
-import { TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import {
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Tab,
+  TabList as ChakraTabList,
+} from '@chakra-ui/react';
 
-import { TabList } from './tab-list';
-import { About } from './tabs/about';
-import { Photos } from './tabs/photos';
-import { Reviews } from './tabs/reviews';
+import { AboutTab } from './about-tab';
+import { ReviewsTab } from './reviews-tab';
+import { PhotosTab } from './photos-tab';
 
 export function BottomBar() {
   return (
@@ -12,17 +17,27 @@ export function BottomBar() {
 
       <TabPanels>
         <TabPanel>
-          <About />
+          <AboutTab />
         </TabPanel>
 
         <TabPanel>
-          <Reviews />
+          <ReviewsTab />
         </TabPanel>
 
         <TabPanel>
-          <Photos />
+          <PhotosTab />
         </TabPanel>
       </TabPanels>
     </Tabs>
+  );
+}
+
+function TabList() {
+  return (
+    <ChakraTabList gridGap='10'>
+      <Tab fontWeight='600'>About</Tab>
+      <Tab fontWeight='600'>Reviews</Tab>
+      <Tab fontWeight='600'>Photos</Tab>
+    </ChakraTabList>
   );
 }

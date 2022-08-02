@@ -1,21 +1,24 @@
 import { useQuery } from 'react-query';
-import { Stack, Text } from '@chakra-ui/react';
+import { Skeleton, Stack, Text } from '@chakra-ui/react';
 
 import { ReviewCard } from './review-card';
-
 import { Rating as Review } from 'types';
 import { api } from 'services/api';
-import { useRestaurantCtx } from 'pages/restaurant/hooks';
-import { ReviewCardSkeleton } from 'core/feedback/skeleton';
+import { useRestaurantCtx } from 'pages/restaurant/[id].page';
 
-export function Reviews() {
-  const { id, name } = useRestaurantCtx();
+function useReviews() {
+  const { id } = useRestaurantCtx();
 
-  const { data: reviews, isLoading } = useQuery('list-reviews', async () => {
+  return useQuery('list-reviews', async () => {
     return api
       .get<Review[]>(`ratings/list-all-restaurant-reviews/${id}`)
       .then((res) => res.data);
   });
+}
+
+export function ReviewsTab() {
+  const { name } = useRestaurantCtx();
+  const { data: reviews, isLoading } = useReviews();
 
   return (
     <Stack spacing='4'>
@@ -25,7 +28,7 @@ export function Reviews() {
 
       <Text fontSize='sm'>
         Read what people think about {name}. All the restaurant reviews are
-        written by verified MEsavip diners.
+        written by verified Mesavip diners.
       </Text>
 
       {isLoading ? (
@@ -37,6 +40,16 @@ export function Reviews() {
           ))}
         </Stack>
       )}
+    </Stack>
+  );
+}
+
+function ReviewCardSkeleton() {
+  return (
+    <Stack spacing='3'>
+      {Array.from({ length: 10 }).map((_, i) => (
+        <Skeleton key={i} h='44' />
+      ))}
     </Stack>
   );
 }

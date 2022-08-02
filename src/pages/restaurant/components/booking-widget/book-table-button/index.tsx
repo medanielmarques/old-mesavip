@@ -4,7 +4,7 @@ import { ConfirmReservationModal } from './confirm-reservation-modal';
 
 import { useModal } from 'hooks';
 import { Hour } from 'types';
-import { useRestaurantCtx } from 'pages/restaurant/hooks';
+import { useRestaurantCtx } from 'pages/restaurant/[id].page';
 import { useAuth } from 'contexts';
 import { useConfirmReservation } from 'pages/restaurant/hooks/use-confirm-reservation';
 

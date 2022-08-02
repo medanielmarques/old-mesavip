@@ -1,5 +1,5 @@
 import { useToast } from '@chakra-ui/react';
-import { useRestaurantCtx } from 'pages/restaurant/hooks';
+import { useRestaurantCtx } from 'pages/restaurant/[id].page';
 
 import { api } from 'services/api';
 import { queryClient } from 'services/query-client';
