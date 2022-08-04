@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { Stack } from '@chakra-ui/react';
+import { Flex, Skeleton, Stack } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 
 import { TimePickerHeader } from './time-picker-header';
 import { AvailableHours } from './available-hours';
 import { BookTableButton } from '../book-table-button';
-import { AvailableHoursSkeleton } from 'core/feedback/skeleton';
 
 import { Hour } from 'types';
 import { api } from 'services/api';
@@ -63,5 +62,15 @@ export function TimePicker({ selectedDate }: TimePickerProps) {
         selectedDate={selectedDate}
       />
     </Stack>
+  );
+}
+
+function AvailableHoursSkeleton() {
+  return (
+    <Flex gridGap='3' flexFlow='wrap' width={334}>
+      {Array.from({ length: 18 }).map((_, i) => (
+        <Skeleton key={i} w={100} h='10' rounded='lg' />
+      ))}
+    </Flex>
   );
 }

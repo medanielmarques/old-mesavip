@@ -1,8 +1,15 @@
 import { GetServerSideProps } from 'next';
-import { Box, BoxProps, Divider, Flex, Stack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  BoxProps,
+  Divider,
+  Flex,
+  Skeleton,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
 import { Filters } from './components/filters';
-import { RestaurandCardSkeleton } from 'core/feedback/skeleton';
 import { RestaurantCard } from './components/restaurant-card';
 import { Footer } from 'core/footer';
 
@@ -23,7 +30,7 @@ export default function Home({ initialData }: RestaurantsProps) {
       <Filters />
 
       {isLoading || isFetching ? (
-        <RestaurandCardSkeleton />
+        <RestaurantCardSkeleton />
       ) : error ? (
         <ErrorMessage />
       ) : (
@@ -73,6 +80,20 @@ function ErrorMessage() {
     <Text fontSize='20px' align='center'>
       Sorry, restaurant not found!
     </Text>
+  );
+}
+
+function RestaurantCardSkeleton() {
+  return (
+    <Stack spacing={4} mt='12'>
+      {Array.from({ length: 20 }).map((_, i) => (
+        <Skeleton
+          key={i}
+          w={{ base: 300, md: 700 }}
+          h={{ base: 125, md: 140 }}
+        />
+      ))}
+    </Stack>
   );
 }
 

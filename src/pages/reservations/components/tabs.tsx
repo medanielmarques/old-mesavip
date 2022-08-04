@@ -6,10 +6,10 @@ import {
   TabPanelProps,
   Text,
   TabList as ChakraTabList,
+  Skeleton,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
-import { ReservationCardSkeleton } from 'core/feedback/skeleton';
 import { ReservationCard } from './reservation-card';
 
 import { ReservationType, useReservations } from 'pages/reservations/hooks';
@@ -98,5 +98,15 @@ function NoReservationsWereFound() {
     <Text w='60' mx='auto'>
       No reservations were found!
     </Text>
+  );
+}
+
+function ReservationCardSkeleton() {
+  return (
+    <Grid templateColumns='repeat(auto-fill, minmax(384px, 1fr))' gap={6}>
+      {Array.from({ length: 15 }).map((_, i) => (
+        <Skeleton key={i} w='92' h='48' borderRadius='md' />
+      ))}
+    </Grid>
   );
 }

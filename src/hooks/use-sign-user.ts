@@ -14,9 +14,7 @@ const cpfMask = (cpf: string) => {
     .replace(/(-\d{2})\d+?$/, '$1');
 };
 
-type SignType = 'sign-in' | 'sign-up';
-
-export function useSignUser(signType: SignType) {
+export function useSignUser(signType: 'sign-in' | 'sign-up') {
   const router = useRouter();
   const { signIn } = useAuth();
 
