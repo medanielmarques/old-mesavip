@@ -1,7 +1,6 @@
-import { Box, Skeleton, Stack, Text } from '@chakra-ui/react';
+import { Box, Image, Skeleton, Stack, Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 
-import { Image } from 'pages/restaurant/components/image';
 import { api } from 'services/api';
 import { useRestaurantCtx } from 'pages/restaurant/[id].page';
 
@@ -34,6 +33,7 @@ export function PhotosTab() {
               key={photo.id}
               src={photo.path}
               alt='Restaurant surroudings and/or food'
+              height={[235, 277, 346, 415, 540]}
             />
           ))}
         </Stack>

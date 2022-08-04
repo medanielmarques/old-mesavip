@@ -1,10 +1,9 @@
 import { createContext, useContext } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Flex, FlexProps } from '@chakra-ui/react';
+import { Flex, FlexProps, Image as Banner } from '@chakra-ui/react';
 import { ParsedUrlQuery } from 'querystring';
 
 import { Topbar } from './components/top-bar';
-import { Image as Banner } from './components/image';
 import { BottomBar } from './components/bottom-bar';
 import { BookingWidget } from './components/booking-widget';
 import { Footer } from 'core/footer';
@@ -30,7 +29,11 @@ export default function RestaurantPage({
       <RestaurantWrapper>
         <Flex direction='column' gridGap='6' mx={{ base: 'auto', xl: 'auto' }}>
           <Topbar />
-          <Banner src={banner_url} alt='Banner' />
+          <Banner
+            src={banner_url}
+            alt='Banner'
+            height={[235, 277, 346, 415, 540]}
+          />
           <BottomBar />
         </Flex>
 

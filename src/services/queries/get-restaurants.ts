@@ -1,6 +1,6 @@
 import { api } from 'services/api';
 import { Restaurant } from 'types';
-import { RestaurantFilters } from 'pages/home/hooks/use-restaurants';
+import { RestaurantFilters } from 'types';
 
 export async function getRestaurants(filters?: RestaurantFilters) {
   const { data: restaurants } = await api.get<Restaurant[]>(

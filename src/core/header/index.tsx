@@ -1,35 +1,60 @@
-import { createContext, useState } from 'react';
-import { Image } from '@chakra-ui/react';
+import { createContext, useContext } from 'react';
+import { Box, Flex, FlexProps, Image, useDisclosure } from '@chakra-ui/react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
-import { NavBarContainer } from './nav-bar-container';
-import { MenuItens, MenuItem } from './menu-links';
-import { MenuToggle } from './menu-toggle';
+import { Logo, MenuLinks } from './menu-links';
 
 interface HeaderContextData {
   toggle: () => void;
+  isOpen: boolean;
 }
 
-export const HeaderContext = createContext({} as HeaderContextData);
+const HeaderContext = createContext({} as HeaderContextData);
+export const useHeaderCtx = () => useContext(HeaderContext);
 
 export function Header() {
-  const [isOpen, isOpenSet] = useState(false);
-  const logo = 'https://bit.ly/2YFsIhw';
-
-  function toggle() {
-    isOpenSet(!isOpen);
-  }
+  const { isOpen, onToggle: toggle } = useDisclosure();
 
   return (
-    <HeaderContext.Provider value={{ toggle }}>
+    <HeaderContext.Provider value={{ toggle, isOpen }}>
       <NavBarContainer>
-        <MenuItem href='/home'>
-          <Image w='40' h='20' src={logo} alt='Mesavip logo' />
-        </MenuItem>
+        <Logo />
 
-        <MenuToggle isOpen={isOpen} />
+        <MenuToggle />
 
-        <MenuItens isOpen={isOpen} />
+        <MenuLinks />
       </NavBarContainer>
     </HeaderContext.Provider>
+  );
+}
+
+function NavBarContainer({ children }: FlexProps) {
+  return (
+    <Flex
+      as='nav'
+      align='center'
+      justify='space-between'
+      wrap='wrap'
+      w='100%'
+      px='3'
+      bg='white'
+      borderBottom='1px solid #f0f2f5'
+    >
+      {children}
+    </Flex>
+  );
+}
+
+function MenuToggle() {
+  const { toggle, isOpen } = useHeaderCtx();
+
+  return (
+    <Box
+      display={{ base: 'block', md: 'none' }}
+      onClick={toggle}
+      cursor='pointer'
+    >
+      {isOpen ? <FaTimes /> : <FaBars />}
+    </Box>
   );
 }
