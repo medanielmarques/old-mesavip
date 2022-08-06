@@ -7,10 +7,10 @@ import {
   Text,
   AccordionItemProps,
   Flex,
+  Box,
+  BoxProps,
 } from '@chakra-ui/react';
 import { FaUserFriends } from 'react-icons/fa';
-
-import { GuestAmountButton } from './guest-ammount-button';
 
 export function GuestAmount({ ...rest }: AccordionItemProps) {
   const [selectedGuestAmount, selectedGuestAmountSet] = useState(2);
@@ -47,5 +47,35 @@ export function GuestAmount({ ...rest }: AccordionItemProps) {
         ))}
       </AccordionPanel>
     </AccordionItem>
+  );
+}
+
+interface GuestAmountButtonProps extends BoxProps {
+  amount: number;
+  selected: boolean;
+}
+
+export function GuestAmountButton({
+  amount,
+  selected,
+  ...rest
+}: GuestAmountButtonProps) {
+  return (
+    <Box
+      w='10'
+      h='10'
+      rounded='full'
+      display='flex'
+      justifyContent='center'
+      alignItems='center'
+      cursor='pointer'
+      bg={!!selected ? 'red.300' : 'inherit'}
+      _hover={{ bg: !selected ? 'gray.100' : 'red.300' }}
+      {...rest}
+    >
+      <Text color={!!selected ? 'white' : 'inherit'} fontSize='xs'>
+        {amount}
+      </Text>
+    </Box>
   );
 }

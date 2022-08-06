@@ -1,13 +1,6 @@
 import { useEffect, useState } from 'react';
 import { isAfter, isSameDay, format as dateFnsFormat } from 'date-fns';
 
-export interface UseDatePickerProps {
-  selectedDate: Date;
-  today: Date;
-  handleDateChange(date: Date): void;
-  formatedDate: string;
-}
-
 export function useDatePicker() {
   const [selectedDate, selectedDateSet] = useState(new Date());
   const [formatedDate, formatedDateSet] = useState('');
