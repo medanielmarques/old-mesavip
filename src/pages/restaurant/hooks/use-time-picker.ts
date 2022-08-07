@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { api } from 'services/api';
 import { Hour } from 'types';
@@ -22,7 +21,7 @@ export function useTimePicker() {
       )
       .then((res) => {
         const availableHours = res.data;
-        availableHours && updateSelectedTime(res.data[0]);
+        updateSelectedTime(res.data[0]);
         return availableHours;
       });
   });
@@ -34,12 +33,6 @@ export function useTimePicker() {
 
   const handleIsTimeSelected = (i: number) =>
     availableHours![i] === selectedTime;
-
-  useEffect(() => {
-    if (availableHours) {
-      updateSelectedTime(availableHours[0]);
-    }
-  }, [availableHours]);
 
   return {
     availableHours,

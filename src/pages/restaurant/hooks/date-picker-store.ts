@@ -11,7 +11,7 @@ interface IDatePickerStore {
   updateSelectedTime: (newTime: Hour) => void;
 }
 
-// don't update if it's a past day
+// it won't update if it's a past day
 const handleDateChange = (newDate: Date, today: Date) => {
   if (isSameDay(newDate, today) || isAfter(newDate, today)) return newDate;
 };
@@ -19,7 +19,7 @@ const handleDateChange = (newDate: Date, today: Date) => {
 export const useDatePickerStore = create<IDatePickerStore>((set) => ({
   today: new Date(),
   selectedDate: new Date(),
-  formatedDate: '',
+  formatedDate: format(new Date(), 'eeee (dd/MM/yyyy)'),
   selectedTime: { id: '', hour: '' },
 
   updateSelectedDate: (newDate: Date) => {
