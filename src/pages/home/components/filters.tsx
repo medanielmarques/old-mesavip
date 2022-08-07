@@ -85,7 +85,7 @@ export function SearchBar() {
 }
 
 function Cuisines() {
-  const { cuisines, handleClick } = useCuisines();
+  const { cuisines, handleChangeCuisine } = useCuisines();
 
   return (
     <Stack>
@@ -101,7 +101,7 @@ function Cuisines() {
             colorScheme='yellow'
             size='lg'
             _hover={{ color: 'yellow.400' }}
-            onChange={() => handleClick(index)}
+            onChange={() => handleChangeCuisine(index)}
           >
             <Text color='gray.500'>
               {/* &#40; &#41; - left and right parentheses */}

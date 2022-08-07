@@ -1,39 +1,29 @@
 import {
   AccordionItem,
   AccordionPanel,
-  AccordionButton as ChakraAccordionButton,
-  AccordionButtonProps as ChakraAccordionButtonProps,
+  AccordionButton,
+  AccordionButtonProps,
   AccordionIcon,
   Flex,
   Text,
 } from '@chakra-ui/react';
 import DayPicker from 'react-day-picker/DayPicker';
-import 'react-day-picker/lib/style.css';
 import { FaRegCalendarAlt } from 'react-icons/fa';
+import 'react-day-picker/lib/style.css';
 
-interface DatePickerProps {
-  selectedDate: Date;
-  today: Date;
-  formatedDate: string;
-  handleDateChange(date: Date): void;
-  toggleDatePicker(): void;
-}
+import { useDatePickerStore } from 'pages/restaurant/hooks/date-picker-store';
 
-export function DatePicker({
-  selectedDate,
-  formatedDate,
-  today,
-  handleDateChange,
-  toggleDatePicker,
-}: DatePickerProps) {
+export function DatePicker({ toggleDatePicker }: { toggleDatePicker(): void }) {
+  const { today, selectedDate, updateSelectedDate } = useDatePickerStore();
+
   function handleOnDayClick(date: Date) {
     toggleDatePicker();
-    handleDateChange(date);
+    updateSelectedDate(date);
   }
 
   return (
     <AccordionItem>
-      <AccordionButton formatedDate={formatedDate} onClick={toggleDatePicker} />
+      <DatePickerHeader onClick={toggleDatePicker} />
 
       <AccordionPanel pb={4}>
         <DayPicker
@@ -49,16 +39,11 @@ export function DatePicker({
   );
 }
 
-interface AccordionButtonProps extends ChakraAccordionButtonProps {
-  formatedDate: string;
-}
+export function DatePickerHeader({ ...rest }: AccordionButtonProps) {
+  const { formatedDate } = useDatePickerStore();
 
-export function AccordionButton({
-  formatedDate,
-  ...rest
-}: AccordionButtonProps) {
   return (
-    <ChakraAccordionButton justifyContent='space-between' {...rest}>
+    <AccordionButton justifyContent='space-between' {...rest}>
       <Flex gridGap='4' align='center'>
         <FaRegCalendarAlt size='22' color='gray' />
 
@@ -68,6 +53,6 @@ export function AccordionButton({
       </Flex>
 
       <AccordionIcon />
-    </ChakraAccordionButton>
+    </AccordionButton>
   );
 }

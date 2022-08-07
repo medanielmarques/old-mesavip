@@ -32,7 +32,7 @@ export function useCuisines() {
     updateCuisine(!cuisine.isChecked ? cuisine.name : '');
   }
 
-  function handleClick(index: number) {
+  function handleChangeCuisine(index: number) {
     const newCuisines = cuisines.map((cuisine, i) => {
       if (i === index) {
         handleSetCuisine(cuisine);
@@ -52,5 +52,5 @@ export function useCuisines() {
     cuisinesSet(newCuisines);
   }
 
-  return { cuisines, handleClick };
+  return { cuisines, handleChangeCuisine };
 }

@@ -37,9 +37,7 @@ function Score({ score }: { score: number }) {
   );
 }
 
-function ReviewerAndDate(props: { client: string; date?: string }) {
-  const { client, date } = props;
-
+function ReviewerAndDate({ client, date }: { client: string; date?: string }) {
   return (
     <Flex justify='space-between'>
       <Flex gridGap='3' align='center'>

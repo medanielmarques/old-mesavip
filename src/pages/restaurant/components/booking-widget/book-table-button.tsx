@@ -7,29 +7,18 @@ import {
 } from '@chakra-ui/react';
 
 import { useModal } from 'hooks';
-import { Hour } from 'types';
 import { useRestaurantCtx } from 'pages/restaurant/[id].page';
 import { useAuth } from 'contexts';
 import { useConfirmReservation } from 'pages/restaurant/hooks/use-confirm-reservation';
+import { useDatePickerStore } from 'pages/restaurant/hooks/date-picker-store';
 
-interface BookTableButtonProps {
-  selectedTime: Hour;
-  selectedDate: Date;
-}
-
-export function BookTableButton(props: BookTableButtonProps) {
-  const { selectedTime, selectedDate } = props;
+export function BookTableButton() {
+  const { selectedTime } = useDatePickerStore();
   const { name } = useRestaurantCtx();
   const { isAuthenticated } = useAuth();
 
-  const { Modal, onToggle } = useModal({
+  const { Modal, onToggle: toggleModal } = useModal({
     title: `Confirm reservation at ${name}?`,
-  });
-
-  const { bookTableQuery } = useConfirmReservation({
-    onToggle,
-    selectedDate,
-    selectedTime,
   });
 
   return (
@@ -46,7 +35,7 @@ export function BookTableButton(props: BookTableButtonProps) {
           _hover={{ bg: 'red.400' }}
           color='white'
           fontSize='xl'
-          onClick={onToggle}
+          onClick={toggleModal}
           disabled={!isAuthenticated}
         >
           Reserve a table at {selectedTime.hour}
@@ -54,30 +43,16 @@ export function BookTableButton(props: BookTableButtonProps) {
       </Tooltip>
 
       <Modal>
-        <ConfirmReservationModal
-          onToggle={onToggle}
-          selectedTime={selectedTime}
-          selectedDate={selectedDate}
-          bookTableQuery={bookTableQuery}
-        />
+        <ConfirmReservationModal toggleModal={toggleModal} />
       </Modal>
     </>
   );
 }
 
-interface ConfirmReservationModalProps {
-  onToggle(): void;
-  selectedTime: Hour;
-  selectedDate: Date;
-  bookTableQuery: () => void;
-}
+function ConfirmReservationModal({ toggleModal }: { toggleModal: () => void }) {
+  const { selectedDate, selectedTime } = useDatePickerStore();
+  const { bookTableQuery } = useConfirmReservation({ toggleModal });
 
-function ConfirmReservationModal({
-  onToggle,
-  selectedTime,
-  selectedDate,
-  bookTableQuery,
-}: ConfirmReservationModalProps) {
   return (
     <>
       <ModalBody>
@@ -91,7 +66,7 @@ function ConfirmReservationModal({
       </ModalBody>
 
       <ModalFooter mr='4' py='6' borderColor='gray.200' borderBottomRadius='md'>
-        <Button variant='ghost' h='12' color='gray.500' onClick={onToggle}>
+        <Button variant='ghost' h='12' color='gray.500' onClick={toggleModal}>
           Cancel
         </Button>
 

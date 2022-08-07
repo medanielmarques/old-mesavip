@@ -39,7 +39,7 @@ export function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
 }
 
 function RestaurantCardWrapper({ children }: LinkProps) {
-  const { id } = useRestaurantCardCtx();
+  const { id, name } = useRestaurantCardCtx();
 
   return (
     <Link href={`/restaurant/${id}`} passHref>
@@ -49,7 +49,7 @@ function RestaurantCardWrapper({ children }: LinkProps) {
           borderRadius='lg'
           shadow={{ base: 'none', md: 'base' }}
           _hover={{ shadow: { base: 'none', md: 'md' } }}
-          role='restaurant-card'
+          role={name}
         >
           {children}
         </Flex>

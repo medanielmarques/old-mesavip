@@ -3,37 +3,14 @@ import { FaRegClock } from 'react-icons/fa';
 
 import { BookTableButton } from './book-table-button';
 
-import { Hour } from 'types';
 import { useTimePicker } from 'pages/restaurant/hooks';
 
-export function TimePicker({ selectedDate }: { selectedDate: Date }) {
-  const {
-    availableHours,
-    isLoading,
-    isFetching,
-    selectedTime,
-    handleIsTimeSelected,
-    handleClickSelectedTime,
-  } = useTimePicker(selectedDate);
-
+export function TimePicker() {
   return (
     <Stack pl='4' mt='10' spacing='10' w={350}>
       <TimePickerHeader />
-
-      {isLoading || isFetching ? (
-        <AvailableHoursSkeleton />
-      ) : (
-        <AvailableHours
-          availableHours={availableHours!}
-          handleIsTimeSelected={handleIsTimeSelected}
-          handleClickSelectedTime={handleClickSelectedTime}
-        />
-      )}
-
-      <BookTableButton
-        selectedTime={selectedTime!}
-        selectedDate={selectedDate}
-      />
+      <AvailableHours />
+      <BookTableButton />
     </Stack>
   );
 }
@@ -50,33 +27,37 @@ function TimePickerHeader() {
   );
 }
 
-interface AvailableHoursProps {
-  availableHours: Hour[];
-  handleClickSelectedTime: (i: number) => void;
-  handleIsTimeSelected: (i: number) => boolean;
-}
+export function AvailableHours() {
+  const {
+    availableHours,
+    isLoading,
+    isFetching,
+    handleIsTimeSelected,
+    handleClickSelectedTime,
+  } = useTimePicker();
 
-export function AvailableHours({
-  availableHours,
-  handleClickSelectedTime,
-  handleIsTimeSelected,
-}: AvailableHoursProps) {
   return (
-    <Flex gridGap='3' flexFlow='wrap' width={334}>
-      {availableHours?.map((availableHour, i) => (
-        <Button
-          key={i}
-          width={100}
-          rounded='lg'
-          bg={handleIsTimeSelected(i) ? 'red.300' : 'gray.100'}
-          color={handleIsTimeSelected(i) ? 'white' : 'inherit'}
-          _hover={{ bg: handleIsTimeSelected(i) ? 'red.300' : 'gray.300' }}
-          onClick={() => handleClickSelectedTime(i)}
-        >
-          {availableHour.hour}
-        </Button>
-      ))}
-    </Flex>
+    <>
+      {isLoading || isFetching ? (
+        <AvailableHoursSkeleton />
+      ) : (
+        <Flex gridGap='3' flexFlow='wrap' width={334}>
+          {availableHours?.map((availableHour, i) => (
+            <Button
+              key={i}
+              width={100}
+              rounded='lg'
+              bg={handleIsTimeSelected(i) ? 'red.300' : 'gray.100'}
+              color={handleIsTimeSelected(i) ? 'white' : 'inherit'}
+              _hover={{ bg: handleIsTimeSelected(i) ? 'red.300' : 'gray.300' }}
+              onClick={() => handleClickSelectedTime(i)}
+            >
+              {availableHour.hour}
+            </Button>
+          ))}
+        </Flex>
+      )}
+    </>
   );
 }
 

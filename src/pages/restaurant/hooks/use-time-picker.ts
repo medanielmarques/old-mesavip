@@ -3,11 +3,13 @@ import { useQuery } from 'react-query';
 import { api } from 'services/api';
 import { Hour } from 'types';
 import { useRestaurantCtx } from '../[id].page';
+import { useDatePickerStore } from './date-picker-store';
 
-export function useTimePicker(selectedDate: Date) {
+export function useTimePicker() {
   const { id } = useRestaurantCtx();
 
-  const [selectedTime, selectedTimeSet] = useState({} as Hour);
+  const { selectedTime, selectedDate, updateSelectedTime } =
+    useDatePickerStore();
 
   const {
     data: availableHours,
@@ -18,32 +20,31 @@ export function useTimePicker(selectedDate: Date) {
       .get<Hour[]>(
         `restaurants/available-hours/${id}/${selectedDate.toDateString()}`
       )
-      .then((res) => res.data);
+      .then((res) => {
+        const availableHours = res.data;
+        availableHours && updateSelectedTime(res.data[0]);
+        return availableHours;
+      });
   });
 
   function handleClickSelectedTime(i: number) {
     const availableHour = availableHours![i];
-    selectedTimeSet(availableHour);
+    updateSelectedTime(availableHour);
   }
 
-  function handleIsTimeSelected(i: number): boolean {
-    if (availableHours![i] === selectedTime) {
-      return true;
-    }
-    return false;
-  }
+  const handleIsTimeSelected = (i: number) =>
+    availableHours![i] === selectedTime;
 
   useEffect(() => {
     if (availableHours) {
-      selectedTimeSet(availableHours[0]);
+      updateSelectedTime(availableHours[0]);
     }
-  }, [availableHours, selectedTimeSet]);
+  }, [availableHours]);
 
   return {
     availableHours,
     isLoading,
     isFetching,
-    selectedTime,
     handleClickSelectedTime,
     handleIsTimeSelected,
   };

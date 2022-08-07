@@ -3,17 +3,15 @@ import { useRestaurantCtx } from 'pages/restaurant/[id].page';
 
 import { api } from 'services/api';
 import { queryClient } from 'services/query-client';
-import { Hour } from 'types';
+import { useDatePickerStore } from './date-picker-store';
 
-export interface UseConfirmReservationProps {
-  onToggle(): void;
-  selectedTime: Hour;
-  selectedDate: Date;
-}
-
-export function useConfirmReservation(props: UseConfirmReservationProps) {
-  const { onToggle, selectedTime, selectedDate } = props;
+export function useConfirmReservation({
+  toggleModal,
+}: {
+  toggleModal(): void;
+}) {
   const { id: restaurant_id } = useRestaurantCtx();
+  const { selectedTime, selectedDate } = useDatePickerStore();
 
   const toast = useToast({
     title: 'Reservation confirmed sucessfully',
@@ -33,7 +31,7 @@ export function useConfirmReservation(props: UseConfirmReservationProps) {
   async function bookTableQuery() {
     await api
       .post('/reservations/create', reservation)
-      .then(() => onToggle())
+      .then(() => toggleModal())
       .then(() => toast())
       .then(() => queryClient.invalidateQueries('available-hours'))
       .catch(() => {});
